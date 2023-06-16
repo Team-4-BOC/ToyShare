@@ -19,5 +19,5 @@ app.get("/", function (req, res) {
 
 var port = 3000;
 app.listen(port, () => {
-  console.log("Server listening on port ", port);
+  console.log("Server listening on port", port);
 });
