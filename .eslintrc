@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "standard",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "semi": ["error", "always"]
+  },
+  "env": {
+    "jest": true
+  }
+}

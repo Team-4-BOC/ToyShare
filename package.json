@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "server": "npx nodemon server/index.js",
-    "build": "webpack --mode production --watch"
+    "build": "webpack --mode production --watch",
+    "test": "jest",
+    "lint": "eslint client/src/*.jsx server/*.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,12 @@
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
     "babel-loader": "^9.1.2",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^16.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "jest": "^29.5.0",
     "webpack": "^5.87.0",
     "webpack-cli": "^5.1.4"
   }
