@@ -14,7 +14,13 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
-      - run: node --version
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run Tests
+          command: npm run test
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
