@@ -21,7 +21,7 @@ jobs:
           name: Run Tests
           command: npm run test
       - run:
-          name: Rune Linter
+          name: Run Linter
           command: npm run lint
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
