@@ -30,8 +30,8 @@ jobs:
 
     steps:
       - run:
-        name: Deploy Over SSH
-        command: ssh $SSH_USER@$SSH_HOST "echo 'Connection successful'"
+          name: Deploy Over SSH
+          command: ssh $SSH_USER@$SSH_HOST "echo 'Connection successful'"
 
 workflows:
   test-deploy:
