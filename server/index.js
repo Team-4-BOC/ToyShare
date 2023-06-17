@@ -1,23 +1,23 @@
-require("dotenv").config();
-const express = require("express");
-const path = require("path");
+require('dotenv').config();
+const express = require('express');
+const path = require('path');
 
 const app = express();
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 
 app.use(
   express.urlencoded({
-    extended: true,
+    extended: true
   })
 );
 
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.get("/", function (req, res) {
-  res.render("index.html");
+app.get('/', function (req, res) {
+  res.render('index.html');
 });
 
-var port = 3000;
+const port = 3000;
 app.listen(port, () => {
-  console.log("Server listening on port", port);
+  console.log('Server listening on port', port);
 });
