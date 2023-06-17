@@ -1,4 +1,4 @@
-const db = require("../database/pg.js");
+// const db = require("../database/pg.js");
 
 // module.exports = {
 //   get: (Kyle) => {
