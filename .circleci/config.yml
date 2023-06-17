@@ -38,6 +38,6 @@ workflows:
     jobs:
       - testAndLint
       - deploy:
-        requires:
-        - testAndLint
+          requires:
+          - testAndLint
 
