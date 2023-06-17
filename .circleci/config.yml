@@ -34,8 +34,6 @@ jobs:
         command: |
         ssh $SSH_USER@$SSH_HOST "echo 'Connection successful'"
 
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   test-deploy:
     jobs:
