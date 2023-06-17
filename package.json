@@ -6,7 +6,8 @@
   "scripts": {
     "server": "npx nodemon server/index.js",
     "build": "webpack --mode production --watch",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint client/src/*.jsx server/*.js"
   },
   "repository": {
     "type": "git",
