@@ -4,6 +4,6 @@
     "semi": ["error", "always"]
   },
   "env": {
-    "jest/globals": true
+    "jest": true
 }
 }
