@@ -16,12 +16,12 @@ jobs:
           name: Run Linter
           command: npm run lint
       - persist_to_workspace:
-        root: .
-        paths:
-          - client/dist
-          - /server
-          - package-lock.json
-          - package.json
+          root: .
+          paths:
+            - client/dist
+            - /server
+            - package-lock.json
+            - package.json
 
   deploy:
     docker:
