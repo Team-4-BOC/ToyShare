@@ -13,11 +13,12 @@ jobs:
           name: Run Linter
           command: npm run lint
       - run:
-          name: Build webpack
-          command: npm run build-prod
-      - run:
           name: Run Tests
           command: npm run test
+      - run:
+          name: Build webpack
+          command: npm run build-prod
+
       - persist_to_workspace:
           root: .
           paths:
