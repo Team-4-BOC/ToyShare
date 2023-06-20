@@ -25,6 +25,8 @@ jobs:
           command: npm run lint
 
   deploy:
+    machine:
+      enabled: true
     steps:
       - run:
           name: Deploy Over SSH
@@ -70,6 +72,7 @@ jobs:
               # 8- Remove the ingress rule
               ~/bin/aws ec2 revoke-security-group-ingress --region $AWS_REGION --group-id $SG_ID \
                 --protocol tcp --port 22 --cidr $PUBLIC_IP/24
+
 
 workflows:
   test-deploy:
