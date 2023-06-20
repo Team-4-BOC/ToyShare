@@ -18,41 +18,27 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/python:3.11.4-node
+      - image: cimg/node:20.3.0
+
     steps:
       - checkout
+
+      # Set up SSH keys for deployment
+      - add_ssh_keys:
+          fingerprints:
+            - "34:cc:96:6f:42:7f:9f:02:cf:07:36:92:d0:f9:06:fe"
+
+      # Install dependencies and build your application
       - run:
-          name: Deploy
+          name: Install Dependencies
           command: |
-            # 1- Install AWS CLI
-            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-            unzip awscli-bundle.zip
-            ./awscli-bundle/install -b ~/bin/aws
-            # 2- Get the public IP of the current CircleCI runner
-            PUBLIC_IP=$(curl ipinfo.io/ip)
-            # 3- Get AWS Region# TODO Don't forget to replace by your own Region
-            AWS_REGION=us-east-2
-            # 4- Get SG ID# TODO Don't forget to replace by your own SG ID
-            SG_ID=sg-XXXXXXXX
-            # 5- Add an ingress rule to the security group
-            ~/bin/aws ec2 authorize-security-group-ingress --region $AWS_REGION --group-id $SG_ID \
-              --protocol tcp --port 22 --cidr $PUBLIC_IP/24
-            # 6- Give the ingress rule some time to propagate
-            sleep 5
-            # 7- SSH to the server to deploy
-            # TODO Change to your username
-            EC2_USERNAME=ubuntu
-            # TODO Change to your server's URL or public IP
-            EC2_PUBLIC_DNS=application-server.example.com
-            ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS \
-              # other commands
-              # TODO Perform steps to deploy
-              # .
-              # .
-              # .
-            # 8- Remove the ingress rule
-            ~/bin/aws ec2 revoke-security-group-ingress --region $AWS_REGION --group-id $SG_ID \
-              --protocol tcp --port 22 --cidr $PUBLIC_IP/24
+            # Add your dependency installation commands for Node.js
+
+      # Deploy to EC2 instance
+      - run:
+          name: Deploy to EC2
+          command: |
+            ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-212-14-214.compute-1.amazonaws.com 'echo "Hello, world!"'
 
 workflows:
   test-deploy:
