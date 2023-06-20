@@ -56,4 +56,5 @@ workflows:
           requires:
             - builtTestLint
           filters:
-            only: main
+            branches:
+              only: main
