@@ -7,11 +7,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Run Linter
-          command: npm run lint
-      - run:
           name: Install dependencies
           command: npm install
+      - run:
+          name: Run Linter
+          command: npm run lint
       - run:
           name: Build webpack
           command: npm run build-prod
