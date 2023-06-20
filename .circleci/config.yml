@@ -19,7 +19,7 @@ jobs:
           root: .
           paths:
             - client/dist
-            - /server
+            - server
             - package-lock.json
             - package.json
 
