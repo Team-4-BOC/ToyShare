@@ -1,7 +1,7 @@
 version: 2.1
 #
 jobs:
-  testAndLint:
+  builtTestLint:
     docker:
       - image: cimg/node:20.3.0
     steps:
@@ -9,6 +9,9 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install
+      - run:
+          name: Build webpack
+          command: npm run build-prod
       - run:
           name: Run Tests
           command: npm run test
@@ -47,7 +50,7 @@ jobs:
 workflows:
   test-deploy:
     jobs:
-      - testAndLint
+      - builtTestLint
       - deploy:
           requires:
-            - testAndLint
+            - builtTestLint

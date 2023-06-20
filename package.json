@@ -9,7 +9,8 @@
     "test": "jest",
     "lint": "eslint client/src/*.jsx server/*.js",
     "server-prod": "pm2 start server/index.js",
-    "server-restart": "pm2 restart server/index.js"
+    "server-restart": "pm2 restart server/index.js",
+    "build-prod": "webpack"
   },
   "repository": {
     "type": "git",
