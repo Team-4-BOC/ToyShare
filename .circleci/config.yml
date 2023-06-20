@@ -15,6 +15,13 @@ jobs:
       - run:
           name: Run Linter
           command: npm run lint
+      - persist_to_workspace:
+        root: .
+        paths:
+          - client/dist
+          - /server
+          - package-lock.json
+          - package.json
 
   deploy:
     docker:
@@ -22,24 +29,20 @@ jobs:
 
     steps:
       - checkout
-
-      # Set up SSH keys for deployment
-      # - add_ssh_keys:
-      #     fingerprints:
-      #       - "34:cc:96:6f:42:7f:9f:02:cf:07:36:92:d0:f9:06:fe"
-
-      # Install dependencies and build your application
-      - run:
-          name: Install Dependencies
-          command: |
-            # Add your dependency installation commands for Node.js
+      - attach_workspace:
+          at: .
 
       # Deploy to EC2 instance
       - run:
           name: Deploy to EC2
           command: |
-            ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-212-14-214.compute-1.amazonaws.com 'echo "Hello, world!"'
+            scp -o StrictHostKeyChecking=no -r client/dist server package-lock.json package.json ubuntu@ec2-18-212-14-214.compute-1.amazonaws.com:~/production
 
+            ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-212-14-214.compute-1.amazonaws.com '
+              cd ~/production
+              npm install --production
+              pm2 restart all
+            '
 workflows:
   test-deploy:
     jobs:
