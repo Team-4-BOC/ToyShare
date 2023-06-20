@@ -18,7 +18,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/node:20.3.0-python
+      - image: cimg/python:3.11.4-node
     steps:
       - checkout
       - run:
