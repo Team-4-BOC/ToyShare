@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Run Linter
+          command: npm run lint
+      - run:
           name: Install dependencies
           command: npm install
       - run:
@@ -15,9 +18,6 @@ jobs:
       - run:
           name: Run Tests
           command: npm run test
-      - run:
-          name: Run Linter
-          command: npm run lint
       - persist_to_workspace:
           root: .
           paths:
