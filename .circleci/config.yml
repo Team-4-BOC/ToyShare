@@ -25,8 +25,9 @@ jobs:
           command: npm run lint
 
   deploy:
-    machine:
-      enabled: true
+    build:
+      docker:
+      - image: cimg/node:20.3.0
     steps:
       - run:
           name: Deploy Over SSH
