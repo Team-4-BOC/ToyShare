@@ -24,9 +24,9 @@ jobs:
       - checkout
 
       # Set up SSH keys for deployment
-      - add_ssh_keys:
-          fingerprints:
-            - "34:cc:96:6f:42:7f:9f:02:cf:07:36:92:d0:f9:06:fe"
+      # - add_ssh_keys:
+      #     fingerprints:
+      #       - "34:cc:96:6f:42:7f:9f:02:cf:07:36:92:d0:f9:06:fe"
 
       # Install dependencies and build your application
       - run:
