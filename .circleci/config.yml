@@ -40,6 +40,7 @@ jobs:
 
             ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-212-14-214.compute-1.amazonaws.com '
               cd ~/production
+              npm install
               npm run server-restart
             '
 workflows:
