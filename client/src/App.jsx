@@ -1,7 +1,12 @@
 import React from 'react';
+import UserProfile from './components/UserProfile/UserProfile.jsx';
 
 const App = () => {
-  return <div>Hello World</div>;
+  return (
+
+  <UserProfile />
+
+  );
 };
 
 export default App;
