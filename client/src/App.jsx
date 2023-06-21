@@ -1,5 +1,5 @@
 import React from 'react';
-import RenteeProfile from './components/RenteeProfile/renteeProfile.js';
+// import RenteeProfile from './components/RenteeProfile/renteeProfile.js';
 
 const App = () => {
   return <div>Hello World Deployed!!!</div>;
