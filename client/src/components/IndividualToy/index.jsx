@@ -22,7 +22,7 @@ const IndividualToy = () => {
         </button>
       </div>
       <PhotoCarousel toy={toy}/>
-      <ToyInfo/>
+      <ToyInfo toy={toy}/>
       <ToyReserve/>
     </div>
   );
