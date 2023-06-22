@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
-// const controllers = require('./controllers');
+const controllers = require('./controllers');
 
 router.get('/', function (req, res) {
   res.render('index.html');
 });
 
+router.post('/toys', controllers.toys.post);
+
 // Examples:
-// router.get('/products', controllers.product.getAll);
 
 // router.get('/products/:product_id', controllers.product.getOne);
 
