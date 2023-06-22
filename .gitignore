@@ -2,3 +2,4 @@ node_modules
 coverage
 .env
 client/dist/bundle.js
+database/uploadDBdata.txt
