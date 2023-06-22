@@ -12,6 +12,7 @@ const pool = new Pool({
 module.exports = {
   query: (text, params) => {
     console.log('Query submitted', { text, params });
+    console.log(process.env.USER);
     return pool.query(text, params);
   }
 };
