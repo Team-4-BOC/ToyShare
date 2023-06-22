@@ -1,4 +1,4 @@
-// const models = require("../models");
+const models = require('../models');
 
 // module.exports = {
 //   get: (req, res) => {
@@ -19,3 +19,13 @@
 //     res.send("Updating cart in controllers");
 //   },
 // };
+
+module.exports = {
+  getOne: (req, res) => {
+    // console.log(req.query);
+    models.users.getOne(req.query)
+      .then((results) => {
+        res.send(results.rows);
+      });
+  }
+};
