@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import StarCreator from '../client/src/components/SharedComponents/StarCreator';
 
 import '@testing-library/jest-dom';
