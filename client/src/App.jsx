@@ -1,9 +1,6 @@
 import React from 'react';
 // import UserProfile from './components/UserProfile/UserProfile.jsx';
 // import RenteeProfile from './components/RenteeProfile/renteeProfile.js';
-import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
-
-import UserProfile from './components/UserProfile/UserProfile.jsx';
 
 const App = () => {
   return (
