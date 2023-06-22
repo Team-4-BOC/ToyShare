@@ -13,8 +13,8 @@ const db = require('../../database/pg.js');
 // };
 
 module.exports = {
-  getOne: () => {
-    console.log('hey');
-    return 'success';
+  getOne: (data) => {
+    const values = [data.id];
+    return db.query('SELECT * from toyshare.users where id = $1', values);
   }
 };
