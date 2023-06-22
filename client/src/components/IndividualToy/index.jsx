@@ -9,7 +9,7 @@ import ToyReserve from './components/ToyReserve.jsx';
 const IndividualToy = () => {
   const [toy, setToy] = useState(tempData);
   return (
-    <div className='bg-gray-800 text-white'>
+    <div className='bg-gray-800 text-white h-screen absolute'>
       <div className='flex justify-center space-x-16'>
         <div>{toy.name}</div>
         <div>{toy.rating}</div>
@@ -23,7 +23,7 @@ const IndividualToy = () => {
       </div>
       <PhotoCarousel toy={toy}/>
       <ToyInfo toy={toy}/>
-      <ToyReserve/>
+      <ToyReserve toy={toy}/>
     </div>
   );
 };
