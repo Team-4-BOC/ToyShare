@@ -38,8 +38,8 @@ jobs:
 
       # Deploy to EC2 instance
       - run:
-        name: Test envs
-        command: |
+          name: Test envs
+          command: |
             echo "HOST: $HOST"
             echo "DATABASE: $DATABASE"
             echo "PORT: $PORT"
