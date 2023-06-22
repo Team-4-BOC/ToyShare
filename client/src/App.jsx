@@ -3,6 +3,8 @@ import React from 'react';
 // import RenteeProfile from './components/RenteeProfile/renteeProfile.js';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
 
+import UserProfile from './components/UserProfile/UserProfile.jsx';
+
 const App = () => {
   return (
     <>
