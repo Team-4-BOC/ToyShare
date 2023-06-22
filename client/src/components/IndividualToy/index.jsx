@@ -6,14 +6,18 @@ import PhotoCarousel from './components/PhotoCarousel.jsx';
 import ToyInfo from './components/ToyInfo.jsx';
 import ToyReserve from './components/ToyReserve.jsx';
 
+import StarCreator from '../SharedComponents/StarCreator';
+
 const IndividualToy = () => {
   const [toy, setToy] = useState(tempData);
   return (
     <div className='bg-gray-800 text-white h-screen absolute'>
-      <div className='flex justify-center space-x-16'>
-        <div>{toy.name}</div>
-        <div>{toy.rating}</div>
+      <div className='flex justify-center space-x-5'>
+        <div className='text-lg'>{toy.name}</div>
+        {StarCreator(toy.rating)}
       </div>
+
+      <div className='h-0.5 bg-white w-11/12 absolute left-1/2 -translate-x-1/2 -translate-y-1/2'></div> {/* Simple line */}
 
       <div className='z-10 flex justify-center relative space-x-60 translate-y-10'>
         <div className='btn btn-sm text-xs btn-square bg-gray-900 text-white'>❮</div>

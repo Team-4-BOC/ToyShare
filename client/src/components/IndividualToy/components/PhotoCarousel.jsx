@@ -3,7 +3,7 @@ import React from 'react';
 const PhotoCarousel = ({ toy }) => {
   return (
     <div className='flex justify-center'>
-      <div className="carousel w-11/12 bg-center">
+      <div className="carousel w-11/12">
       {toy.photos.map((curUrl, idx) => {
         // const prevPhoto = idx - 1 > -1 ? '#slide' + (idx - 1) : '#slide' + (toy.photos.length - 1);
         // const nextPhoto = idx + 1 < toy.photos.length ? '#slide' + (idx + 1) : '#slide0';
