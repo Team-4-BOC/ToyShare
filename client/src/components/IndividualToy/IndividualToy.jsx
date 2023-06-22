@@ -13,7 +13,7 @@ const IndividualToy = ({ testing }) => {
   return (
     <div className='bg-gray-800 text-white absolute overflow-y-scroll min-h-screen'>
       <div className='flex justify-center space-x-5'>
-        <div className='text-lg'>{toy.name}</div>
+        <div className='text-lg' data-testid='it-toy-name'>{toy.name}</div>
         {StarCreator(toy.rating)}
       </div>
 
