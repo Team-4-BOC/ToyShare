@@ -8,8 +8,10 @@ import ToyReserve from './components/ToyReserve.jsx';
 
 import StarCreator from '../SharedComponents/StarCreator';
 
-const IndividualToy = () => {
-  const [toy, setToy] = useState(tempData);
+const IndividualToy = ({ fakeApiData }) => {
+  const data = !tempData ? fakeApiData : tempData;
+
+  const [toy, setToy] = useState(data);
   return (
     <div className='bg-gray-800 text-white absolute overflow-y-scroll min-h-screen'>
       <div className='flex justify-center space-x-5'>
