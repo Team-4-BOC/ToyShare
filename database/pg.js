@@ -1,8 +1,10 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
+const username = process.env.DBUSER;
+
 const pool = new Pool({
-  user: process.env.USER,
+  user: username,
   host: process.env.HOST,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
@@ -12,7 +14,6 @@ const pool = new Pool({
 module.exports = {
   query: (text, params) => {
     console.log('Query submitted', { text, params });
-    console.log(process.env.USER);
     return pool.query(text, params);
   }
 };

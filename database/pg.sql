@@ -2,7 +2,7 @@ DROP SCHEMA IF EXISTS toyshare CASCADE;
 
 CREATE SCHEMA toyshare
   CREATE TABLE users (
-    id integer PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     first_name varchar,
     last_name varchar,
     email varchar,
@@ -10,11 +10,11 @@ CREATE SCHEMA toyshare
     city_state varchar
   )
   CREATE TABLE category (
-    id integer PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name varchar NOT NULL
   )
   CREATE TABLE toys (
-    id integer PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     toy_name varchar,
     category_id integer,
     rating integer,
@@ -32,7 +32,7 @@ CREATE SCHEMA toyshare
       ON DELETE CASCADE
   )
   CREATE TABLE saved_toys (
-    id integer PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id integer NOT NULL,
     toy_id integer NOT NULL,
     FOREIGN KEY(user_id)
@@ -43,7 +43,7 @@ CREATE SCHEMA toyshare
       ON DELETE CASCADE
   )
   CREATE TABLE inventory_out (
-    id integer PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id integer NOT NULL,
     toy_id integer NOT NULL,
     FOREIGN KEY(user_id)
@@ -54,7 +54,7 @@ CREATE SCHEMA toyshare
       ON DELETE CASCADE
   )
     CREATE TABLE toy_rental_history (
-    id integer PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id integer NOT NULL,
     toy_id integer NOT NULL,
     FOREIGN KEY(user_id)
@@ -65,7 +65,7 @@ CREATE SCHEMA toyshare
       ON DELETE CASCADE
   )
   CREATE TABLE dates_available (
-    id integer PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     toy_id integer NOT NULL,
     dates date NOT NULL,
     toy_status integer NOT NULL,
@@ -74,7 +74,7 @@ CREATE SCHEMA toyshare
       ON DELETE CASCADE
   )
   CREATE TABLE toy_photos (
-    id integer PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     toy_id integer NOT NULL,
     url varchar,
     FOREIGN KEY(toy_id)
@@ -82,10 +82,21 @@ CREATE SCHEMA toyshare
       ON DELETE CASCADE
   )
  CREATE TABLE user_photos (
-    id integer PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id integer NOT NULL,
     url varchar,
     FOREIGN KEY(user_id)
       REFERENCES users(id)
       ON DELETE CASCADE
   );
+
+  -- AFTER IMPORTING THE DATA- This sets the auto icrement to the last id
+SELECT setval('toyshare.users_id_seq', (SELECT COALESCE(MAX(id), 0) FROM toyshare.users));
+SELECT setval('toyshare.category_id_seq', (SELECT COALESCE(MAX(id), 0) FROM toyshare.category));
+SELECT setval('toyshare.toys_id_seq', (SELECT COALESCE(MAX(id), 0) FROM toyshare.toys));
+SELECT setval('toyshare.saved_toys_id_seq', (SELECT COALESCE(MAX(id), 0) FROM toyshare.saved_toys));
+SELECT setval('toyshare.inventory_out_id_seq', (SELECT COALESCE(MAX(id), 0) FROM toyshare.inventory_out));
+SELECT setval('toyshare.toy_rental_history_id_seq', (SELECT COALESCE(MAX(id), 0) FROM toyshare.toy_rental_history));
+SELECT setval('toyshare.dates_available_id_seq', (SELECT COALESCE(MAX(id), 0) FROM toyshare.dates_available));
+SELECT setval('toyshare.toy_photos_id_seq', (SELECT COALESCE(MAX(id), 0) FROM toyshare.toy_photos));
+SELECT setval('toyshare.user_photos_id_seq', (SELECT COALESCE(MAX(id), 0) FROM toyshare.user_photos));
