@@ -1,7 +1,13 @@
 /* eslint-disable no-undef */
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import axios from 'axios';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut
+} from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAM5hTXl0XTWMwI-jlm-v0AGDg7oYp5cHI',
@@ -21,8 +27,20 @@ const provider = new GoogleAuthProvider();
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      console.log('send update to user table to set isloggedin to true');
-      console.log('results', result);
+      axios.get('/newUser', { params: { email: result.user.email } })
+        .then((response) => {
+          if (response) {
+            alert('You are now Logged in');
+          } else {
+            axios.post('./users', { firstName: 'namw', lastName: 'name', email: result.user.email })
+              .then(() => {
+                axios.post('/user_photos', { url: result.user.photoURL })
+                  .then(() => {
+                    alert('Thanks for logging in!!');
+                  });
+              });
+          }
+        });
     })
     .catch((err) => {
       alert(err);
@@ -30,17 +48,28 @@ export const signInWithGoogle = () => {
 };
 
 export const signOutOfGoogle = () => {
-  const email = auth.currentUser.email;
   if (auth.currentUser === null) {
     alert('You are already signed out, please sign in to checkout');
   } else {
-    alert('You have signed out');
+    signOut(auth)
+      .then(() => {
+        alert('You have signed out');
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
-  signOut(auth)
-    .then(() => {
-      console.log('send update to user table to set isloggedin to false');
-    })
-    .catch((err) => {
-      alert(err);
-    });
+};
+
+export const verifySignedIn = () => {
+  const idToken = auth.currentUser;
+  if (idToken) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const getCurrentUserInfo = () => {
+  return auth.currentUser;
 };
