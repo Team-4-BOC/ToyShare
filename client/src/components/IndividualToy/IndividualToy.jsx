@@ -11,7 +11,7 @@ import StarCreator from '../SharedComponents/StarCreator';
 const IndividualToy = () => {
   const [toy, setToy] = useState(tempData);
   return (
-    <div className='bg-gray-800 text-white h-screen absolute'>
+    <div className='bg-gray-800 text-white absolute overflow-y-scroll min-h-screen'>
       <div className='flex justify-center space-x-5'>
         <div className='text-lg'>{toy.name}</div>
         {StarCreator(toy.rating)}

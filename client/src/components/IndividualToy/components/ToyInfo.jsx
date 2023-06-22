@@ -2,7 +2,7 @@ import React from 'react';
 
 const ToyInfo = ({ toy }) => {
   return (
-    <div className='w-11/12' style={{ transform: 'translateX(5vw)' }}>
+    <div className='w-11/12 pb-36' style={{ transform: 'translateX(5vw)' }}>
       <div>{toy.location}</div>
       <div className='h-0.5 bg-slate-600 w-40 mb-5'></div> {/* Simple line */}
       <div className='btn btn-circle float-right'>{toy.user}</div>
