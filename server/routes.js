@@ -8,6 +8,8 @@ router.get('/', function (req, res) {
 
 router.post('/toys', controllers.toys.post);
 
+router.get('/user', controllers.users.getOne);
+
 // Examples:
 
 // router.get('/products/:product_id', controllers.product.getOne);
