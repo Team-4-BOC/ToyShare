@@ -18,6 +18,14 @@ jobs:
       - run:
           name: Build webpack
           command: npm run build-prod
+      - run:
+          name: Test envs
+          command: |
+            echo "HOST: $HOST"
+            echo "DATABASE: $DATABASE"
+            echo "PORT: $PORT"
+            echo "PASSWORD: $PASSWORD"
+            echo "DBUSER: $DBUSER"
 
       - persist_to_workspace:
           root: .
@@ -37,14 +45,6 @@ jobs:
           at: .
 
       # Deploy to EC2 instance
-      - run:
-          name: Test envs
-          command: |
-            echo "HOST: $HOST"
-            echo "DATABASE: $DATABASE"
-            echo "PORT: $PORT"
-            echo "PASSWORD: $PASSWORD"
-            echo "DBUSER: $DBUSER"
       - run:
           name: Deploy to EC2
           command: |
