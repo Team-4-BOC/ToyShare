@@ -2,6 +2,7 @@ node_modules
 coverage
 .env
 client/dist/bundle.js
+client/dist/styles.css
 database/uploadDBdata.txt
 client/src/styles.css
 Raw Toys Data - Category.csv
