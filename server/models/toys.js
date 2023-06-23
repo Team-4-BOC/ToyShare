@@ -6,7 +6,24 @@ module.exports = {
   // },
   getOne: (data) => {
     const values = [data.id];
-    return db.query('SELECT * from toyshare.toys where id = $1', values);
+    return db.query(`
+    SELECT
+      t.toy_name AS name,
+      t.rating,
+      t.toy_description AS description,
+      t.original_price,
+      t.rental_price,
+      t.delivery_method,
+      t.payment_method,
+      (
+        SELECT json_agg(tp.url)
+        FROM toyshare.toy_photos tp
+        WHERE tp.toy_id =  t.id
+      )
+      AS photos
+      FROM toyshare.toys t
+      WHERE t.id = $1`
+    , values);
   },
   // put: (Nick) => {
   //   return db.query("SELECT * FROM sdc.cart;");

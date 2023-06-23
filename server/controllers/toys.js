@@ -14,12 +14,15 @@ module.exports = {
 //   },
   getOne: (req, res) => {
     if (!req.query.id) {
-      res.status = 404;
-      res.send('Please input id');
+      res.status(404).send('Please input id');
     }
     models.toys.getOne(req.query)
       .then((results) => {
-        res.send(results.rows);
+        res.status(200).send(results.rows[0]);
+      })
+      .catch((err) => {
+        res.status(404).send('Error retrieving toy ' + JSON.stringify(err));
+        console.log('Error querying toy', err);
       });
   },
   post: (req, res) => {
