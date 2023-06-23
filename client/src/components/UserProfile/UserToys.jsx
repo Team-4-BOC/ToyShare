@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
+// This component displays the user's rental inventory, rental history, and saved toys
 function UserToys ({ userData }) {
   const titleStyle = {
     fontSize: 20,
