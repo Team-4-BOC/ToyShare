@@ -15,6 +15,8 @@ module.exports = {
       t.rental_price,
       t.delivery_method,
       t.payment_method,
+      t.user_id,
+      u.first_name AS user,
       (
         SELECT json_agg(tp.url)
         FROM toyshare.toy_photos tp
@@ -22,6 +24,7 @@ module.exports = {
       )
       AS photos
       FROM toyshare.toys t
+      JOIN toyshare.users u ON t.user_id = u.id
       WHERE t.id = $1`
     , values);
   },
