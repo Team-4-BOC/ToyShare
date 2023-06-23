@@ -12,7 +12,9 @@
     "lint": "eslint client/src/*.jsx server/*.js",
     "server-prod": "pm2 start server/index.js",
     "server-restart": "pm2 restart server/index.js",
-    "build-prod": "webpack"
+    "build-css-prod":"npx tailwind build -i client/src/styles.css -o client/dist/styles.css",
+    "build-webpack-prod": "webpack",
+    "build-prod": "npm-run-all --parallel build-css-prod build-webpack-prod"
   },
   "repository": {
     "type": "git",
