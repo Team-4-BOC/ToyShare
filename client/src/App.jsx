@@ -7,6 +7,7 @@ const App = () => {
     <>
       <div className='text-red-950'>Hello World Deployed!!!</div>
       <button className='btn btn-outline btn-primary'>Daisy Button</button>
+      {/* <IndividualToy /> */}
       {/* <UserProfile /> */}
     </>
   );
