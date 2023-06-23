@@ -5,9 +5,9 @@ module.exports = {
     './client/src/**/*.{js,jsx}'
   ],
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [require("daisyui")],
+  plugins: [require('daisyui')],
   daisyui: {
     styled: true
   }

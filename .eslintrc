@@ -4,7 +4,8 @@
     "plugin:react/recommended"
   ],
   "rules": {
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "react/prop-types": 0
   },
   "env": {
     "jest": true
