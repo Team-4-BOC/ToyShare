@@ -12,11 +12,12 @@ router.get('/user', controllers.users.getOne);
 
 router.get('/toy', controllers.toys.getOne);
 
+router.post('/favorite', controllers.toys.save);
+
 router.post('/bookings/getAllBooked', controllers.bookings.getAllBooked);
 
 router.post('/bookings/getAllAvailable', controllers.bookings.getAllAvailable);
 
-router.get('/toy', controllers.toys.getOne);
 // Examples:
 
 // router.get('/products/:product_id', controllers.product.getOne);

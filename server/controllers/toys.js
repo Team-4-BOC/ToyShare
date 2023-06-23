@@ -26,8 +26,8 @@ module.exports = {
         res.status(200).send(results.rows[0]);
       })
       .catch((err) => {
-        res.status(404).send('Error retrieving toy ' + JSON.stringify(err));
-        console.log('Error querying toy', err);
+        res.status(404).send('ERROR retrieving toy ' + JSON.stringify(err));
+        console.log('ERROR querying toy', err);
       });
   },
   post: (req, res) => {
@@ -40,8 +40,15 @@ module.exports = {
         console.log('ERROR ADDING TOY', err);
       });
     // console.log(models.toys.post());
+  },
+  save: (req, res) => {
+    models.toys.favorite(req.query.id)
+      .then(() => {
+        res.status(202).send('Succesfully favorited toy!');
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR favoriting toy');
+        console.log('ERROR ADDING TOY', err);
+      });
   }
-//   put: (req, res) => {
-//     res.send("Updating cart in controllers");
-//   },
 };
