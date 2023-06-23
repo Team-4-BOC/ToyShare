@@ -1,0 +1,11 @@
+.react-datepicker__day--available {
+  background-color: darkgreen;
+}
+
+.react-datepicker__day--booked {
+  background-color: darkred;
+}
+
+.react-datepicker__day--unavailable {
+  background-color: gray;
+}

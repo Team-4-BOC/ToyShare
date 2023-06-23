@@ -14,11 +14,11 @@ const DatePickerComponent = ({ toy_id }) => {
 
   const fetchAllDates = async () => {
     try {
-      const bookedRes = await fetch('/bookings/getAllBooked', { method: 'POST', body: JSON.stringify({ toy_id }), headers: { 'Content-Type': 'application/json' } });
-      const availableRes = await fetch('/bookings/getAllAvailable', { method: 'POST', body: JSON.stringify({ toy_id }), headers: { 'Content-Type': 'application/json' } });
+      const booked = await fetch('/bookings/getAllBooked', { method: 'POST', body: JSON.stringify({ toy_id }), headers: { 'Content-Type': 'application/json' } });
+      const available = await fetch('/bookings/getAllAvailable', { method: 'POST', body: JSON.stringify({ toy_id }), headers: { 'Content-Type': 'application/json' } });
 
-      const bookedDates = await bookedRes.json();
-      const availableDates = await availableRes.json();
+      const bookedDates = await booked.json();
+      const availableDates = await available.json();
 
       setBookedDates(bookedDates.map(d => new Date(d.date)));
       setAvailableDates(availableDates.map(d => new Date(d.date)));
