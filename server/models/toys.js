@@ -4,9 +4,10 @@ module.exports = {
   // getAll: (Kevin) => {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
-  // getOne: (Brady) => {
-  //   return db.query("SELECT * FROM sdc.cart;");
-  // },
+  getOne: (data) => {
+    const values = [data.id];
+    return db.query('SELECT * from toyshare.toys where id = $1', values);
+  },
   // put: (Nick) => {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
