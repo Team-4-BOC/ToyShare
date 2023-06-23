@@ -27,21 +27,32 @@ const provider = new GoogleAuthProvider();
 const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      axios.get('/user/new', { params: { email: result.user.email } })
+      // alert('you are sighned in');
+      axios.get('/userNew', { params: { email: result.user.email } })
         .then((response) => {
-          if (response) {
+          console.log('RESPONSE', response);
+          if (response.data.length !== 0) {
             alert('You are now Logged in');
           } else {
-            const name = result.user.displayName.split('');
-            axios.post('./user', { firstName: name[0], lastName: name[1], email: result.user.email })
+            const name = result.user.displayName.split(' ');
+            console.log('name inside else block of get request then block', name);
+
+            const data = {};
+            data.first_name = name[0];
+            data.last_name = name[1];
+            data.email = result.user.email;
+
+            axios.post('/user', data)
               .then(() => {
-                axios.post('/user/photos', { url: result.user.photoURL })
-                  .then(() => {
-                    alert('Thanks for logging in!!');
-                  });
+                console.log('inside post request for signInWithGoogle then block');
+                // axios.post('/user/photos', { url: result.user.photoURL })
+                //   .then(() => {
+                //     alert('Thanks for logging in!!');
+                //   });
               });
           }
         });
+      // console.log('results', result);
     })
     .catch((err) => {
       alert(err);
