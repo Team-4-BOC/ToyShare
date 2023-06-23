@@ -10,6 +10,10 @@ router.post('/toys', controllers.toys.post);
 
 router.get('/user', controllers.users.getOne);
 
+router.post('/bookings/getAllBooked', controllers.bookings.getAllBooked);
+
+router.post('/bookings/getAllAvailable', controllers.bookings.getAllAvailable);
+
 // Examples:
 
 // router.get('/products/:product_id', controllers.product.getOne);
