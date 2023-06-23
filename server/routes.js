@@ -12,6 +12,10 @@ router.get('/user', controllers.users.getOne);
 
 router.get('/userpf', controllers.users.getOneMeta);
 
+router.post('/bookings/getAllBooked', controllers.bookings.getAllBooked);
+
+router.post('/bookings/getAllAvailable', controllers.bookings.getAllAvailable);
+
 // Examples:
 
 // router.get('/products/:product_id', controllers.product.getOne);
