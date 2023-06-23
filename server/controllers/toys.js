@@ -13,8 +13,8 @@ module.exports = {
 //       });
 //   },
   getOne: (req, res) => {
-    if (!req.query.id) {
-      res.status(404).send('Please input id');
+    if (!req.query.toy_id) {
+      res.status(404).send('Please input toy_id');
       return;
     }
     models.toys.getOne(req.query)
@@ -42,7 +42,11 @@ module.exports = {
     // console.log(models.toys.post());
   },
   save: (req, res) => {
-    models.toys.favorite(req.query.id)
+    if (!req.query.toy_id || !req.query.current_user_id) {
+      res.status(500).send('Please input current_user_id and toy_id');
+      return;
+    }
+    models.toys.favorite(req.query)
       .then(() => {
         res.status(202).send('Succesfully favorited toy!');
       })

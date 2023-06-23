@@ -6,7 +6,7 @@ module.exports = {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
   getOne: (data) => {
-    const values = [data.id];
+    const values = [data.toy_id, data.current_user_id ? data.current_user_id : 0];
     return db.query(`
     SELECT
       t.toy_name AS name,
@@ -24,10 +24,12 @@ module.exports = {
         FROM toyshare.toy_photos tp
         WHERE tp.toy_id =  t.id
       )
-      AS photos
+      AS photos,
+      CASE WHEN st.toy_id IS NULL THEN false ELSE true END AS favorited
     FROM toyshare.toys t
     JOIN toyshare.users u ON t.user_id = u.id
     JOIN toyshare.dates_available d ON d.toy_id = t.id AND toy_status = 1 AND dates > CURRENT_DATE
+    LEFT JOIN toyshare.saved_toys st ON t.id = st.toy_id AND st.user_id = $2
     WHERE t.id = $1
     ORDER BY d.dates ASC
     LIMIT 1`
@@ -41,7 +43,7 @@ module.exports = {
     return db.query('INSERT INTO toyshare.toys(toy_name, category_id, rating, user_id, toy_description, original_price, rental_price, delivery_method, payment_method) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);', values);
   },
   save: (data) => {
-    const values = [data.toy_id, data.user_id];
+    const values = [data.toy_id, data.current_user_id];
     return db.query('INSERT INTO toyshare.saved_toys(toy_id, user_id) VALUES($1, $2)', values);
   }
 };
