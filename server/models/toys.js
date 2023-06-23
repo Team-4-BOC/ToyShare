@@ -17,6 +17,7 @@ module.exports = {
       t.payment_method,
       t.user_id,
       u.first_name AS user,
+      d.dates AS next_date,
       (
         SELECT json_agg(tp.url)
         FROM toyshare.toy_photos tp
@@ -25,7 +26,10 @@ module.exports = {
       AS photos
       FROM toyshare.toys t
       JOIN toyshare.users u ON t.user_id = u.id
-      WHERE t.id = $1`
+      JOIN toyshare.dates_available d ON d.toy_id = t.id AND toy_status = 1 AND dates > CURRENT_DATE
+      WHERE t.id = $1
+      ORDER BY d.dates ASC
+      LIMIT 1`
     , values);
   },
   // put: (Nick) => {
