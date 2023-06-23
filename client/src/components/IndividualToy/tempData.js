@@ -13,5 +13,6 @@ export default {
     'https://i5.walmartimages.com/asr/dc8d82bd-f819-4d17-8c92-2543afb1d78b.88cca436288ff489fd12f0ea861ccc5e.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF'
   ],
   location: 'Sanfrancisco, California',
-  next_date: '2023-06-24T07:00:00.000Z'
+  next_date: '2023-06-24T07:00:00.000Z',
+  saved: true
 };

@@ -25,7 +25,7 @@ module.exports = {
         WHERE tp.toy_id =  t.id
       )
       AS photos,
-      CASE WHEN st.toy_id IS NULL THEN false ELSE true END AS favorited
+      CASE WHEN st.toy_id IS NULL THEN false ELSE true END AS saved
     FROM toyshare.toys t
     JOIN toyshare.users u ON t.user_id = u.id
     JOIN toyshare.dates_available d ON d.toy_id = t.id AND toy_status = 1 AND dates > CURRENT_DATE
