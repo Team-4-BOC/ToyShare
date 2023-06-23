@@ -21,20 +21,21 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
+const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-export const signInWithGoogle = () => {
+const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      axios.get('/newUser', { params: { email: result.user.email } })
+      axios.get('/user/new', { params: { email: result.user.email } })
         .then((response) => {
           if (response) {
             alert('You are now Logged in');
           } else {
-            axios.post('./users', { firstName: 'namw', lastName: 'name', email: result.user.email })
+            const name = result.user.displayName.split('');
+            axios.post('./user', { firstName: name[0], lastName: name[1], email: result.user.email })
               .then(() => {
-                axios.post('/user_photos', { url: result.user.photoURL })
+                axios.post('/user/photos', { url: result.user.photoURL })
                   .then(() => {
                     alert('Thanks for logging in!!');
                   });
@@ -47,9 +48,9 @@ export const signInWithGoogle = () => {
     });
 };
 
-export const signOutOfGoogle = () => {
+const signOutOfGoogle = () => {
   if (auth.currentUser === null) {
-    alert('You are already signed out, please sign in to checkout');
+    alert('You are already signed out, please sign in to checkout or edit your profile');
   } else {
     signOut(auth)
       .then(() => {
@@ -61,7 +62,7 @@ export const signOutOfGoogle = () => {
   }
 };
 
-export const verifySignedIn = () => {
+const verifySignedIn = () => {
   const idToken = auth.currentUser;
   if (idToken) {
     return true;
@@ -70,6 +71,8 @@ export const verifySignedIn = () => {
   }
 };
 
-export const getCurrentUserInfo = () => {
+const getCurrentUserInfo = () => {
   return auth.currentUser;
 };
+
+export { auth, signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo };

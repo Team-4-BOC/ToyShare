@@ -10,6 +10,10 @@ router.post('/toys', controllers.toys.post);
 
 router.get('/user', controllers.users.getOne);
 
+router.post('/user', controllers.users.addUser);
+router.post('/user/photos', controllers.users.addUserPhoto);
+router.get('/user/new', controllers.users.checkForNewUser);
+
 router.post('/bookings/getAllBooked', controllers.bookings.getAllBooked);
 
 router.post('/bookings/getAllAvailable', controllers.bookings.getAllAvailable);

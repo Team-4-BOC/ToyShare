@@ -5,6 +5,7 @@ client/dist/bundle.js
 client/dist/styles.css
 database/uploadDBdata.txt
 client/src/styles.css
+client/dist/bundle.js.LICENSE.txt
 Raw Toys Data - Category.csv
 Raw Toys Data - Dates Available.csv
 Raw Toys Data - Saved Toys.csv

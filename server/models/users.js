@@ -16,5 +16,14 @@ module.exports = {
   getOne: (data) => {
     const values = [data.id];
     return db.query('SELECT * from toyshare.users where id = $1', values);
+  },
+  addUser: (userInfo) => {
+    console.log('inside addUser model', userInfo);
+  },
+  addUserPhoto: (userPhoto) => {
+    console.log('inside addUserPhoto model', userPhoto);
+  },
+  checkForNewUser: (email) => {
+    console.log('inside checkForNewUser model', email);
   }
 };

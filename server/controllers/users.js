@@ -27,5 +27,35 @@ module.exports = {
       .then((results) => {
         res.send(results.rows);
       });
+  },
+  addUser: (req, res) => {
+    console.log('inside addUser controller', req.body);
+    // models.users.addUser()
+    //   .then(() => {
+    //     console.log('user added to users table');
+    //   })
+    //   .catch((err) => {
+    //     res.status(500).send(err);
+    //   });
+  },
+  addUserPhoto: (req, res) => {
+    console.log('inside addUserPhoto controller', req.body);
+    // models.users.addUserPhoto()
+    //   .then(() => {
+    //     console.log('photo added to users photos table');
+    //   })
+    //   .catch((err) => {
+    //     res.status(500).send(err);
+    //   });
+  },
+  checkForNewUser: (req, res) => {
+    console.log('inside checkForNewUser controller', req.query);
+    // models.users.checkForNewUser()
+    //   .then(() => {
+    //     console.log('photo added to users photos table');
+    //   })
+    //   .catch((err) => {
+    //     res.status(500).send(err);
+    //   });
   }
 };
