@@ -22,10 +22,15 @@ const models = require('../models');
 
 module.exports = {
   getOne: (req, res) => {
-    // console.log(req.query);
     models.users.getOne(req.query)
       .then((results) => {
         res.send(results.rows);
+      });
+  },
+  getOneMeta: (req, res) => {
+    models.users.getOneMeta(req.query)
+      .then((results) => {
+        res.send(results);
       });
   }
 };

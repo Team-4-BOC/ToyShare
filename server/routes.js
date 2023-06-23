@@ -10,6 +10,8 @@ router.post('/toys', controllers.toys.post);
 
 router.get('/user', controllers.users.getOne);
 
+router.get('/userpf', controllers.users.getOneMeta);
+
 // Examples:
 
 // router.get('/products/:product_id', controllers.product.getOne);
