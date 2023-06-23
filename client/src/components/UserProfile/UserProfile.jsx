@@ -14,22 +14,26 @@ function UserProfile () {
         signed_in: false,
         city_state: 'init'
       },
+      photo: 'https://shorturl.at/pOQSW',
       inventory: [],
       history: [],
       saved: []
     });
 
   useEffect(() => {
-    axios.get('/userpf', { params: { id: 1 } })
+    axios.get('/userpf', { params: { id: 2 } })
       .then((response) => {
         setUserData(response.data);
       });
   }, []);
 
   return (
+    <div className="h-screen flex items-center justify-center flex-col">
     <div className="profile">
       <UserInfo userData={userData}/>
+      <br></br>
       <UserToys userData={userData}/>
+    </div>
     </div>
   );
 };

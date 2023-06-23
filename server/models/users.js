@@ -21,6 +21,7 @@ module.exports = {
     const values = [data.id];
     const result = {};
     const user = await db.query('SELECT * from toyshare.users where id = $1', values);
+    const photo = await db.query('SELECT * from toyshare.user_photos where user_id = $1', values);
     const inventory = await db.query('SELECT * from toyshare.toys where user_id = $1', values);
     const historyID = await db.query('SELECT * from toyshare.toy_rental_history where user_id = $1', values);
     const savedID = await db.query('SELECT * from toyshare.saved_toys where user_id = $1', values);
@@ -35,6 +36,7 @@ module.exports = {
       toysSaved.push(toy.rows[0]);
     }
     result.user = user.rows[0];
+    result.photo = photo.rows[0].url;
     result.inventory = inventory.rows;
     result.history = toysHist;
     result.saved = toysSaved;
