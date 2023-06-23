@@ -57,6 +57,6 @@ workflows:
       - deploy:
           requires:
             - builtTestLint
-          # filters:
-          #   branches:
-          #     only: main
+          filters:
+            branches:
+              only: main
