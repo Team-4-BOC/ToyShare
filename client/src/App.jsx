@@ -17,7 +17,7 @@ const App = () => {
   // 5 === checkout 1 (RESERVED)
   // 6 === checkout 2 (RESERVED)
   // 7 === checkout 3 (RESERVED)
-  const [page, setPage] = useState(9);
+  const [page, setPage] = useState(3);
 
   // if (page === 0) {
   //   return (
@@ -45,7 +45,7 @@ const App = () => {
   if (page === 3) {
     return (
       <>
-        <RenteeProfile userId={1} setPage={setPage}/>
+        <RenteeProfile userId={2} setPage={setPage}/>
       </>
     );
   }

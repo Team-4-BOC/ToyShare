@@ -27,11 +27,12 @@ const RenteeProfile = ({ userId, setPage }) => {
     //   });
   }, []);
 
+  // className="card card-compact w-96 bg-base-100 shadow-xl"
   return (
-    <div>
+    <div className="flex items-center flex-col">
       <div>
-        <div className="rentee">
-          <div className="card card-compact w-96 bg-base-100 shadow-xl">
+        <div>
+          <div>
             <img src={userInfo.photo} alt="The man himself"></img>
           </div>
           <h2>{renteeData.first_name + ' ' + renteeData.last_name}</h2>
@@ -39,7 +40,7 @@ const RenteeProfile = ({ userId, setPage }) => {
           <div>{StarCreator(3)}</div>
         </div>
         <div>
-          <p>{renteeData.description}</p>
+          <p>{userInfo.description}</p>
         </div>
       </div>
       <div>
