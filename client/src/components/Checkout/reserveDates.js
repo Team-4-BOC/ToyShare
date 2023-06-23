@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "../../datePicker.css"; 
+import "../../styles.css"; 
 
 const ReserveDates = ({ toy_id }) => {
   const [startDate, setStartDate] = useState(new Date());
