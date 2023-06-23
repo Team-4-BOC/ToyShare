@@ -15,9 +15,14 @@ module.exports = {
   getOne: (req, res) => {
     if (!req.query.id) {
       res.status(404).send('Please input id');
+      return;
     }
     models.toys.getOne(req.query)
       .then((results) => {
+        if (!results.rows[0]) {
+          res.status(404).send('No toys with this id found');
+          return;
+        }
         res.status(200).send(results.rows[0]);
       })
       .catch((err) => {

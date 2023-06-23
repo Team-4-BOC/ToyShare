@@ -24,12 +24,12 @@ module.exports = {
         WHERE tp.toy_id =  t.id
       )
       AS photos
-      FROM toyshare.toys t
-      JOIN toyshare.users u ON t.user_id = u.id
-      JOIN toyshare.dates_available d ON d.toy_id = t.id AND toy_status = 1 AND dates > CURRENT_DATE
-      WHERE t.id = $1
-      ORDER BY d.dates ASC
-      LIMIT 1`
+    FROM toyshare.toys t
+    JOIN toyshare.users u ON t.user_id = u.id
+    JOIN toyshare.dates_available d ON d.toy_id = t.id AND toy_status = 1 AND dates > CURRENT_DATE
+    WHERE t.id = $1
+    ORDER BY d.dates ASC
+    LIMIT 1`
     , values);
   },
   // put: (Nick) => {

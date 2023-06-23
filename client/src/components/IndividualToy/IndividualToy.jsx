@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 import tempData from './tempData';
 
@@ -10,6 +11,15 @@ import StarCreator from '../SharedComponents/StarCreator';
 
 const IndividualToy = ({ testing }) => {
   const [toy, setToy] = useState(tempData);
+
+  axios.get('toy', { params: { id: 1 } })
+    .then((apiResults) => {
+      setToy(apiResults.data);
+    })
+    .catch((err) => {
+      console.log('Error fetching toy: ', err);
+    });
+
   return (
     <div className='bg-gray-800 text-white absolute overflow-y-scroll min-h-screen'>
       <div className='flex justify-center space-x-5'>
