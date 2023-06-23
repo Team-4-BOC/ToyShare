@@ -8,7 +8,7 @@ const userInfo = {
   location: 'Denver, CO',
   rating: '5stars',
   description: 'Loves working on his farm and has a pet alligator',
-  inventory: ['T-Rex (full body suit)', '1000pc erector set', 'Remote control airplane']
+  inventory: ['T-Rex (full body suit)', '1000pc erector set', 'Remote control airplane', '6x6 red cotton  blanky']
 };
 
 const RenteeProfile = ({ userId, setPage }) => {
@@ -27,10 +27,9 @@ const RenteeProfile = ({ userId, setPage }) => {
     //   });
   }, []);
 
-  // className="card card-compact w-96 bg-base-100 shadow-xl"
   return (
     <div className="flex items-center flex-col">
-      <div>
+      <div className="card-body">
         <div>
           <div>
             <img src={userInfo.photo} alt="The man himself"></img>
@@ -44,15 +43,16 @@ const RenteeProfile = ({ userId, setPage }) => {
         </div>
       </div>
       <div>
-        <h3>Rental Inventory</h3>
-        <p>add/edit toy</p>
-        <div>
-          <ul>
-          {userInfo.inventory.map((item, i) => {
-            return <li key={i}>{item}</li>;
-          })}
-          </ul>
-        </div>
+        <ul className="menu bg-base-200 w-56 rounded-box">
+          <li>
+            <h2 className="rental-inventory">Rental Inventory</h2>
+            <ul>
+              {userInfo.inventory.map((item, i) => {
+                return <li key={i}>{item}</li>;
+              })}
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
   );
