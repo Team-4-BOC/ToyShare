@@ -11,7 +11,7 @@ const App = () => {
       <button className='btn btn-outline btn-primary'>Daisy Button</button>
       {/* <IndividualToy /> */}
       {/* <UserProfile /> */}
-      <AddEditToy/>
+      {/* <AddEditToy/> */}
     </>
   );
 };
