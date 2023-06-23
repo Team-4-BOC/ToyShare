@@ -24,6 +24,7 @@ jobs:
           paths:
             - client/dist
             - server
+            - database
             - package-lock.json
             - package.json
 
@@ -55,6 +56,6 @@ workflows:
       - deploy:
           requires:
             - builtTestLint
-          filters:
-            branches:
-              only: main
+          # filters:
+          #   branches:
+          #     only: main
