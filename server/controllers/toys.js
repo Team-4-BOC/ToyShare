@@ -15,7 +15,7 @@ module.exports = {
   post: (req, res) => {
     models.toys.post(req.body)
       .then((results) => {
-        res.status(201).send(results);
+        res.status(201).send('Succesfully added toy!');
       })
       .catch((err) => {
         res.status(500).send('ERROR adding toy');
