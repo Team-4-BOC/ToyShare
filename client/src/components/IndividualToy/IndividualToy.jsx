@@ -12,7 +12,7 @@ import StarCreator from '../SharedComponents/StarCreator';
 const IndividualToy = ({ testing }) => {
   const [toy, setToy] = useState(tempData);
 
-  axios.get('toy', { params: { id: 1 } })
+  axios.get('toy', { params: { id: 19 } })
     .then((apiResults) => {
       setToy(apiResults.data);
     })
