@@ -4,6 +4,7 @@ module.exports = {
   getAllBooked: (req, res) => {
     models.getAllBooked(req.body)
       .then((results) => {
+        console.log('getAllBooked results:', results);
         res.status(200).send(results.rows);
       })
       .catch((err) => {
@@ -12,8 +13,10 @@ module.exports = {
       });
   },
   getAllAvailable: (req, res) => {
-    models.getAllAvailable(req.body)
+    const toyId = req.query.toyId;
+    models.getAllAvailable({ toyId })
       .then((results) => {
+        console.log('getAllAvail... results:', results);
         res.status(200).send(results.rows);
       })
       .catch((err) => {
