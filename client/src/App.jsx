@@ -17,7 +17,8 @@ const App = () => {
 
   const getUserId = () => {
     // const userInfo = getCurrentUserInfo();
-    axios.get('/userNew', { params: { email: 'JoshMan@email.com' } })
+    axios
+      .get('/userNew', { params: { email: 'JoshMan@email.com' } })
       .then((data) => {
         // console.log('data', data.data[0].id);
         setUserId(data.data[0].id);
@@ -40,11 +41,22 @@ const App = () => {
   const [page, setPage] = useState(0); // check this
   const [toyId, setToyId] = useState(1);
   const [toyUserId, setToyUserId] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+
   if (page === 0) {
     return (
       <>
-        <TopBar setPage={setPage}/>
-        <Home setPage={setPage} setToyId={setToyId} setToyUserId={setToyUserId}/>
+        <TopBar
+          setPage={setPage}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
+        <Home
+          setPage={setPage}
+          setToyId={setToyId}
+          setToyUserId={setToyUserId}
+          searchTerm={searchTerm}
+        />
       </>
     );
   }
@@ -82,7 +94,6 @@ const App = () => {
     );
   }
   if (page === 5) {
-    // revert line 88!
     return (
       <>
         <TopBar setPage={setPage}/>
@@ -106,7 +117,7 @@ const App = () => {
         <br />
         <img src="https://www.belvoirterrace.com/wp-content/uploads/2020/10/Venmo-QR-Code-@Edna-260x300.jpg" alt="venmo payment link"></img>
         <a className="justify-between" onClick={() => setPage(8)}>
-                Click <b>here</b> once you have paid $13 to the Venmo account above
+                Click <b>here</b> once you have paid $30 to the Venmo account above
               </a>
       </>
     );
