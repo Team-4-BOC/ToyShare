@@ -5,6 +5,7 @@ import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
 import Home from './components/TempHome/Home.jsx';
 import EditToy from './components/AddEditToy/EditToy.jsx';
+import AddToy from './components/AddEditToy/AddToy.jsx';
 // import Checkout from './components/Checkout/placeholer.jsx';
 import TopBar from './components/TempHome/TopBar.jsx';
 // import { use } from 'matter';
@@ -50,7 +51,7 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage}/>
-        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId}/>
+        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId}/>
       </>
     );
   }
@@ -71,19 +72,19 @@ const App = () => {
       </>
     );
   }
-  // if (page === 4) {
-  //  return (
-  //    <>
-  //      <TopBar setPage={setPage}/>
-  //      <AddToy setPage={setPage}/>
-  //    </>
-  //  );
-  // }
+  if (page === 4) {
+    return (
+     <>
+       <TopBar setPage={setPage}/>
+       <AddToy setPage={setPage}/>
+     </>
+    );
+  }
   if (page === 5) {
     return (
       <>
         <TopBar setPage={setPage}/>
-        <EditToy setPage={setPage}/>
+        <EditToy setPage={setPage} toyId={toyId} toyUserId={toyUserId}/>
       </>
     );
   }

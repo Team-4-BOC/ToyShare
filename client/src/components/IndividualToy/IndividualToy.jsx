@@ -13,12 +13,11 @@ import StarCreator from '../SharedComponents/StarCreator';
 
 let justSaved = false;
 
-const IndividualToy = ({ testing, setPage, toyId }) => {
+const IndividualToy = ({ testing, setPage, toyId, userId }) => {
   const [toy, setToy] = useState(testing ? tempData : {});
-
   const fetchToy = () => {
     justSaved = false;
-    axios.get('toy', { params: { toyId, current_user_id: 1 } }) // Fix current user id and toy id
+    axios.get('toy', { params: { toyId, userId } })
       .then((apiResults) => {
         setToy(apiResults.data);
       })
@@ -27,7 +26,7 @@ const IndividualToy = ({ testing, setPage, toyId }) => {
       });
   };
 
-  useEffect(fetchToy, []); // On startup
+  useEffect(() => { if (userId !== undefined) { fetchToy(); } }, [userId]); // On user id
 
   const handleSave = () => {
     if (toy.saved || justSaved) {
@@ -43,7 +42,7 @@ const IndividualToy = ({ testing, setPage, toyId }) => {
     //   return;
     // }
 
-    axios.post('saved', { toy_id: 19, current_user_id: 1 }) // Fix current user id and toy id
+    axios.post('saved', { toyId, userId })
       .then(() => {
         console.log('Succesful save');
       })
@@ -53,14 +52,11 @@ const IndividualToy = ({ testing, setPage, toyId }) => {
   };
 
   return (
-    <div className='bg-gray-800 text-white absolute overflow-y-scroll min-h-screen'>
-      <div className='flex justify-center space-x-5'>
-        <div className='text-lg' data-testid='it-toy-name'>{toy.name}</div>
+    <div className='absolute overflow-y-scroll min-h-screen'>
+      <div className='flex justify-center space-x-5 bg-gray-900 '>
+      <div className='text-lg font-bold text-white' data-testid='it-toy-name'>{toy.name}</div>
         {StarCreator(toy.rating)}
       </div>
-
-      <div className='h-0.5 bg-white w-11/12 absolute left-1/2 -translate-x-1/2 -translate-y-1/2'></div> {/* Simple line */}
-
       <div className='z-10 flex justify-center relative space-x-60 translate-y-10'>
         <div className='btn btn-sm text-xs btn-square bg-gray-900 text-white'>❮</div>
         <button className="btn btn-sm btn-square bg-gray-900" onClick={handleSave}>
@@ -69,7 +65,7 @@ const IndividualToy = ({ testing, setPage, toyId }) => {
       </div>
       <PhotoCarousel toy={toy}/>
       <ToyInfo toy={toy} setPage={setPage}/>
-      <ToyReserve toy={toy}/>
+      <ToyReserve toy={toy} setPage={setPage}/>
     </div>
   );
 };

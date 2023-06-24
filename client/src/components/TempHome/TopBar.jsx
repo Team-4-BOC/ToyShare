@@ -26,7 +26,7 @@ const Home = ({ setPage }) => {
             </li>
             <li><a onClick={() => signInWithGoogle()}>Login</a></li>
             <li><a onClick={() => signOutOfGoogle()}>Logout</a></li>
-            <li><a onClick={() => setPage(3)}>RenteeProfile</a></li>
+            {/* <li><a onClick={() => setPage(3)}>RenteeProfile</a></li> */}
             {/* <li><a onClick={() => { console.log(verifySignedIn()); }}>IsLoggedIn?</a></li> */}
           </ul>
         </div>

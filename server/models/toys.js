@@ -5,8 +5,9 @@ module.exports = {
   // getAll: (Kevin) => {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
+
   getOne: (data) => {
-    const values = [data.toyId, data.current_user_id ? data.current_user_id : 0];
+    const values = [data.toyId, data.userId !== undefined ? data.userId : 0];
     return db.query(`
     SELECT
       t.toy_name AS name,
@@ -18,6 +19,7 @@ module.exports = {
       t.payment_method,
       t.user_id,
       u.first_name AS user,
+      u.city_state AS location,
       d.dates AS next_date,
       (
         SELECT json_agg(tp.url)
@@ -25,7 +27,12 @@ module.exports = {
         WHERE tp.toy_id =  t.id
       )
       AS photos,
-      CASE WHEN st.toy_id IS NULL THEN false ELSE true END AS saved
+      CASE WHEN st.toy_id IS NULL THEN false ELSE true END AS saved,
+    (
+      SELECT up.url
+      FROM toyshare.user_photos up
+      WHERE up.user_id = u.id
+    ) AS user_photo
     FROM toyshare.toys t
     JOIN toyshare.users u ON t.user_id = u.id
     JOIN toyshare.dates_available d ON d.toy_id = t.id AND toy_status = 1 AND dates > CURRENT_DATE
@@ -63,7 +70,7 @@ module.exports = {
     return db.query('INSERT INTO toyshare.toys(toy_name, category_id, rating, user_id, toy_description, original_price, rental_price, delivery_method, payment_method) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);', values);
   },
   save: (data) => {
-    const values = [data.toy_id, data.current_user_id];
+    const values = [data.toyId, data.userId];
     return db.query('INSERT INTO toyshare.saved_toys(toy_id, user_id) VALUES($1, $2)', values);
   }
 };
