@@ -35,7 +35,7 @@ const AddToy = () => {
   };
 
   const handleDateChange = (newValue) => {
-    console.log("newValue:", newValue);
+    console.log('newValue:', newValue);
     setDate(newValue);
 };
 

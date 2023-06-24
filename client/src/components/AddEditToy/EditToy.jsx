@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import PhotoCarousel from '../IndividualToy/components/PhotoCarousel.jsx';
 import axios from 'axios';
 
-
 const EditToy = (toyId, userId) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
@@ -59,7 +58,7 @@ const EditToy = (toyId, userId) => {
     setDate(newValue);
   };
 
-  console.log('test', {photos: photos});
+  console.log('test', { photos: photos });
 
   return (
     <div className="h-screen flex items-center justify-center flex-col">
