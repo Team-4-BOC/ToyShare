@@ -40,7 +40,7 @@ const AddToy = () => {
 };
 
   return (
-    <div className="h-screen flex items-center justify-center flex-col">
+    <div className="h-screen flex items-center justify-center flex-col space-y-3">
       <div>Add a Toy!</div>
       <input onChange={handleChange} type="text" placeholder="Add Toy Name" className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
       <div className="form-control w-full max-w-xs">
@@ -69,8 +69,9 @@ const AddToy = () => {
         <option>Venmo</option>
         <option>Cash & Venmo</option>
       </select>
-          <div className="stat-title text-info-content">Input Dates Available</div>
-          <div className="stat-value"><Datepicker value={date} onChange={handleDateChange}/></div>
+      <div className="stat-title text-info-content">Input Dates Available</div>
+      <div className="stat-value"><Datepicker value={date} onChange={handleDateChange}/></div>
+      <button className="btn btn-primary">Submit!</button>
     </div>
   );
 };
