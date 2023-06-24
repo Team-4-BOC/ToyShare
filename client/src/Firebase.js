@@ -84,7 +84,8 @@ const verifySignedIn = () => {
 };
 
 const getCurrentUserInfo = () => {
-  return auth.currentUser;
+  const userInfo = auth.currentUser;
+  return userInfo;
 };
 
 export { auth, signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo };
