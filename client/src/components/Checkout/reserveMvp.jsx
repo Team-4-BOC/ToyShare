@@ -13,8 +13,6 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId }) => {
   const fetchAllDates = async () => {
     try {
       const response = await axios.get(`/bookings/getAllAvailable?toyId=${toyId}`)
-      console.log('available Days data:', response.data);
-      // assuming that dates are stored under "dates" property in each row
       const dates = response.data.map(row => row.dates);
       setAvailableDates(dates);
     } catch (err) {
@@ -37,7 +35,6 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId }) => {
       // Update availability/booking status
       try {
         await axios.put('/bookings/updateStatus', { toyId, dates });
-        console.log('updated toy from available to booked');
       } catch (err) {
         console.log('ERROR updating booking status: ', err);
       }
@@ -45,7 +42,6 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId }) => {
       // Add to inventory_out
       try {
         await axios.post('/bookings/postInventory', { toyUserId, toyId });
-        console.log('added toy to inventory_out');
       } catch (err) {
         console.log('ERROR adding to inventory: ', err);
       }
@@ -53,7 +49,6 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId }) => {
       // Add to rental_history
       try {
         await axios.post('/bookings/postRental', { userId, toyId });
-        console.log('added toy to rental_history');
       } catch (err) {
         console.log('ERROR adding to rental history: ', err);
       }
