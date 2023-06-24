@@ -8,7 +8,7 @@ function Home ({ setToyId, setToyUserId, setPage }) {
 
   useEffect(() => {
     const count = 10;
-    const page = Math.floor((Math.random() * 3)) + 1;
+    const page = Math.floor((Math.random() * 2)) + 1;
     console.log(page);
     axios.get('/toys', ({ params: { page, count } }))
       .then((response) => {
