@@ -23,6 +23,13 @@ router.post('/saved', controllers.toys.saved);
 
 router.get('/bookings/getAllBooked', controllers.bookings.getAllBooked);
 router.get('/bookings/getAllAvailable', controllers.bookings.getAllAvailable);
+router.get('/bookings/getInventory', controllers.bookings.getInventory);
+router.get('/bookings/getRental', controllers.bookings.getRental);
+
+router.post('/bookings/postInventory', controllers.bookings.getAllAvailable);
+router.post('/bookings/postRental', controllers.bookings.getAllAvailable);
+
+router.put('/bookings/updateStatus', controllers.bookings.updateStatus);
 
 // Examples:
 
