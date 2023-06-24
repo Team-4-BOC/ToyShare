@@ -3,21 +3,32 @@ import axios from 'axios';
 // import TopBar from './TopBar.jsx';
 import ToyCard from './ToyCard.jsx';
 
-function Home () {
+function Home ({ setToyId, setToyUserId, setPage }) {
   const [toys, setToys] = useState([]);
 
   useEffect(() => {
-    axios.get('/toys')
+    const count = 10;
+    const page = Math.floor((Math.random() * 3)) + 1;
+    console.log(page);
+    axios.get('/toys', ({ params: { page, count } }))
       .then((response) => {
-        // only render 10 toys
-        setToys(response.data.slice(0, -25));
+        setToys(response.data);
+      })
+      .catch((err) => {
+        console.log('ERROR fetching toys ', err);
       });
   }, []);
+
+  const handleToyClick = (toyId, userId) => {
+    setToyId(toyId);
+    setToyUserId(userId);
+    setPage(1);
+  };
 
   return (
     <div>
       <ul>
-      {toys.map(toy => <div key={toys.id}><ToyCard toy={toy} /></div>)}
+      {toys.map(toy => <div key={toys.id}><ToyCard toy={toy} handleToyClick={ handleToyClick } /></div>)}
       </ul>
     </div>
   );

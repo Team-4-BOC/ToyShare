@@ -7,6 +7,7 @@ import Home from './components/TempHome/Home.jsx';
 // import AddEditToy from './components/AddEditToy/placeholer.jsx';
 // import Checkout from './components/Checkout/placeholer.jsx';
 import TopBar from './components/TempHome/TopBar.jsx';
+// import { use } from 'matter';
 // import { getCurrentUserInfo } from './Firebase.js';
 
 const App = () => {
@@ -34,11 +35,13 @@ const App = () => {
   // 6 === checkout 2 (RESERVED)
   // 7 === checkout 3 (RESERVED)
   const [page, setPage] = useState(0);
+  const [toyId, setToyId] = useState(1);
+  const [toyUserId, setToyUserId] = useState(1);
   if (page === 0) {
     return (
       <>
         <TopBar setPage={setPage}/>
-        <Home />
+        <Home setPage={setPage} setToyId={setToyId} setToyUserId={setToyUserId}/>
       </>
     );
   }
@@ -46,7 +49,7 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage}/>
-        <IndividualToy setPage={setPage}/>
+        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId}/>
       </>
     );
   }
@@ -62,7 +65,7 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage}/>
-        <RenteeProfile userId={userId} setPage={setPage} />
+        <RenteeProfile userId={userId} setPage={setPage} toyUserId={toyUserId}/>
       </>
     );
   }
@@ -78,7 +81,7 @@ const App = () => {
   //   return (
   //     <>
   //       <TopBar setPage={setPage}/>
-  //       <Checkout setPage={setPage} />
+  //       <Checkout setPage={setPage} toyId={toyId} />
   //     </>
   //   );
   // }
