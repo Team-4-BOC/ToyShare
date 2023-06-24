@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 import { initializeApp } from 'firebase/app';
-import axios from 'axios';
+// import axios from 'axios';
 import {
   getAuth,
   GoogleAuthProvider,
@@ -21,35 +21,48 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
+const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-export const signInWithGoogle = () => {
+const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      axios.get('/newUser', { params: { email: result.user.email } })
-        .then((response) => {
-          if (response) {
-            alert('You are now Logged in');
-          } else {
-            axios.post('./users', { firstName: 'namw', lastName: 'name', email: result.user.email })
-              .then(() => {
-                axios.post('/user_photos', { url: result.user.photoURL })
-                  .then(() => {
-                    alert('Thanks for logging in!!');
-                  });
-              });
-          }
-        });
+      alert('you are sighned in');
+      // axios.get('/userNew', { params: { email: result.user.email } })
+      //   .then((response) => {
+      //     console.log('RESPONSE', response);
+      //     alert('You are now Logged in');
+      // if (response.data.length !== 0) {
+      //   alert('You are now Logged in');
+      // } else {
+      //   const name = result.user.displayName.split(' ');
+      //   console.log('name inside else block of get request then block', name);
+
+      //   const data = {};
+      //   data.first_name = name[0];
+      //   data.last_name = name[1];
+      //   data.email = result.user.email;
+
+      //   axios.post('/user', data)
+      //     .then(() => {
+      //       console.log('inside post request for signInWithGoogle then block');
+      // axios.post('/user/photos', { url: result.user.photoURL })
+      //   .then(() => {
+      //     alert('Thanks for logging in!!');
+      //   });
+      // });
+      // }
+    // })
+      // console.log('results', result);
     })
     .catch((err) => {
       alert(err);
     });
 };
 
-export const signOutOfGoogle = () => {
+const signOutOfGoogle = () => {
   if (auth.currentUser === null) {
-    alert('You are already signed out, please sign in to checkout');
+    alert('You are already signed out, please sign in to checkout or edit your profile');
   } else {
     signOut(auth)
       .then(() => {
@@ -61,7 +74,7 @@ export const signOutOfGoogle = () => {
   }
 };
 
-export const verifySignedIn = () => {
+const verifySignedIn = () => {
   const idToken = auth.currentUser;
   if (idToken) {
     return true;
@@ -70,6 +83,8 @@ export const verifySignedIn = () => {
   }
 };
 
-export const getCurrentUserInfo = () => {
+const getCurrentUserInfo = () => {
   return auth.currentUser;
 };
+
+export { auth, signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo };

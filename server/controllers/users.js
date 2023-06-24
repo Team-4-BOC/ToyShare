@@ -22,10 +22,42 @@ const models = require('../models');
 
 module.exports = {
   getOne: (req, res) => {
-    // console.log(req.query);
+    console.log(req.query);
     models.users.getOne(req.query)
       .then((results) => {
         res.send(results.rows);
+      });
+  },
+  addUser: (req, res) => {
+    console.log('inside addUser controller', req.body);
+    models.users.addUser(req.body)
+      .then(() => {
+        console.log('user added to users table');
+        res.status(201).send('user added');
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
+  },
+  addUserPhoto: (req, res) => {
+    console.log('inside addUserPhoto controller', req.body);
+    // models.users.addUserPhoto()
+    //   .then(() => {
+    //     console.log('photo added to users photos table');
+    //   })
+    //   .catch((err) => {
+    //     res.status(500).send(err);
+    //   });
+  },
+  checkForNewUser: (req, res) => {
+    console.log('inside checkForNewUser controller', req.query.email);
+    models.users.checkForNewUser(req.query.email)
+      .then((data) => {
+        console.log('inside then of checkForNewUser controller', data.rows);
+        res.send(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).send(err);
       });
   }
 };
