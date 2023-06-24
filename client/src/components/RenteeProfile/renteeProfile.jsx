@@ -4,7 +4,7 @@ import StarCreator from '../SharedComponents/StarCreator.js';
 
 const userInfo = {
   name: 'Burt Macklyn',
-  photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Dwayne_Johnson_2014_%28cropped%29.jpg/640px-Dwayne_Johnson_2014_%28cropped%29.jpg',
+  photo: 'https://pbs.twimg.com/profile_images/1573101768707219456/rOi41vHE_400x400.jpg',
   location: 'Denver, CO',
   rating: '5stars',
   description: 'Loves working on his farm and has a pet alligator',
