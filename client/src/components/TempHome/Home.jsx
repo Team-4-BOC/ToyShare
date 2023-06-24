@@ -7,7 +7,7 @@ function Home ({ setToyId, setToyUserId, setPage }) {
   const [toys, setToys] = useState([]);
 
   useEffect(() => {
-    const count = 10;
+    const count = 30;
     const page = 1;
     axios.get('/toys', ({ params: { page, count } }))
       .then((response) => {

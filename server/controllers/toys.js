@@ -13,7 +13,7 @@ module.exports = {
 //       });
 //   },
   getOne: (req, res) => {
-    if (!req.query.toy_id) {
+    if (!req.query.toyId) {
       res.status(404).send('Please input toy_id');
       return;
     }

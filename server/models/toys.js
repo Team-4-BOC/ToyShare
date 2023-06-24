@@ -6,7 +6,7 @@ module.exports = {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
   getOne: (data) => {
-    const values = [data.toy_id, data.current_user_id ? data.current_user_id : 0];
+    const values = [data.toyId, data.current_user_id ? data.current_user_id : 0];
     return db.query(`
     SELECT
       t.toy_name AS name,

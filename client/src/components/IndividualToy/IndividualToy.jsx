@@ -13,12 +13,12 @@ import StarCreator from '../SharedComponents/StarCreator';
 
 let justSaved = false;
 
-const IndividualToy = ({ testing, setPage }) => {
-  const [toy, setToy] = useState(tempData);
+const IndividualToy = ({ testing, setPage, toyId }) => {
+  const [toy, setToy] = useState(testing ? tempData : {});
 
   const fetchToy = () => {
     justSaved = false;
-    axios.get('toy', { params: { toy_id: 19, current_user_id: 1 } }) // Fix current user id and toy id
+    axios.get('toy', { params: { toyId, current_user_id: 1 } }) // Fix current user id and toy id
       .then((apiResults) => {
         setToy(apiResults.data);
       })
