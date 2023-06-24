@@ -21,9 +21,8 @@ router.get('/toys', controllers.toys.getAll);
 
 router.post('/saved', controllers.toys.saved);
 
-router.post('/bookings/getAllBooked', controllers.bookings.getAllBooked);
-
-router.post('/bookings/getAllAvailable', controllers.bookings.getAllAvailable);
+router.get('/bookings/getAllBooked', controllers.bookings.getAllBooked);
+router.get('/bookings/getAllAvailable', controllers.bookings.getAllAvailable);
 
 // Examples:
 

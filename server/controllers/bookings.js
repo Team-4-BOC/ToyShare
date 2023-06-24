@@ -1,16 +1,6 @@
 const models = require('../models/bookings');
 
 module.exports = {
-  put: (req, res) => {
-    models.put(req.body)
-      .then((results) => {
-        res.status(200).send(results);
-      })
-      .catch((err) => {
-        res.status(500).send('ERROR updating booking');
-        console.log('ERROR updating booking', err);
-      });
-  },
   getAllBooked: (req, res) => {
     models.getAllBooked(req.body)
       .then((results) => {
@@ -31,24 +21,14 @@ module.exports = {
         console.log('ERROR getting all available', err);
       });
   },
-  getOneStatus: (req, res) => {
-    models.getOneStatus(req.body)
+  updateStatus: (req, res) => {
+    models.updateStatus(req.body)
       .then((results) => {
-        res.status(200).send(results.rows);
+        res.status(200).send(results);
       })
       .catch((err) => {
-        res.status(500).send('ERROR getting one status');
-        console.log('ERROR getting one status', err);
-      });
-  },
-  getAllStatus: (req, res) => {
-    models.getAllStatus(req.body)
-      .then((results) => {
-        res.status(200).send(results.rows);
-      })
-      .catch((err) => {
-        res.status(500).send('ERROR getting all status');
-        console.log('ERROR getting all status', err);
+        res.status(500).send('ERROR updating booking status');
+        console.log('ERROR updating booking status', err);
       });
   },
   getInventory: (req, res) => {
@@ -58,7 +38,7 @@ module.exports = {
       })
       .catch((err) => {
         res.status(500).send('ERROR getting inventory');
-        console.log('ERROR getting inventor', err);
+        console.log('ERROR getting inventory', err);
       });
   },
   getRental: (req, res) => {
