@@ -1,7 +1,16 @@
 import React from 'react';
-import { signInWithGoogle, signOutOfGoogle } from '../../Firebase.js';
+import { signInWithGoogle, signOutOfGoogle, verifySignedIn } from '../../Firebase.js';
+
 
 const Home = ({ setPage, searchTerm, setSearchTerm }) => {
+  const onAddToyClick = () => {
+    const isSignedIn = verifySignedIn();
+    if (isSignedIn) {
+      setPage(4);
+    } else {
+      alert('Please sign in to add a toy');
+    }
+  };
   return (
     <div className="navbar bg-base-100 border-solid">
       <div className="flex-1">
@@ -24,6 +33,9 @@ const Home = ({ setPage, searchTerm, setSearchTerm }) => {
             className="input input-bordered w-24 md:w-auto"
           />
         </div>
+        <button className="active:bg-gray-100 shadow text-black py-3 px-4 rounded-full border border-solid" onClick={onAddToyClick}>
+          AddToy
+        </button>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
