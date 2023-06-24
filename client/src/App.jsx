@@ -6,7 +6,8 @@ import IndividualToy from "./components/IndividualToy/IndividualToy.jsx";
 import Home from "./components/TempHome/Home.jsx";
 import EditToy from "./components/AddEditToy/EditToy.jsx";
 import AddToy from "./components/AddEditToy/AddToy.jsx";
-// import Checkout from './components/Checkout/placeholer.jsx';
+import ReserveDates from "./components/Checkout/reserveMvp.jsx";
+import BookingConfirmation from "./components/Checkout/bookingConfirmation.js";
 import TopBar from "./components/TempHome/TopBar.jsx";
 // import { use } from 'matter';
 // import { getCurrentUserInfo } from './Firebase.js';
@@ -34,10 +35,10 @@ const App = () => {
   // 3 === rentee profile
   // 4 === add a toy
   // 5 == edit a toy
-  // 6 === checkout 1 (RESERVED)
-  // 7 === checkout 2 (RESERVED)
-  // 8 === checkout 3 (RESERVED)
-  const [page, setPage] = useState(0);
+  // 6 === checkout: choose dates
+  // 7 === checkout: details/payment
+  // 8 === checkout: confirmation
+  const [page, setPage] = useState(0); // check this
   const [toyId, setToyId] = useState(1);
   const [toyUserId, setToyUserId] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -118,26 +119,57 @@ const App = () => {
     );
   }
   if (page === 5) {
+    // revert line 88!
     return (
       <>
-        <TopBar
+        <TopBar setPage={setPage} />
+        <EditToy
           setPage={setPage}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
+          toyId={toyId}
+          toyUserId={toyUserId}
+          userId={userId}
+        />{" "}
+        /
+      </>
+    );
+  }
+  if (page === 6) {
+    return (
+      <>
+        <TopBar setPage={setPage} />
+        <ReserveDates
+          setPage={setPage}
+          toyId={toyId}
+          toyUserId={toyUserId}
+          userId={userId}
         />
+      </>
+    );
+  }
+  if (page === 7) {
+    return (
+      <>
+        <TopBar setPage={setPage} />
+        Dates reserved! Now pay them: <br />
+        <br />
+        <img
+          src="https://www.belvoirterrace.com/wp-content/uploads/2020/10/Venmo-QR-Code-@Edna-260x300.jpg"
+          alt="venmo payment link"
+        ></img>
+        <a className="justify-between" onClick={() => setPage(8)}>
+          Click <b>here</b> once you have paid $13 to the Venmo account above
+        </a>
+      </>
+    );
+  }
+  if (page === 8) {
+    return (
+      <>
+        <TopBar setPage={setPage} />
         <EditToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} />
       </>
     );
   }
-  // }
-  // if (page === 5) {
-  //   return (
-  //     <>
-  //       <TopBar setPage={setPage}/>
-  //       <Checkout setPage={setPage} toyId={toyId} />
-  //     </>
-  //   );
-  // }
   // if (page === 9) {
   //   return (
   //     <>
