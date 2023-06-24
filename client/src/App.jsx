@@ -37,6 +37,7 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage}/>
+        <br></br>
         <UserProfile setPage={setPage} />
       </>
     );
