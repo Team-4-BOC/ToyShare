@@ -1,33 +1,31 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 const ReserveDates = ({ setPage, toyId, toyUserId, userId }) => {
-  const [bookedDates, setBookedDates] = useState([]);
+  //const [bookedDates, setBookedDates] = useState([]);
   const [availableDates, setAvailableDates] = useState([]);
-  const [selectedDates, setSelectedDates] = useState([]); 
+  const [selectedDates, setSelectedDates] = useState([]);
 
   useEffect(() => {
     fetchAllDates();
   }, []);
 
   const fetchAllDates = async () => {
-    try {  
-      const bookedRes = await fetch('/bookings/getAllBooked', { method: 'POST', body: JSON.stringify({ toy_id }), headers: { 'Content-Type': 'application/json' } });
-      const availableRes = await fetch('/bookings/getAllAvailable', { method: 'POST', body: JSON.stringify({ toy_id }), headers: { 'Content-Type': 'application/json' } });
-
-      const bookedDays = await bookedRes.json();
-      const availableDays = await availableRes.json();
-
-      setBookedDates(bookedDays.map(d => new Date(d.date)));
-      setAvailableDates(availableDays.map(d => new Date(d.date)));
-
+    try {
+      const response = await axios.get(`/bookings/getAllAvailable?toyId=${toyId}`)
+      console.log('available Days data:', response.data);
+      // assuming that dates are stored under "dates" property in each row
+      const dates = response.data.map(row => row.dates);
+      setAvailableDates(dates);
     } catch (err) {
-      console.error(err);
+      console.error('ERROR grabbing dates available: ', err);
     }
   };
 
+
   const handleDateSelect = (date) => {
-    if (selectedDates.some(selectedDate => selectedDate.getTime() === date.getTime())) {
-      setSelectedDates(selectedDates.filter(selectedDate => selectedDate.getTime() !== date.getTime()));
+    if (selectedDates.includes(date)) {
+      setSelectedDates(selectedDates.filter(selectedDate => selectedDate !== date));
     } else {
       setSelectedDates([...selectedDates, date]);
     }
@@ -35,32 +33,52 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId }) => {
 
   const handleReserve = async () => {
     try {
-      // update availability/booking status
-      await fetch('/bookings/updateBooking', {
-        method: 'PUT',
-        body: JSON.stringify({ toy_id, dates: selectedDates.map(date => date.toISOString()) }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
-      // add to inventory
-      await fetch('/inventory/add', {
-        method: 'POST',
-        body: JSON.stringify({ user_id: owner_id, toy_id }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
-      // add to rental history
-      await fetch('/rental/add', {
-        method: 'POST',
-        body: JSON.stringify({ user_id, toy_id }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
+      const dates = selectedDates;
+      // Update availability/booking status
+      try {
+        await axios.put('/bookings/updateStatus', { toyId, dates });
+        console.log('updated toy from available to booked');
+      } catch (err) {
+        console.log('ERROR updating booking status: ', err);
+      }
+
+      // Add to inventory_out
+      try {
+        await axios.post('/bookings/postInventory', { toyUserId, toyId });
+        console.log('added toy to inventory_out');
+      } catch (err) {
+        console.log('ERROR adding to inventory: ', err);
+      }
+
+      // Add to rental_history
+      try {
+        await axios.post('/bookings/postRental', { userId, toyId });
+        console.log('added toy to rental_history');
+      } catch (err) {
+        console.log('ERROR adding to rental history: ', err);
+      }
+      // // add to inventory
+      // await axios.post('/inventory/add',
+      //   { user_id: owner_id, toy_id },
+      //   { headers: { 'Content-Type': 'application/json' } }
+      // );
+
+      // // add to rental history
+      // await axios.post('/rental/add',
+      //   { user_id, toy_id },
+      //   { headers: { 'Content-Type': 'application/json' } }
+      // );
+
+
       // Clear selected dates
       setSelectedDates([]);
-  
-      // Refetch all dates
-      fetchAllDates();
+
+      // Refetch all dates?
+      // fetchAllDates();
+
+      // switch to payment page
+      setPage(7);
+
     } catch (err) {
       console.error(err);
     }
@@ -71,10 +89,10 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId }) => {
       Available dates:
       <ul>
         {availableDates.map(date => (
-          <li key={date.getTime()}>
+          <li key={date}>
             <label>
-              <input type="checkbox" checked={selectedDates.some(selectedDate => selectedDate.getTime() === date.getTime())} onChange={() => handleDateSelect(date)} />
-              {date.toLocaleDateString()}
+              <input type="checkbox" checked={selectedDates.includes(date)} onChange={() => handleDateSelect(date)} />
+              {date}
             </label>
           </li>
         ))}
@@ -82,7 +100,7 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId }) => {
       <hr />
       Selected dates:
       <ul>
-        {selectedDates.map(date => <li key={date.getTime()}>{date.toLocaleDateString()}</li>)} 
+        {selectedDates.map(date => <li key={date}>{date}</li>)}
       </ul>
       <button onClick={handleReserve}>Book above dates</button>
     </div>
