@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 // import UserProfile from './components/UserProfile/UserProfile.jsx';
-// import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
+import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
 // import Home from './components/Home/placeholer.jsx';
-// import AddEditToy from './components/AddEditToy/placeholer.jsx';
+import AddEditToy from './components/AddEditToy/placeholer.jsx';
 // import Checkout from './components/Checkout/placeholer.jsx';
 import TopBar from './components/TempHome/TopBar.jsx';
 
@@ -16,7 +16,7 @@ const App = () => {
   // 5 === checkout 1 (RESERVED)
   // 6 === checkout 2 (RESERVED)
   // 7 === checkout 3 (RESERVED)
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(4);
   if (page === 0) {
     return (
       <>
@@ -40,22 +40,22 @@ const App = () => {
   //     </>
   //   );
   // }
-  // if (page === 3) {
-  //   return (
-  //     <>
-  //       <TopBar setPage={setPage}/>
-  //       <RenteeProfile userId={2} setPage={setPage} />
-  //     </>
-  //   );
-  // }
-  // if (page === 4) {
-  //   return (
-  //     <>
-  //       <TopBar setPage={setPage}/>
-  //       <AddEditToy setPage={setPage} />
-  //     </>
-  //   );
-  // }
+  if (page === 3) {
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        <RenteeProfile userId={2} setPage={setPage} />
+      </>
+    );
+  }
+  if (page === 4) {
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        <AddEditToy setPage={setPage} />
+      </>
+    );
+  }
   // if (page === 5) {
   //   return (
   //     <>
