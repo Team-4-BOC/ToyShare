@@ -4,3 +4,13 @@ coverage
 client/dist/bundle.js
 client/dist/styles.css
 database/uploadDBdata.txt
+client/src/styles.css
+client/dist/bundle.js.LICENSE.txt
+Raw Toys Data - Category.csv
+Raw Toys Data - Dates Available.csv
+Raw Toys Data - Saved Toys.csv
+Raw Toys Data - Toy Photos.csv
+Raw Toys Data - Toy Rental History.csv
+Raw Toys Data - Toys.csv
+Raw Toys Data - User Photos.csv
+Raw Toys Data - User.csv

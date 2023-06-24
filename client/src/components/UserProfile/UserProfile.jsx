@@ -19,7 +19,7 @@ function UserProfile () {
   return (
     <div className="h-screen flex items-center justify-center flex-col">
     <div className="profile">
-
+    
       {userData && !enableEdit ? <UserInfo userData={userData} setEnableEdit={setEnableEdit}/> : null}
       {enableEdit ? <UserEdit userData={userData} setEnableEdit={setEnableEdit}/> : null }
       <br></br>
