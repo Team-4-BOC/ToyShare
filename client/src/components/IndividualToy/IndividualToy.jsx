@@ -13,7 +13,7 @@ import StarCreator from '../SharedComponents/StarCreator';
 
 let justSaved = false;
 
-const IndividualToy = ({ testing }) => {
+const IndividualToy = ({ testing, setPage }) => {
   const [toy, setToy] = useState(tempData);
 
   const fetchToy = () => {
@@ -68,7 +68,7 @@ const IndividualToy = ({ testing }) => {
         </button>
       </div>
       <PhotoCarousel toy={toy}/>
-      <ToyInfo toy={toy}/>
+      <ToyInfo toy={toy} setPage={setPage}/>
       <ToyReserve toy={toy}/>
     </div>
   );

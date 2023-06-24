@@ -1,8 +1,8 @@
 import React from 'react';
 
-function ToyCard ({ toy }) {
+function ToyCard ({ toy, handleToyClick }) {
   return (
-    <div className="toycard">
+    <div className="toycard" onClick={() => handleToyClick(toy.id, toy.user_id)}>
       <br></br>
       <div className="card w-96 bg-base-100 shadow-xl">
         <figure><img src={toy.photos[0]} /></figure>

@@ -3,7 +3,7 @@ import axios from 'axios';
 // import TopBar from './TopBar.jsx';
 import ToyCard from './ToyCard.jsx';
 
-function Home () {
+function Home ({ setToyId, setToyUserId, setPage }) {
   const [toys, setToys] = useState([]);
 
   useEffect(() => {
@@ -14,10 +14,16 @@ function Home () {
       });
   }, []);
 
+  const handleToyClick = (toyId, userId) => {
+    setToyId(toyId);
+    setToyUserId(userId);
+    setPage(1);
+  };
+
   return (
     <div>
       <ul>
-      {toys.map(toy => <div key={toys.id}><ToyCard toy={toy} /></div>)}
+      {toys.map(toy => <div key={toys.id}><ToyCard toy={toy} handleToyClick={ handleToyClick } /></div>)}
       </ul>
     </div>
   );
