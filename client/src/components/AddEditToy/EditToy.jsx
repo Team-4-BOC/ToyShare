@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PhotoCarousel from '../IndividualToy/components/PhotoCarousel.jsx';
 import axios from 'axios';
 
-const EditToy = (toyId, userId) => {
+const EditToy = ({ toyId, toyUserId }) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
@@ -15,9 +15,10 @@ const EditToy = (toyId, userId) => {
     startDate: new Date(),
     endDate: new Date().setMonth(11)
   });
+  console.log('toyid', toyId, 'user', toyUserId);
 
   const fetchToy = () => {
-    axios.get('toy', { params: { toy_id: 19, current_user_id: 1 } }) // Fix current user id and toy id
+    axios.get('toy', { params: { toyId: toyId, current_user_id: toyUserId } }) // Fix current user id and toy id
       .then((apiResults) => {
         console.log('TOY DATA', apiResults);
         const data = apiResults.data;
@@ -62,7 +63,7 @@ const EditToy = (toyId, userId) => {
 
   return (
     <div className="h-screen flex items-center justify-center flex-col">
-      <div>Add a Toy!</div>
+      <div>Edit {toyName} </div>
       <input onChange={handleChange} type="text" placeholder="Add Toy Name" defaultValue={description} className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
       {/* {photos !== '' ? <PhotoCarousel toy={{ photos: photos }}/> : null} */}
       <div className="form-control w-full max-w-xs">
