@@ -7,6 +7,8 @@ app.set('view engine', 'ejs');
 
 const routes = require('./routes.js');
 
+app.use(express.json());
+
 app.use(
   express.urlencoded({
     extended: true

@@ -41,12 +41,12 @@ module.exports = {
       });
     // console.log(models.toys.post());
   },
-  save: (req, res) => {
-    if (!req.query.toy_id || !req.query.current_user_id) {
+  saved: (req, res) => {
+    if (!req.body.toy_id || !req.body.current_user_id) {
       res.status(500).send('Please input current_user_id and toy_id');
       return;
     }
-    models.toys.favorite(req.query)
+    models.toys.save(req.body)
       .then(() => {
         res.status(202).send('Succesfully favorited toy!');
       })

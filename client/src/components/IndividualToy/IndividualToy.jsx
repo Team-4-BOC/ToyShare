@@ -11,26 +11,45 @@ import StarCreator from '../SharedComponents/StarCreator';
 
 import { getCurrentUserInfo, verifySignedIn } from '../../Firebase.js';
 
+let justSaved = false;
+
 const IndividualToy = ({ testing }) => {
   const [toy, setToy] = useState(tempData);
 
   const fetchToy = () => {
-    axios.get('toy', { params: { toy_id: 19 } })
+    justSaved = false;
+    axios.get('toy', { params: { toy_id: 19, current_user_id: 1 } }) // Fix current user id and toy id
       .then((apiResults) => {
         setToy(apiResults.data);
       })
       .catch((err) => {
-        console.log('Error fetching toy: ', err);
+        console.log('EROR fetching toy: ', err);
       });
   };
 
   useEffect(fetchToy, []); // On startup
 
   const handleSave = () => {
-    if (!verifySignedIn()) {
-      alert('I will bring you to login page!');
-      console.log('Not logged in');
+    if (toy.saved || justSaved) {
+      return;
     }
+    justSaved = true;
+    const modifiedToy = JSON.parse(JSON.stringify(toy));
+    modifiedToy.saved = true;
+    setToy(modifiedToy);
+    // if (!verifySignedIn()) {                             Fix me!!!!
+    //   alert('I will bring you to login page!');
+    //   console.log('Not logged in');
+    //   return;
+    // }
+
+    axios.post('saved', { toy_id: 19, current_user_id: 1 }) // Fix current user id and toy id
+      .then(() => {
+        console.log('Succesful save');
+      })
+      .catch((err) => {
+        console.log('ERROR saving toy: ', err);
+      });
   };
 
   return (

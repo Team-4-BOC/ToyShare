@@ -12,7 +12,7 @@ router.get('/user', controllers.users.getOne);
 
 router.get('/toy', controllers.toys.getOne);
 
-router.post('/favorite', controllers.toys.save);
+router.post('/saved', controllers.toys.saved);
 
 router.post('/bookings/getAllBooked', controllers.bookings.getAllBooked);
 
