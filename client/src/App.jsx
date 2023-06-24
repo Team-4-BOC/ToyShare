@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import UserProfile from './components/UserProfile/UserProfile.jsx';
+import UserProfile from './components/UserProfile/UserProfile.jsx';
 // import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
 import Home from './components/TempHome/Home.jsx';
@@ -16,7 +16,7 @@ const App = () => {
   // 5 === checkout 1 (RESERVED)
   // 6 === checkout 2 (RESERVED)
   // 7 === checkout 3 (RESERVED)
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(2);
   if (page === 0) {
     return (
       <>
@@ -33,14 +33,14 @@ const App = () => {
       </>
     );
   }
-  // if (page === 2) {
-  //   return (
-  //     <>
-  //       <TopBar setPage={setPage}/>
-  //       <UserProfile setPage={setPage} />
-  //     </>
-  //   );
-  // }
+  if (page === 2) {
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        <UserProfile setPage={setPage} />
+      </>
+    );
+  }
   // if (page === 3) {
   //   return (
   //     <>
