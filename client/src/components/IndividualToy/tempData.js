@@ -2,6 +2,7 @@ export default {
   name: 'LumiTEK R/C - Neon Giant Truck',
   rating: 4,
   user: 'jacob',
+  user_id: 1,
   description: '4WD. Awesome High speed RGB truck! Works great outdoors and drifts! My son loves this thing and its super fast, in awesome condition!',
   original_price: 99.99,
   rental_price: 20.87,

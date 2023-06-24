@@ -9,7 +9,7 @@ import ToyReserve from './components/ToyReserve.jsx';
 
 import StarCreator from '../SharedComponents/StarCreator';
 
-import { getCurrentUserInfo, verifySignedIn } from '../../Firebase.js';
+// import { getCurrentUserInfo, verifySignedIn } from '../../Firebase.js';
 
 let justSaved = false;
 
@@ -37,7 +37,7 @@ const IndividualToy = ({ testing }) => {
     const modifiedToy = JSON.parse(JSON.stringify(toy));
     modifiedToy.saved = true;
     setToy(modifiedToy);
-    // if (!verifySignedIn()) {                             Fix me!!!!
+    // if (!verifySignedIn()) {
     //   alert('I will bring you to login page!');
     //   console.log('Not logged in');
     //   return;

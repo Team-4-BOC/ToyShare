@@ -17,7 +17,6 @@ const App = () => {
   // 6 === checkout 2 (RESERVED)
   // 7 === checkout 3 (RESERVED)
   const [page, setPage] = useState(0);
-
   if (page === 0) {
     return (
       <>
@@ -29,7 +28,7 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage}/>
-        <IndividualToy />
+        <IndividualToy setPage={setPage}/>
       </>
     );
   }
