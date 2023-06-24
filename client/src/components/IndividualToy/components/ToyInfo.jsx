@@ -2,13 +2,16 @@ import React from 'react';
 
 const ToyInfo = ({ toy, setPage }) => {
   return (
-    <div className='w-11/12 pb-36' style={{ transform: 'translateX(5vw)' }}>
+    <div className='pb-36 relative'>
       <div data-testid='it-location' >{toy.location}</div>
-      <div className='h-0.5 bg-black w-40 mb-5'></div> {/* Simple line */}
-      <img src={toy.user_photo} data-testid='it-user' className='btn btn-circle float-right border-slate-950' onClick={() => setPage(3)} />
+      <div className='h-0.5 bg-gray-500  w-40 mb-5'></div> {/* A simple line */}
+      <div className='absolute top-0 right-1 shadow-xl rounded-md w-16 h-24 bg-gray-900' onClick={() => setPage(3)}>
+        <img src={toy.user_photo} data-testid='it-user' className='rounded-full w-16 h-16'/>
+        <div className='text-white font-bold text-center'>{toy.user}</div>
+      </div>
       <div data-testid='it-distance' className='inline-block'>24 miles away</div>
       <img data-testid='it-map' className='w-8 inline-block hover:opacity-30' src='./icons/mapIcon.png' />
-      <div className='h-0.5 bg-black w-40 mt-5 mb-5'></div> {/* Simple line */}
+      <div className='h-0.5 bg-black w-40 mt-5 mb-5'></div>  {/* A simple line */}
       <div data-testid='it-description'>{toy.description}</div>
     </div>
   );

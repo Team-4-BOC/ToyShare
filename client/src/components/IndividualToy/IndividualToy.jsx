@@ -52,13 +52,18 @@ const IndividualToy = ({ testing, setPage, toyId, userId }) => {
   };
 
   return (
-    <div className='absolute overflow-y-scroll min-h-screen'>
-      <div className='flex justify-center space-x-5 bg-gray-900'>
-      <div className='text-lg font-bold text-white' data-testid='it-toy-name'>{toy.name}</div>
-        {StarCreator(toy.rating)}
+    <div className='absolute overflow-y-scroll min-h-screen '>
+      <div className='card w-96 bg-base-100 shadow-xl'>
+        <div className='flex space-x-5 justify-center bg-gray-900'>
+        <div className='card-title text-lg font-bold text-white' data-testid='it-toy-name'>{toy.name}</div>
+          {StarCreator(toy.rating)}
+        </div>
+        <PhotoCarousel toy={toy} handleSave={handleSave}/>
+        <div className='card-body'>
+          <ToyInfo toy={toy} setPage={setPage}/>
+        </div>
       </div>
-      <PhotoCarousel toy={toy} handleSave={handleSave}/>
-      <ToyInfo toy={toy} setPage={setPage}/>
+      <div className='card-actions justify-end'></div>
       <ToyReserve toy={toy} setPage={setPage}/>
     </div>
   );
