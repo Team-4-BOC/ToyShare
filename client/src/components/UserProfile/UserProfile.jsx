@@ -19,7 +19,6 @@ function UserProfile ({ setPage }) {
   return (
     <div className="h-screen flex items-center justify-center flex-col">
     <div className="profile" style={{ marginTop: '150px' }}>
-
       {userData && !enableEdit ? <UserInfo userData={userData} setEnableEdit={setEnableEdit}/> : null}
       {enableEdit ? <UserEdit userData={userData} setEnableEdit={setEnableEdit}/> : null }
       <br></br>
