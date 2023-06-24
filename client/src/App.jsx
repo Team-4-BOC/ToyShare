@@ -1,21 +1,5 @@
 import React, { useState } from 'react';
 // import UserProfile from './components/UserProfile/UserProfile.jsx';
-<<<<<<< HEAD
-// import RenteeProfile from './components/RenteeProfile/renteeProfile.js';
-// import IndivudalToy from './components/IndividualToy/IndividualToy.js';
-import AddEditToy from './components/AddEditToy/AddEditToy.jsx';
-
-const App = () => {
-  return (
-    <>
-      <div className='text-red-950'>Hello World Deployed!!!</div>
-      <button className='btn btn-outline btn-primary'>Daisy Button</button>
-      {/* <IndividualToy /> */}
-      {/* <UserProfile /> */}
-      <AddEditToy/>
-    </>
-  );
-=======
 // import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 // import PhotoCarousel from './components/IndividualToy/components/PhotoCarousel.jsx';
 // import ToyInfo from './components/IndividualToy/components/ToyInfo.jsx';
@@ -93,7 +77,6 @@ const App = () => {
   //     </>
   //   );
   // }
->>>>>>> origin/main
 };
 
 export default App;
