@@ -89,6 +89,7 @@ const EditToy = ({ toyId, toyUserId }) => {
         <option>Venmo</option>
         <option>Cash & Venmo</option>
       </select>
+      <button className="btn btn-primary">Submit!</button>
     </div>
   );
 };

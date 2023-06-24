@@ -69,8 +69,9 @@ const AddToy = () => {
         <option>Venmo</option>
         <option>Cash & Venmo</option>
       </select>
-          <div className="stat-title text-info-content">Input Dates Available</div>
-          <div className="stat-value"><Datepicker value={date} onChange={handleDateChange}/></div>
+      <div className="stat-title text-info-content">Input Dates Available</div>
+      <div className="stat-value"><Datepicker value={date} onChange={handleDateChange}/></div>
+      <button className="btn btn-primary">Submit!</button>
     </div>
   );
 };
