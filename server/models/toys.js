@@ -35,6 +35,20 @@ module.exports = {
     LIMIT 1`
     , values);
   },
+  getAll: async () => {
+    const values = [];
+    const toysData = await db.query('SELECT * FROM toyshare.toys;', values);
+    const toys = toysData.rows;
+    for (let i = 0; i < toys.length; i++) {
+      const photos = await db.query('SELECT * from toyshare.toy_photos where toy_id = $1', [toys[i].id]);
+      const currentToyPhotos = [];
+      for (let j = 0; j < photos.rows.length; j++) {
+        currentToyPhotos.push(photos.rows[j].url);
+      }
+      toys[i].photos = currentToyPhotos;
+    }
+    return toys;
+  },
   // put: (Nick) => {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
