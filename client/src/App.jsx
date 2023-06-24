@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 // import UserProfile from './components/UserProfile/UserProfile.jsx';
 // import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
+<<<<<<< HEAD
 // import Home from './components/Home/placeholer.jsx';
 import AddToy from './components/AddEditToy/AddToy.jsx';
 import EditToy from './components/AddEditToy/EditToy.jsx';
 
+=======
+import Home from './components/TempHome/Home.jsx';
+// import AddEditToy from './components/AddEditToy/placeholer.jsx';
+>>>>>>> origin/main
 // import Checkout from './components/Checkout/placeholer.jsx';
 import TopBar from './components/TempHome/TopBar.jsx';
 
@@ -18,6 +23,7 @@ const App = () => {
   // 5 === checkout 1 (RESERVED)
   // 6 === checkout 2 (RESERVED)
   // 7 === checkout 3 (RESERVED)
+<<<<<<< HEAD
   const [page, setPage] = useState(4);
   // if (page === 0) {
   //   return (
@@ -34,6 +40,25 @@ const App = () => {
   //     </>
   //   );
   // }
+=======
+  const [page, setPage] = useState(0);
+  if (page === 0) {
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        <Home />
+      </>
+    );
+  }
+  if (page === 1) {
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        <IndividualToy setPage={setPage}/>
+      </>
+    );
+  }
+>>>>>>> origin/main
   // if (page === 2) {
   //   return (
   //     <>
