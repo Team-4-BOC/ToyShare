@@ -7,10 +7,14 @@ function Home ({ setToyId, setToyUserId, setPage }) {
   const [toys, setToys] = useState([]);
 
   useEffect(() => {
-    axios.get('/toys')
+    const count = 10;
+    const page = 1;
+    axios.get('/toys', ({ params: { page, count } }))
       .then((response) => {
-        // only render 10 toys
-        setToys(response.data.slice(0, -25));
+        setToys(response.data);
+      })
+      .catch((err) => {
+        console.log('ERROR fetching toys ', err);
       });
   }, []);
 
