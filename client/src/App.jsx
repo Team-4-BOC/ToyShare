@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import UserProfile from './components/UserProfile/UserProfile.jsx';
 // import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
-// import Home from './components/Home/placeholer.jsx';
+import Home from './components/TempHome/Home.jsx';
 // import AddEditToy from './components/AddEditToy/placeholer.jsx';
 // import Checkout from './components/Checkout/placeholer.jsx';
 import TopBar from './components/TempHome/TopBar.jsx';
@@ -21,6 +21,7 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage}/>
+        <Home />
       </>
     );
   }

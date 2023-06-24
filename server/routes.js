@@ -17,6 +17,8 @@ router.get('/userNew', controllers.users.checkForNewUser);
 
 router.get('/toy', controllers.toys.getOne);
 
+router.get('/toys', controllers.toys.getAll);
+
 router.post('/saved', controllers.toys.saved);
 
 router.post('/bookings/getAllBooked', controllers.bookings.getAllBooked);
