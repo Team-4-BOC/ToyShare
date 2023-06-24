@@ -10,27 +10,31 @@ import React, { useState, useEffect } from "react";
 
 function getDummyData() {
     const user = {
-        first_name: 'Nick',
-        last_name: 'Mann'
+        first_name: 'Ben',
+        last_name: 'Block'
     };
     const toy = {
         toy_photos: [
             {
-                url: 'https://place-puppy.com/200x200'
+                url: 'https://images.squarespace-cdn.com/content/v1/5943b11db3db2be040e6fa54/1521785280031-WSCUN2QOVEFM6YN0TMUC/logic-rubiks-cube.jpg'
             },
             {
-                url: 'https://place-puppy.com/201x201'
+                url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkgI-QflIkfGckuPj4q9kZ9fjHkf-CFKOFQH3hb8P9Xo93aDvNZNdz5Vz7VEV4Hu92hg5YSb02rZg&usqp=CAU&ec=48665701'
             }
         ],
-        toy_name: 'a puppy',
-        rental_price: 20
+        toy_name: 'Rubics Cube',
+        rental_price: 5
     }
     const dates_booked = [
-        'Thursday, June 22', 
-        'Friday, June 23'
+        'Sunday, June 25',
+        'Monday, June 26',
+        'Tuesday, June 27',
+        'Wednesday, June 28',
+        'Thursday, June 29',
+        'Friday, June 30',
     ]
     const checkoutData = {
-        user, 
+        user,
         toy,
         dates_booked
     }

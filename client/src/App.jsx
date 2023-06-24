@@ -82,7 +82,6 @@ const App = () => {
     );
   }
   if (page === 5) {
-    // revert line 88!
     return (
       <>
         <TopBar setPage={setPage}/>
@@ -106,7 +105,7 @@ const App = () => {
         <br />
         <img src="https://www.belvoirterrace.com/wp-content/uploads/2020/10/Venmo-QR-Code-@Edna-260x300.jpg" alt="venmo payment link"></img>
         <a className="justify-between" onClick={() => setPage(8)}>
-                Click <b>here</b> once you have paid $13 to the Venmo account above
+                Click <b>here</b> once you have paid $30 to the Venmo account above
               </a>
       </>
     );
