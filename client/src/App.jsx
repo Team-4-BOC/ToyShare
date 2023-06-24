@@ -7,6 +7,7 @@ import Home from './components/TempHome/Home.jsx';
 import EditToy from './components/AddEditToy/EditToy.jsx';
 import AddToy from './components/AddEditToy/AddToy.jsx';
 import ReserveDates from './components/Checkout/reserveMvp.jsx'; 
+import BookingConfirmation from './components/Checkout/bookingConfirmation.js';
 import TopBar from './components/TempHome/TopBar.jsx';
 // import { use } from 'matter';
 // import { getCurrentUserInfo } from './Firebase.js';
@@ -94,6 +95,30 @@ const App = () => {
       <>
         <TopBar setPage={setPage}/>
         <ReserveDates setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} />
+      </>
+    );
+  }
+  if (page === 7) {
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        Dates reserved! Now pay them: <br />
+        <br />
+        <img src="https://www.belvoirterrace.com/wp-content/uploads/2020/10/Venmo-QR-Code-@Edna-260x300.jpg" alt="venmo payment link"></img>
+        <a className="justify-between" onClick={() => setPage(8)}>
+                Click <b>here</b> once you have paid $13 to the Venmo account above
+              </a>
+      </>
+    );
+  }
+  if (page === 8) {
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        <BookingConfirmation/>
+        <a className="justify-between" onClick={() => setPage(0)}>
+                Booking success! Click <b>here</b> to return to home page
+              </a>
       </>
     );
   }
