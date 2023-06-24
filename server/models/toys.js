@@ -19,6 +19,7 @@ module.exports = {
       t.payment_method,
       t.user_id,
       u.first_name AS user,
+      u.city_state AS location,
       d.dates AS next_date,
       (
         SELECT json_agg(tp.url)
@@ -26,7 +27,12 @@ module.exports = {
         WHERE tp.toy_id =  t.id
       )
       AS photos,
-      CASE WHEN st.toy_id IS NULL THEN false ELSE true END AS saved
+      CASE WHEN st.toy_id IS NULL THEN false ELSE true END AS saved,
+    (
+      SELECT up.url
+      FROM toyshare.user_photos up
+      WHERE up.user_id = u.id
+    ) AS user_photo
     FROM toyshare.toys t
     JOIN toyshare.users u ON t.user_id = u.id
     JOIN toyshare.dates_available d ON d.toy_id = t.id AND toy_status = 1 AND dates > CURRENT_DATE

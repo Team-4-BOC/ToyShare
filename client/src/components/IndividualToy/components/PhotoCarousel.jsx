@@ -20,7 +20,7 @@ const PhotoCarousel = ({ toy }) => {
         })
         : null}
       </div>
-      {toy.photos ? <div className='absolute bg-gray-900 translate-x-36 translate-y-52 rounded p-1'>0/{toy.photos.length}</div> : null}
+      {toy.photos ? <div className='absolute bg-white/75 translate-x-36 translate-y-52 rounded p-1'>0/{toy.photos.length}</div> : null}
     </div>
   );
 };
