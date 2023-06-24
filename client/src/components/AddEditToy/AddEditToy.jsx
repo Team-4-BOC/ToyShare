@@ -10,7 +10,7 @@ const AddEditToy = (userId) => {
   const [deliveryMethod, setDeliveryMethod] = useState('');
   // const [dates, setDates] = useState('');
 
-  const updateState = {
+  const setStateNames = {
     toyName: setToyName,
     photos: setPhotos,
     originalPrice: setOriginalPrice,
@@ -19,28 +19,32 @@ const AddEditToy = (userId) => {
     deliveryMethod: setDeliveryMethod
   };
 
-  const handleInput = (e) => {
+  const handleChange = (e) => {
     e.preventDefault();
+    const dataName = e.target.name;
+    const data = e.target.value;
+    const updateState = setStateNames[dataName];
+    updateState(data);
   };
   return (
     <div className="h-screen flex items-center justify-center flex-col">
       <div>Add a Toy!</div>
-      <input type="text" placeholder="Add Toy Name" className="input input-bordered input-primary w-full max-w-xs" />
+      <input onChange={handleChange} type="text" placeholder="Add Toy Name" className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Upload Toy Image</span>
           {/* <span className="label-text-alt">Alt label</span> */}
         </label>
-        <input type="file" multiple="multiple" className="file-input file-input-bordered w-full max-w-xs" />
+        <input onChange={handleChange} type="file" multiple="multiple" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
         <label className="label">
           {/* <span className="label-text-alt">Alt label</span>
           <span className="label-text-alt">Alt label</span> */}
         </label>
       </div>
-      <input type="text" placeholder="Add Original Price" className="input input-bordered input-primary w-full max-w-xs" />
-      <input type="text" placeholder="Add Rental Price" className="input input-bordered input-primary w-full max-w-xs" />
-      <input type="text" placeholder="Add Description" className="input input-bordered input-primary w-full max-w-xs" />
-      <select className="select select-primary w-full max-w-xs">
+      <input onChange={handleChange} type="text" placeholder="Add Original Price" className="input input-bordered input-primary w-full max-w-xs" name="originalPrice"/>
+      <input onChange={handleChange} type="text" placeholder="Add Rental Price" className="input input-bordered input-primary w-full max-w-xs" name="rentalPrice"/>
+      <input onChange={handleChange} type="text" placeholder="Add Description" className="input input-bordered input-primary w-full max-w-xs" name="description"/>
+      <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="deliveryMethod">
         <option disabled selected>Select Delivery Methods</option>
         <option>Pick Up</option>
         <option>Delivery</option>
