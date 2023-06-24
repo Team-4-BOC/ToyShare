@@ -53,7 +53,7 @@ const App = () => {
   return (
       <>
         <TopBar setPage={setPage}/>
-        <EditToy setPage={setPage} />
+        {/* <EditToy setPage={setPage} /> */}
       </>
   );
   // }
