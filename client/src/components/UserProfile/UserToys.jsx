@@ -11,9 +11,9 @@ function UserToys ({ userData, setPage }) {
       {/* //////// RENTAL INVENTORY LIST //////// */}
       <ul className="menu bg-base-200 w-100 rounded-box">
       <li>
-        <h2 className="rental-inventory" style={titleStyle}>Rental Inventory</h2>
+        <h2 className="rental-inventory" style={titleStyle}>Rental Inventory <button onClick={() => { setPage(4); }} className="btn-sm">Add toy</button></h2>
         <ul>
-        {userData.inventory.map(toy => <div key={toy.id}>• {toy.toy_name} <button onClick={() => { setPage(4); }} className="btn-sm">Edit</button></div>)}
+        {userData.inventory.map(toy => <div key={toy.id}>• {toy.toy_name} <button onClick={() => { setPage(5); }} className="btn-sm">Edit</button></div>)}
         </ul>
       </li>
     </ul>
