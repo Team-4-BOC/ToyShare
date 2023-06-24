@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 // import UserProfile from './components/UserProfile/UserProfile.jsx';
 import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
 // import Home from './components/Home/placeholer.jsx';
-import AddEditToy from './components/AddEditToy/placeholer.jsx';
+// import AddEditToy from './components/AddEditToy/placeholer.jsx';
 // import Checkout from './components/Checkout/placeholer.jsx';
 import TopBar from './components/TempHome/TopBar.jsx';
+// import { getCurrentUserInfo } from './Firebase.js';
 
 const App = () => {
+  const [userId, setUserId] = useState(0);
+
+  const getUserId = () => {
+    // const userInfo = getCurrentUserInfo();
+    axios.get('/userNew', { params: { email: 'JoshMan@email.com' } })
+      .then((data) => {
+        // console.log('data', data.data[0].id);
+        setUserId(data.data[0].id);
+      })
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    getUserId();
+  }, []);
+
   // 0 === homepage
   // 1 === individual toy page
   // 2 === user profile
@@ -16,7 +33,7 @@ const App = () => {
   // 5 === checkout 1 (RESERVED)
   // 6 === checkout 2 (RESERVED)
   // 7 === checkout 3 (RESERVED)
-  const [page, setPage] = useState(4);
+  const [page, setPage] = useState(0);
   if (page === 0) {
     return (
       <>
@@ -44,18 +61,18 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage}/>
-        <RenteeProfile userId={2} setPage={setPage} />
+        <RenteeProfile userId={userId} setPage={setPage} />
       </>
     );
   }
-  if (page === 4) {
-    return (
-      <>
-        <TopBar setPage={setPage}/>
-        <AddEditToy setPage={setPage} />
-      </>
-    );
-  }
+  // if (page === 4) {
+  //   return (
+  //     <>
+  //       <TopBar setPage={setPage}/>
+  //       <AddEditToy setPage={setPage} />
+  //     </>
+  //   );
+  // }
   // if (page === 5) {
   //   return (
   //     <>
