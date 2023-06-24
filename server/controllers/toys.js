@@ -52,8 +52,8 @@ module.exports = {
     // console.log(models.toys.post());
   },
   saved: (req, res) => {
-    if (!req.body.toy_id || !req.body.current_user_id) {
-      res.status(500).send('Please input current_user_id and toy_id');
+    if (!req.body.toyId || !req.body.userId) {
+      res.status(500).send('Please input userId and toyId');
       return;
     }
     models.toys.save(req.body)

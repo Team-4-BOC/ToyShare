@@ -5,8 +5,9 @@ module.exports = {
   // getAll: (Kevin) => {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
+
   getOne: (data) => {
-    const values = [data.toyId, data.current_user_id ? data.current_user_id : 0];
+    const values = [data.toyId, data.userId !== undefined ? data.userId : 0];
     return db.query(`
     SELECT
       t.toy_name AS name,
@@ -63,7 +64,7 @@ module.exports = {
     return db.query('INSERT INTO toyshare.toys(toy_name, category_id, rating, user_id, toy_description, original_price, rental_price, delivery_method, payment_method) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);', values);
   },
   save: (data) => {
-    const values = [data.toy_id, data.current_user_id];
+    const values = [data.toyId, data.userId];
     return db.query('INSERT INTO toyshare.saved_toys(toy_id, user_id) VALUES($1, $2)', values);
   }
 };

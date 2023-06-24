@@ -13,12 +13,11 @@ import StarCreator from '../SharedComponents/StarCreator';
 
 let justSaved = false;
 
-const IndividualToy = ({ testing, setPage, toyId }) => {
+const IndividualToy = ({ testing, setPage, toyId, userId }) => {
   const [toy, setToy] = useState(testing ? tempData : {});
-
   const fetchToy = () => {
     justSaved = false;
-    axios.get('toy', { params: { toyId, current_user_id: 1 } }) // Fix current user id and toy id
+    axios.get('toy', { params: { toyId, userId } })
       .then((apiResults) => {
         setToy(apiResults.data);
       })
@@ -27,7 +26,7 @@ const IndividualToy = ({ testing, setPage, toyId }) => {
       });
   };
 
-  useEffect(fetchToy, []); // On startup
+  useEffect(() => { if (userId !== undefined) { fetchToy(); } }, [userId]); // On user id
 
   const handleSave = () => {
     if (toy.saved || justSaved) {
@@ -43,7 +42,7 @@ const IndividualToy = ({ testing, setPage, toyId }) => {
     //   return;
     // }
 
-    axios.post('saved', { toy_id: 19, current_user_id: 1 }) // Fix current user id and toy id
+    axios.post('saved', { toyId, userId })
       .then(() => {
         console.log('Succesful save');
       })
