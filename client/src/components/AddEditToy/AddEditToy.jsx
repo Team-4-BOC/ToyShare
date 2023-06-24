@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Datepicker from 'react-tailwindcss-datepicker';
 // import axios from 'axios';
 
 const AddEditToy = (userId) => {
@@ -8,7 +9,10 @@ const AddEditToy = (userId) => {
   const [rentalPrice, setRentalPrice] = useState('');
   const [description, setDescription] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('');
-  // const [dates, setDates] = useState('');
+  const [date, setDate] = useState({
+    startDate: new Date(),
+    endDate: new Date().setMonth(11)
+  });
 
   const setStateNames = {
     toyName: setToyName,
@@ -26,6 +30,12 @@ const AddEditToy = (userId) => {
     const updateState = setStateNames[dataName];
     updateState(data);
   };
+
+  const handleDateChange = (newValue) => {
+    console.log("newValue:", newValue);
+    setDate(newValue);
+};
+
   return (
     <div className="h-screen flex items-center justify-center flex-col">
       <div>Add a Toy!</div>
@@ -50,7 +60,12 @@ const AddEditToy = (userId) => {
         <option>Delivery</option>
         <option>Pick Up & Delivery</option>
       </select>
-      <div>SOMETHING WITH DATES HERE</div>
+      {/* <div className="stats"> */}
+        {/* <div className="stat"> */}
+          <div className="stat-title text-info-content">Input Dates Available</div>
+          <div className="stat-value"><Datepicker value={date} onChange={handleDateChange}/></div>
+        {/* </div> */}
+      {/* </div> */}
     </div>
   );
 };
