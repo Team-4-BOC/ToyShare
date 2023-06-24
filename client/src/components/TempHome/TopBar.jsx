@@ -35,5 +35,5 @@ const Home = ({ setPage }) => {
   );
 };
 
-// };https://t4.ftcdn.net/jpg/02/88/34/27/360_F_288342756_jUPN56JY6vWu7ur7W75bMY7z4x7T9vbi.jpg
+// };
 export default Home;

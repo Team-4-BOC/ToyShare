@@ -13,7 +13,7 @@ module.exports = {
 //       });
 //   },
   getOne: (req, res) => {
-    if (!req.query.toy_id) {
+    if (!req.query.toyId) {
       res.status(404).send('Please input toy_id');
       return;
     }
@@ -33,7 +33,7 @@ module.exports = {
   getAll: (req, res) => {
     models.toys.getAll(req.query)
       .then((results) => {
-        res.status(201).send(results);
+        res.status(201).send(results.rows);
       })
       .catch((err) => {
         res.status(500).send('ERROR GET toys');

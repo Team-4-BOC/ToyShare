@@ -1,4 +1,4 @@
-const { query } = require('express');
+// const { query } = require('express');
 const db = require('../../database/pg.js');
 
 module.exports = {
@@ -6,7 +6,7 @@ module.exports = {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
   getOne: (data) => {
-    const values = [data.toy_id, data.current_user_id ? data.current_user_id : 0];
+    const values = [data.toyId, data.current_user_id ? data.current_user_id : 0];
     return db.query(`
     SELECT
       t.toy_name AS name,
@@ -35,19 +35,25 @@ module.exports = {
     LIMIT 1`
     , values);
   },
-  getAll: async () => {
-    const values = [];
-    const toysData = await db.query('SELECT * FROM toyshare.toys;', values);
-    const toys = toysData.rows;
-    for (let i = 0; i < toys.length; i++) {
-      const photos = await db.query('SELECT * from toyshare.toy_photos where toy_id = $1', [toys[i].id]);
-      const currentToyPhotos = [];
-      for (let j = 0; j < photos.rows.length; j++) {
-        currentToyPhotos.push(photos.rows[j].url);
-      }
-      toys[i].photos = currentToyPhotos;
-    }
-    return toys;
+  getAll: async (query) => {
+    const page = query.page ? query.page : 1;
+    const count = query.count ? query.count : 5;
+    const offset = (page - 1) * count;
+    const values = [count, offset];
+
+    return db.query(`
+    SELECT
+      toys.*,
+      array_agg(toy_photos.url) AS photos
+    FROM
+      toyshare.toys
+      LEFT JOIN toyshare.toy_photos ON toys.id = toy_photos.toy_id
+    GROUP BY
+      toys.id
+    ORDER BY
+      toys.id
+    LIMIT $1 OFFSET $2;
+    `, values);
   },
   // put: (Nick) => {
   //   return db.query("SELECT * FROM sdc.cart;");

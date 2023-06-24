@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import tempData from './tempData';
@@ -13,12 +13,12 @@ import StarCreator from '../SharedComponents/StarCreator';
 
 let justSaved = false;
 
-const IndividualToy = ({ testing }) => {
-  const [toy, setToy] = useState(tempData);
+const IndividualToy = ({ testing, setPage, toyId }) => {
+  const [toy, setToy] = useState(testing ? tempData : {});
 
   const fetchToy = () => {
     justSaved = false;
-    axios.get('toy', { params: { toy_id: 19, current_user_id: 1 } }) // Fix current user id and toy id
+    axios.get('toy', { params: { toyId, current_user_id: 1 } }) // Fix current user id and toy id
       .then((apiResults) => {
         setToy(apiResults.data);
       })
@@ -68,7 +68,7 @@ const IndividualToy = ({ testing }) => {
         </button>
       </div>
       <PhotoCarousel toy={toy}/>
-      <ToyInfo toy={toy}/>
+      <ToyInfo toy={toy} setPage={setPage}/>
       <ToyReserve toy={toy}/>
     </div>
   );
