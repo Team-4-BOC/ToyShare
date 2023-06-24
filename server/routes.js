@@ -10,6 +10,7 @@ router.post('/toys', controllers.toys.post);
 
 router.get('/user', controllers.users.getOne);
 
+router.get('/userpf', controllers.users.getOneMeta);
 router.post('/user', controllers.users.addUser);
 router.post('/user/photos', controllers.users.addUserPhoto);
 router.get('/userNew', controllers.users.checkForNewUser);
