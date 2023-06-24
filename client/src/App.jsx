@@ -27,12 +27,12 @@ const App = () => {
   //   );
   // }
   // if (page === 1) {
-    return (
-      <>
-        <TopBar setPage={setPage}/>
-        <IndividualToy setPage={setPage}/>
-      </>
-    );
+  //   return (
+  //     <>
+  //       <TopBar setPage={setPage}/>
+  //       <IndividualToy setPage={setPage}/>
+  //     </>
+  //   );
   // }
   // if (page === 2) {
   //   return (
@@ -51,12 +51,12 @@ const App = () => {
   //   );
   // }
   // if (page === 4) {
-    // return (
-    //   <>
-    //     <TopBar setPage={setPage}/>
-    //     <EditToy setPage={setPage} />
-    //   </>
-    // );
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        <EditToy setPage={setPage} />
+      </>
+    );
   // }
   // if (page === 5) {
   //   return (

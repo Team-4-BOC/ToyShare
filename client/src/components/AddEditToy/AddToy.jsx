@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
 // import axios from 'axios';
@@ -9,6 +10,7 @@ const AddToy = () => {
   const [rentalPrice, setRentalPrice] = useState('');
   const [description, setDescription] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
   const [date, setDate] = useState({
     startDate: new Date(),
     endDate: new Date().setMonth(11)
@@ -20,7 +22,8 @@ const AddToy = () => {
     originalPrice: setOriginalPrice,
     rentalPrice: setRentalPrice,
     description: setDescription,
-    deliveryMethod: setDeliveryMethod
+    deliveryMethod: setDeliveryMethod,
+    paymentMethod: setPaymentMethod
   };
 
   const handleChange = (e) => {
@@ -60,12 +63,14 @@ const AddToy = () => {
         <option>Delivery</option>
         <option>Pick Up & Delivery</option>
       </select>
-      {/* <div className="stats"> */}
-        {/* <div className="stat"> */}
+      <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="paymentMethod">
+        <option disabled selected>Select Payment Methods</option>
+        <option>Cash</option>
+        <option>Venmo</option>
+        <option>Cash & Venmo</option>
+      </select>
           <div className="stat-title text-info-content">Input Dates Available</div>
           <div className="stat-value"><Datepicker value={date} onChange={handleDateChange}/></div>
-        {/* </div> */}
-      {/* </div> */}
     </div>
   );
 };
