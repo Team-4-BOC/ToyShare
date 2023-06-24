@@ -62,7 +62,7 @@ const EditToy = ({ toyId, toyUserId }) => {
   console.log('test', { photos: photos });
 
   return (
-    <div className="h-screen flex items-center justify-center flex-col">
+    <div className="h-screen flex items-center justify-center flex-col space-y-3">
       <div>Edit {toyName} </div>
       <input onChange={handleChange} type="text" placeholder="Add Toy Name" defaultValue={description} className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
       {/* {photos !== '' ? <PhotoCarousel toy={{ photos: photos }}/> : null} */}
