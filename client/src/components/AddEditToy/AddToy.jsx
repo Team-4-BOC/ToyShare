@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
 // import axios from 'axios';
 
-const AddEditToy = (userId) => {
+const AddToy = (userId) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
@@ -70,4 +70,4 @@ const AddEditToy = (userId) => {
   );
 };
 
-export default AddEditToy;
+export default AddToy;

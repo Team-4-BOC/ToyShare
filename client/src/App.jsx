@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 // import ToyInfo from './components/IndividualToy/components/ToyInfo.jsx';
 // import ToyReserve from './components/IndividualToy/components/ToyReserve.jsx';
 // import Home from './components/Home/placeholer.jsx';
-// import AddEditToy from './components/AddEditToy/placeholer.jsx';
+import AddToy from './components/AddEditToy/AddToy.jsx';
 // import Checkout from './components/Checkout/placeholer.jsx';
 import TopBar from './components/TempHome/TopBar.jsx';
 
@@ -18,7 +18,7 @@ const App = () => {
   // 5 === checkout 1 (RESERVED)
   // 6 === checkout 2 (RESERVED)
   // 7 === checkout 3 (RESERVED)
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(4);
 
   if (page === 0) {
     return (
@@ -53,14 +53,14 @@ const App = () => {
   //     </>
   //   );
   // }
-  // if (page === 4) {
-  //   return (
-  //     <>
-  //       <TopBar setPage={setPage}/>
-  //       <AddEditToy setPage={setPage} />
-  //     </>
-  //   );
-  // }
+  if (page === 4) {
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        <AddToy setPage={setPage} />
+      </>
+    );
+  }
   // if (page === 5) {
   //   return (
   //     <>
