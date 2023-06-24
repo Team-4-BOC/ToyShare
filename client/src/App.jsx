@@ -17,7 +17,8 @@ const App = () => {
 
   const getUserId = () => {
     // const userInfo = getCurrentUserInfo();
-    axios.get('/userNew', { params: { email: 'JoshMan@email.com' } })
+    axios
+      .get('/userNew', { params: { email: 'JoshMan@email.com' } })
       .then((data) => {
         // console.log('data', data.data[0].id);
         setUserId(data.data[0].id);
@@ -40,11 +41,22 @@ const App = () => {
   const [page, setPage] = useState(0); // check this
   const [toyId, setToyId] = useState(1);
   const [toyUserId, setToyUserId] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+
   if (page === 0) {
     return (
       <>
-        <TopBar setPage={setPage}/>
-        <Home setPage={setPage} setToyId={setToyId} setToyUserId={setToyUserId}/>
+        <TopBar
+          setPage={setPage}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
+        <Home
+          setPage={setPage}
+          setToyId={setToyId}
+          setToyUserId={setToyUserId}
+          searchTerm={searchTerm}
+        />
       </>
     );
   }
