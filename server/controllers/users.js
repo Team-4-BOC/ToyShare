@@ -22,10 +22,23 @@ const models = require('../models');
 
 module.exports = {
   getOne: (req, res) => {
-    console.log(req.query);
     models.users.getOne(req.query)
       .then((results) => {
-        res.send(results.rows);
+        res.status(200).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR GET user');
+        console.log('ERROR GET user', err);
+      });
+  },
+  getOneMeta: (req, res) => {
+    models.users.getOneMeta(req.query)
+      .then((results) => {
+        res.send(results);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR GET user meta');
+        console.log('ERROR GET user meta', err);
       });
   },
   addUser: (req, res) => {
