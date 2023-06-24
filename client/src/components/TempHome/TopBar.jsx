@@ -1,5 +1,5 @@
-import React from "react";
-import { signInWithGoogle, signOutOfGoogle } from "../../Firebase.js";
+import React from 'react';
+import { signInWithGoogle, signOutOfGoogle } from '../../Firebase.js';
 
 const Home = ({ setPage, searchTerm, setSearchTerm }) => {
   return (
