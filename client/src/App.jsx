@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 // import UserProfile from './components/UserProfile/UserProfile.jsx';
-// import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
+import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
 import Home from './components/TempHome/Home.jsx';
 // import AddEditToy from './components/AddEditToy/placeholer.jsx';
 // import Checkout from './components/Checkout/placeholer.jsx';
 import TopBar from './components/TempHome/TopBar.jsx';
+// import { getCurrentUserInfo } from './Firebase.js';
 
 const App = () => {
+  const [userId, setUserId] = useState(0);
+
+  const getUserId = () => {
+    // const userInfo = getCurrentUserInfo();
+    axios.get('/userNew', { params: { email: 'JoshMan@email.com' } })
+      .then((data) => {
+        // console.log('data', data.data[0].id);
+        setUserId(data.data[0].id);
+      })
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    getUserId();
+  }, []);
+
   // 0 === homepage
   // 1 === individual toy page
   // 2 === user profile
@@ -41,14 +58,14 @@ const App = () => {
   //     </>
   //   );
   // }
-  // if (page === 3) {
-  //   return (
-  //     <>
-  //       <TopBar setPage={setPage}/>
-  //       <RenteeProfile userId={2} setPage={setPage} />
-  //     </>
-  //   );
-  // }
+  if (page === 3) {
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        <RenteeProfile userId={userId} setPage={setPage} />
+      </>
+    );
+  }
   // if (page === 4) {
   return (
       <>
