@@ -1,17 +1,49 @@
+const { query } = require('express');
 const db = require('../../database/pg.js');
 
 module.exports = {
   // getAll: (Kevin) => {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
-  // getOne: (Brady) => {
-  //   return db.query("SELECT * FROM sdc.cart;");
-  // },
+  getOne: (data) => {
+    const values = [data.toy_id, data.current_user_id ? data.current_user_id : 0];
+    return db.query(`
+    SELECT
+      t.toy_name AS name,
+      t.rating,
+      t.toy_description AS description,
+      t.original_price,
+      t.rental_price,
+      t.delivery_method,
+      t.payment_method,
+      t.user_id,
+      u.first_name AS user,
+      d.dates AS next_date,
+      (
+        SELECT json_agg(tp.url)
+        FROM toyshare.toy_photos tp
+        WHERE tp.toy_id =  t.id
+      )
+      AS photos,
+      CASE WHEN st.toy_id IS NULL THEN false ELSE true END AS saved
+    FROM toyshare.toys t
+    JOIN toyshare.users u ON t.user_id = u.id
+    JOIN toyshare.dates_available d ON d.toy_id = t.id AND toy_status = 1 AND dates > CURRENT_DATE
+    LEFT JOIN toyshare.saved_toys st ON t.id = st.toy_id AND st.user_id = $2
+    WHERE t.id = $1
+    ORDER BY d.dates ASC
+    LIMIT 1`
+    , values);
+  },
   // put: (Nick) => {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
   post: (data) => {
     const values = [data.toy_name, data.category_id, data.rating, data.user_id, data.toy_description, data.original_price, data.rental_price, data.delivery_method, data.payment_method];
     return db.query('INSERT INTO toyshare.toys(toy_name, category_id, rating, user_id, toy_description, original_price, rental_price, delivery_method, payment_method) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);', values);
+  },
+  save: (data) => {
+    const values = [data.toy_id, data.current_user_id];
+    return db.query('INSERT INTO toyshare.saved_toys(toy_id, user_id) VALUES($1, $2)', values);
   }
 };
