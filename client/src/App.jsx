@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
 // import Home from './components/Home/placeholer.jsx';
 import AddToy from './components/AddEditToy/AddToy.jsx';
+import EditToy from './components/AddEditToy/EditToy.jsx';
+
 // import Checkout from './components/Checkout/placeholer.jsx';
 import TopBar from './components/TempHome/TopBar.jsx';
 
@@ -16,27 +18,22 @@ const App = () => {
   // 5 === checkout 1 (RESERVED)
   // 6 === checkout 2 (RESERVED)
   // 7 === checkout 3 (RESERVED)
-<<<<<<< HEAD
   const [page, setPage] = useState(4);
-
-=======
-  const [page, setPage] = useState(0);
->>>>>>> origin/main
-  if (page === 0) {
-    return (
-      <>
-        <TopBar setPage={setPage}/>
-      </>
-    );
-  }
-  if (page === 1) {
+  // if (page === 0) {
+  //   return (
+  //     <>
+  //       <TopBar setPage={setPage}/>
+  //     </>
+  //   );
+  // }
+  // if (page === 1) {
     return (
       <>
         <TopBar setPage={setPage}/>
         <IndividualToy setPage={setPage}/>
       </>
     );
-  }
+  // }
   // if (page === 2) {
   //   return (
   //     <>
@@ -53,14 +50,14 @@ const App = () => {
   //     </>
   //   );
   // }
-  if (page === 4) {
-    return (
-      <>
-        <TopBar setPage={setPage}/>
-        <AddToy setPage={setPage} />
-      </>
-    );
-  }
+  // if (page === 4) {
+    // return (
+    //   <>
+    //     <TopBar setPage={setPage}/>
+    //     <EditToy setPage={setPage} />
+    //   </>
+    // );
+  // }
   // if (page === 5) {
   //   return (
   //     <>

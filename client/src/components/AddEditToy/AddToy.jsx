@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
 // import axios from 'axios';
 
-const AddToy = (userId) => {
+const AddToy = () => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
