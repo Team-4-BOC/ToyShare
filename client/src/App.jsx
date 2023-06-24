@@ -53,12 +53,12 @@ const App = () => {
     );
   }
   // if (page === 4) {
-  //   return (
-  //     <>
-  //       <TopBar setPage={setPage}/>
-  //       <AddEditToy setPage={setPage} />
-  //     </>
-  //   );
+  return (
+      <>
+        <TopBar setPage={setPage}/>
+        {/* <EditToy setPage={setPage} /> */}
+      </>
+  );
   // }
   // if (page === 5) {
   //   return (
