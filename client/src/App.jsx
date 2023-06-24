@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 // import UserProfile from './components/UserProfile/UserProfile.jsx';
 // import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
-// import PhotoCarousel from './components/IndividualToy/components/PhotoCarousel.jsx';
-// import ToyInfo from './components/IndividualToy/components/ToyInfo.jsx';
-// import ToyReserve from './components/IndividualToy/components/ToyReserve.jsx';
+import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
 // import Home from './components/Home/placeholer.jsx';
 import AddToy from './components/AddEditToy/AddToy.jsx';
 // import Checkout from './components/Checkout/placeholer.jsx';
@@ -18,8 +16,12 @@ const App = () => {
   // 5 === checkout 1 (RESERVED)
   // 6 === checkout 2 (RESERVED)
   // 7 === checkout 3 (RESERVED)
+<<<<<<< HEAD
   const [page, setPage] = useState(4);
 
+=======
+  const [page, setPage] = useState(0);
+>>>>>>> origin/main
   if (page === 0) {
     return (
       <>
@@ -27,16 +29,14 @@ const App = () => {
       </>
     );
   }
-  // if (page === 1) {
-  //   return (
-  //     <>
-  //       <TopBar setPage={setPage}/>
-  //       <PhotoCarousel />
-  //       <ToyInfo />
-  //       <ToyReserve />
-  //     </>
-  //   );
-  // }
+  if (page === 1) {
+    return (
+      <>
+        <TopBar setPage={setPage}/>
+        <IndividualToy setPage={setPage}/>
+      </>
+    );
+  }
   // if (page === 2) {
   //   return (
   //     <>

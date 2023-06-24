@@ -15,6 +15,10 @@ router.post('/user', controllers.users.addUser);
 router.post('/user/photos', controllers.users.addUserPhoto);
 router.get('/userNew', controllers.users.checkForNewUser);
 
+router.get('/toy', controllers.toys.getOne);
+
+router.post('/saved', controllers.toys.saved);
+
 router.post('/bookings/getAllBooked', controllers.bookings.getAllBooked);
 
 router.post('/bookings/getAllAvailable', controllers.bookings.getAllAvailable);

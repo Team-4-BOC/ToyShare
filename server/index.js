@@ -7,6 +7,8 @@ app.set('view engine', 'ejs');
 
 const routes = require('./routes.js');
 
+app.use(express.json());
+
 app.use(
   express.urlencoded({
     extended: true
@@ -14,7 +16,6 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
-app.use(express.json());
 
 app.use('/', routes);
 

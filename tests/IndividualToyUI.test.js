@@ -39,7 +39,7 @@ describe('IndividualToy Given Temp Data', () => { // Lots more to do
     const oPrice = getByTestId('it-originPrice');
     const rPrice = getByTestId('it-rentalPrice');
     const rButton = getByTestId('it-reserveButton');
-    const dates = getByTestId('it-dates');
+    const dates = getByTestId('it-next_date');
 
     const elements = [oPrice, rPrice, rButton, dates];
 
