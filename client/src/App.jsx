@@ -6,7 +6,7 @@ import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
 import Home from './components/TempHome/Home.jsx';
 import EditToy from './components/AddEditToy/EditToy.jsx';
 import AddToy from './components/AddEditToy/AddToy.jsx';
-import ReserveDates from './components/Checkout/reserveMvp.jsx'; 
+import ReserveDates from './components/Checkout/reserveMvp.jsx';
 import BookingConfirmation from './components/Checkout/bookingConfirmation.js';
 import TopBar from './components/TempHome/TopBar.jsx';
 // import { use } from 'matter';
