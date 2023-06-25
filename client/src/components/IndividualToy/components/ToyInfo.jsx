@@ -3,6 +3,9 @@ import React from 'react';
 import Map from './Map.jsx';
 
 const ToyInfo = ({ toy, setPage, setMap, map }) => {
+  const splitLocation = toy.location.split(',');
+  const city = splitLocation[0];
+  const state = splitLocation[1];
   return (
     <div className='pb-24 relative'>
       <div data-testid='it-location' >{toy.location}</div>
@@ -12,7 +15,7 @@ const ToyInfo = ({ toy, setPage, setMap, map }) => {
         <div className='text-white font-bold text-center'>{toy.user}</div>
       </div>
       <div data-testid='it-distance' className='inline-block'>24 miles away</div>
-      {map ? <Map /> : <img data-testid='it-map' className='w-8 inline-block hover:opacity-30' src='./icons/mapIcon.png' onClick={() => setMap(true)}/>}
+      {map ? <Map city={city} state={state}/> : <img data-testid='it-map' className='w-8 inline-block hover:opacity-30' src='./icons/mapIcon.png' onClick={() => setMap(true)}/>}
       <div className='h-0.5 bg-black w-40 mt-5 mb-5'></div>  {/* A simple line */}
       <div data-testid='it-description'>{toy.description}</div>
     </div>
