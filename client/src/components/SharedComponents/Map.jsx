@@ -8,10 +8,12 @@ const Map = ({ latLng, iconImage, toys }) => {
   const coordinates = latLng.split(',');
 
   const handleViewStateChange = (props) => {
-    const markerElement = document.querySelector('.marker-element');
+    const markerElements = document.querySelectorAll('.marker-element');
     const size = props.viewState.zoom * 9;
-    markerElement.style.height = size + 'px';
-    markerElement.style.width = size + 'px';
+    markerElements.forEach((element) => {
+      element.style.height = size + 'px';
+      element.style.width = size + 'px';
+    });
   };
 
   return (
