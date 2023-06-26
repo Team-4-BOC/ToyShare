@@ -41,6 +41,16 @@ module.exports = {
         console.log('ERROR GET user meta', err);
       });
   },
+  getRenteeData: (req, res) => {
+    models.users.getRenteeData(req.query)
+      .then((results) => {
+        res.send(results);
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+        console.log('ERROR GET getRenteeData', err);
+      });
+  },
   addUser: (req, res) => {
     console.log('inside addUser controller', req.body);
     models.users.addUser(req.body)

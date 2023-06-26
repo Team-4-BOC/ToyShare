@@ -42,6 +42,17 @@ module.exports = {
     result.saved = toysSaved;
     return result;
   },
+  getRenteeData: async (data) => {
+    const values = [data.id];
+    const result = {};
+    const user = await db.query('SELECT * from toyshare.users where id = $1', values);
+    const photo = await db.query('SELECT * from toyshare.user_photos where user_id = $1', values);
+    const inventory = await db.query('SELECT * from toyshare.toys where user_id = $1', values);
+    result.user = user.rows[0];
+    result.photo = photo.rows[0].url;
+    result.inventory = inventory.rows;
+    return result;
+  },
   addUser: (userInfo) => {
     console.log('inside addUser model', userInfo);
     const values = [userInfo.first_name, userInfo.last_name, userInfo.email, false];
