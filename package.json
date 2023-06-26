@@ -45,6 +45,7 @@
     "@testing-library/react": "^14.0.0",
     "babel-loader": "^9.1.2",
     "daisyui": "^3.1.5",
+    "dayjs": "^1.11.8",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^16.0.0",
@@ -52,10 +53,10 @@
     "eslint-plugin-react": "^7.32.2",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
+    "react-tailwindcss-datepicker": "^1.6.3",
     "tailwindcss": "^3.3.2",
     "webpack": "^5.87.0",
     "webpack-cli": "^5.1.4",
-    "dayjs": "^1.11.8",
-    "react-tailwindcss-datepicker": "^1.6.3"
+    "react-multi-date-picker": "^4.1.2"
   }
 }
