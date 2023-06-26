@@ -1,5 +1,7 @@
+const { getByLabelText, renderHook } = require('@testing-library/react');
 const db = require('../../database/pg.js');
-
+const axios = require('axios');
+require('dotenv').config();
 // module.exports = {
 //   get: (Kyle) => {
 //     return db.query("SELECT * FROM sdc.cart;");
@@ -11,6 +13,21 @@ const db = require('../../database/pg.js');
 //     return db.query("SELECT * FROM sdc.cart;");
 //   },
 // };
+
+const getCoordinates = (location, cb) => {
+  const city = location.split(',')[0];
+  const cityString = city.replace(' ', '%20');
+  return axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${cityString}.json?access_token=${process.env.MAPBOX_KEY}&&limit=1`)
+    .then((apiData) => {
+      console.log(apiData.data.features[0].geometry);
+      const lngLat = apiData.data.features[0].geometry.coordinates;
+      cb(null, lngLat[1] + ',' + lngLat[0]);
+    })
+    .catch((err) => {
+      console.log('ERROR fetching coordinates ', err);
+      cb(err, null);
+    });
+};
 
 module.exports = {
   getOne: (data) => {
