@@ -14,8 +14,6 @@ import StarCreator from '../SharedComponents/StarCreator';
 let justSaved = false;
 
 const IndividualToy = ({ testing, setPage, toyId, userId }) => {
-  userId = 1; // Temporary fix me ---------
-  toyId = 19;
   const [map, setMap] = useState(false);
   const [toy, setToy] = useState(testing ? tempData : {});
   const fetchToy = () => {

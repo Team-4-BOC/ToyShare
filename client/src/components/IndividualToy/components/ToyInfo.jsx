@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Map from './Map.jsx';
+import Map from '../../SharedComponents/Map.jsx';
 
 const ToyInfo = ({ toy, setPage, setMap, map }) => {
   return (

@@ -16,4 +16,4 @@ Raw Toys Data - Toys.csv
 Raw Toys Data - User Photos.csv
 Raw Toys Data - User.csv
 .DS_Store
-/client/src/components/IndividualToy/components/mapBoxKey.js
+client/src/components/SharedComponents/mapBoxKey.js
