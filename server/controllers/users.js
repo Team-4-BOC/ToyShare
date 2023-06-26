@@ -54,13 +54,13 @@ module.exports = {
   },
   addUserPhoto: (req, res) => {
     console.log('inside addUserPhoto controller', req.body);
-    // models.users.addUserPhoto()
-    //   .then(() => {
-    //     console.log('photo added to users photos table');
-    //   })
-    //   .catch((err) => {
-    //     res.status(500).send(err);
-    //   });
+    models.users.addUserPhoto(req.body)
+      .then(() => {
+        console.log('photo added to users photos table');
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
   },
   checkForNewUser: (req, res) => {
     console.log('inside checkForNewUser controller', req.query.email);

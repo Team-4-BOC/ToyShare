@@ -16,7 +16,7 @@ const RenteeProfile = ({ userId, setPage }) => {
   // const [itemsRentedOut, setItemsRentedOut] = useState([]);
 
   useEffect(() => {
-    axios.get('/user', { params: { id: userId } })
+    axios.get('/userpf', { params: { id: userId } })
       .then((data) => {
         console.log('data', data.data[0]);
         setRenteeData(data.data[0]);
