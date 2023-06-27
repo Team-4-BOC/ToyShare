@@ -1,4 +1,7 @@
 module.exports = {
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'active']
+  },
   mode: 'jit',
   content: [
     './client/dist/**/*.html',

@@ -41,6 +41,16 @@ module.exports = {
         console.log('ERROR GET user meta', err);
       });
   },
+  getRenteeData: (req, res) => {
+    models.users.getRenteeData(req.query)
+      .then((results) => {
+        res.send(results);
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+        console.log('ERROR GET getRenteeData', err);
+      });
+  },
   addUser: (req, res) => {
     console.log('inside addUser controller', req.body);
     models.users.addUser(req.body)
@@ -54,13 +64,13 @@ module.exports = {
   },
   addUserPhoto: (req, res) => {
     console.log('inside addUserPhoto controller', req.body);
-    // models.users.addUserPhoto()
-    //   .then(() => {
-    //     console.log('photo added to users photos table');
-    //   })
-    //   .catch((err) => {
-    //     res.status(500).send(err);
-    //   });
+    models.users.addUserPhoto(req.body)
+      .then(() => {
+        console.log('photo added to users photos table');
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
   },
   checkForNewUser: (req, res) => {
     console.log('inside checkForNewUser controller', req.query.email);

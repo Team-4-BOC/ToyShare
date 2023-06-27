@@ -14,6 +14,7 @@ import StarCreator from '../SharedComponents/StarCreator';
 let justSaved = false;
 
 const IndividualToy = ({ testing, setPage, toyId, userId }) => {
+  const [map, setMap] = useState(false);
   const [toy, setToy] = useState(testing ? tempData : {});
   const fetchToy = () => {
     justSaved = false;
@@ -53,18 +54,23 @@ const IndividualToy = ({ testing, setPage, toyId, userId }) => {
 
   return (
     <div className='absolute overflow-y-scroll min-h-screen'>
-      <div className='card w-screen bg-base-100 shadow-xl mt-5'>
-        <div className='flex space-x-5 justify-center bg-gray-900 rounded-tl-lg rounded-tr-lg'>
-        <div className='card-title text-lg text-white' data-testid='it-toy-name'>{toy.name}</div>
-          {StarCreator(toy.rating)}
+      {map ? <div className='w-screen h-screen bg-slate-400/40 absolute top-0 left-0 z-10' onClick={() => setMap(false)}></div> : null}
+      {toy.name
+        ? <>
+        <div className='card w-screen bg-base-100 shadow-xl mt-5'>
+          <div className='flex space-x-5 justify-center bg-gray-900 rounded-tl-lg rounded-tr-lg'>
+            <div className='card-title text-lg text-white' data-testid='it-toy-name'>{toy.name}</div>
+              {StarCreator(toy.rating)}
+            </div>
+            <PhotoCarousel toy={toy} handleSave={handleSave} setPage={setPage}/>
+            <div className='card-body'>
+              <ToyInfo toy={toy} setPage={setPage} map={map} setMap={setMap}/>
+            </div>
         </div>
-        <PhotoCarousel toy={toy} handleSave={handleSave} setPage={setPage}/>
-        <div className='card-body'>
-          <ToyInfo toy={toy} setPage={setPage}/>
-        </div>
-      </div>
-      <div className='card-actions justify-end'></div>
-      <ToyReserve toy={toy} setPage={setPage}/>
+        <div className='card-actions justify-end'></div>
+        <ToyReserve toy={toy} setPage={setPage}/>
+      </>
+        : null}
     </div>
   );
 };
