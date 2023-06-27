@@ -11,13 +11,13 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, userCoords, toysID
     const count = 10;
     const page = Math.floor(Math.random() * 2) + 1;
     axios
-      .get("/toys", { params: { page, count } })
+      .get('/toys', { params: { page, count } })
       .then((response) => {
         setRenderedToys(response.data);
         setToys(response.data);
       })
       .catch((err) => {
-        console.log("ERROR fetching toys ", err);
+        console.log('ERROR fetching toys ', err);
       });
   };
 
@@ -26,7 +26,7 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, userCoords, toysID
   useEffect(() => {
     if (toys.length !== 0) {
       if (searchTerm.length > 0) {
-        let tempArr = [];
+        const tempArr = [];
         for (let i = 0; i < toys.length; i++) {
           if (
             toys[i].toy_name.toLowerCase().includes(searchTerm.toLowerCase())

@@ -35,7 +35,7 @@ const AddToy = () => {
   const handleDateChange = (newValue) => {
     console.log('newValue:', newValue);
     setDateValues(newValue);
-};
+  };
 
   return (
     <div className="h-screen flex items-center justify-center flex-col space-y-3">

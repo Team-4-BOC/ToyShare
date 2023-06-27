@@ -147,14 +147,6 @@ const App = () => {
       </>
     );
   }
-  // if (page === 9) {
-  //   return (
-  //     <>
-  //       <div className='text-red-950'>Hello World Deployed!!!</div>
-  //       <button className='btn btn-outline btn-primary'>Daisy Button</button>
-  //     </>
-  //   );
-  // }
 };
 
 export default App;
