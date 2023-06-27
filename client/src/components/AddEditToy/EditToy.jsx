@@ -90,7 +90,7 @@ const EditToy = ({ toyId, toyUserId }) => {
         <option>Cash & Venmo</option>
       </select>
       <div className="stat-title text-info-content">Update Dates Available</div>
-      <DatePicker multiple plugins={[<DatePanel key='1' />]} value={date} onChange={handleDateChange} />
+      <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)}plugins={[<DatePanel key='1' />]} value={date} onChange={handleDateChange} />
       <button className="btn btn-primary">Submit!</button>
     </div>
   );
