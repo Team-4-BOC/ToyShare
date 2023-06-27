@@ -1,5 +1,5 @@
-import aws from 'aws-sdk';
-import crypto from 'crypto';
+const aws = require('aws-sdk');
+const crypto = require('crypto');
 require('dotenv').config();
 
 const region = 'us-east-1';
@@ -11,12 +11,13 @@ const s3 = new aws.S3({
   region,
   accessKeyId,
   secretAccessKey,
-  signatureVersion: '4'
+  signatureVersion: 'v4'
 });
 
-export async function generateUploadURL () {
-  const rawBytes = await randomBytes(16);
+const generateUploadURL = async () => {
+  const rawBytes = await crypto.randomBytes(16);
   const imageName = rawBytes.toString('hex');
+  console.log(imageName);
 
   const params = ({
     Bucket: bucketName,
@@ -27,3 +28,5 @@ export async function generateUploadURL () {
   const uploadURL = await s3.getSignedUrlPromise('putObject', params);
   return uploadURL;
 };
+
+module.exports = generateUploadURL;

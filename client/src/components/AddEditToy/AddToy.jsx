@@ -14,14 +14,28 @@ const AddToy = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [dateValues, setDateValues] = useState(new Date().setDate(new Date().getDate() + 1));
 
-  const uploadImage = async () => {
-    const { url } = await axios.get('/s3Url').then(res => res.json());
+  const uploadImages = async (photo) => {
+    const url = await axios.get('/s3Url').then((res) => { return res.data.url; });
     console.log(url);
-  }
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    };
+
+    await axios.put(url, photo, config);
+    const imageUrl = url.split('?')[0];
+    console.log(imageUrl);
+  };
+  const uploadAllImages = async () => {
+    for (let i = 0; i < photos.length; i++) {
+      uploadImages(photos[i]);
+    }
+  };
 
   const setStateNames = {
     toyName: setToyName,
-    photos: setPhotos,
     originalPrice: setOriginalPrice,
     rentalPrice: setRentalPrice,
     description: setDescription,
@@ -35,6 +49,12 @@ const AddToy = () => {
     const data = e.target.value;
     const updateState = setStateNames[dataName];
     updateState(data);
+  };
+
+  const handlePhotoUpload = (e) => {
+    e.preventDefault();
+    const files = e.target.files;
+    setPhotos(files);
   };
 
   const handleDateChange = (newValue) => {
@@ -51,7 +71,7 @@ const AddToy = () => {
           <span className="label-text">Upload Toy Image</span>
           {/* <span className="label-text-alt">Alt label</span> */}
         </label>
-        <input onChange={handleChange} type="file" multiple="multiple" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
+        <input onChange={handlePhotoUpload} type="file" accept="image/*" multiple="multiple" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
         <label className="label">
           {/* <span className="label-text-alt">Alt label</span>
           <span className="label-text-alt">Alt label</span> */}
@@ -74,7 +94,7 @@ const AddToy = () => {
       </select>
       <div className="stat-title text-info-content">Input Dates Available</div>
       <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)} plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
-      <button className="btn btn-primary">Submit!</button>
+      <button onClick={uploadAllImages} className="btn btn-primary">Submit!</button>
     </div>
   );
 };
