@@ -44,7 +44,6 @@ const App = () => {
   const [toyUserId, setToyUserId] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [toys, setToys] = useState([]);
-  console.log(toys);
   if (page === 0) {
     return (
       <>

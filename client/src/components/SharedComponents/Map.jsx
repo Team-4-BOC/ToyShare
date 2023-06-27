@@ -34,7 +34,6 @@ const Map = ({ latLng, iconImage, toys }) => {
             {toys !== undefined
               ? toys.map((toy, idx) => {
                 const markerCoordinates = toy.latlng.split(',');
-                console.log(markerCoordinates);
                 return (
                   <Marker latitude={markerCoordinates[0]} longitude={markerCoordinates[1]} anchor="bottom" key={idx * 10}>
                     <div className="icon-container">
