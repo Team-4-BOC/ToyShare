@@ -12,7 +12,7 @@ const AddToy = () => {
   const [description, setDescription] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
-  const [date, setDate] = useState(new Date())
+  const [dateValues, setDateValues] = useState(new Date().setDate(new Date().getDate() + 1));
 
   const setStateNames = {
     toyName: setToyName,
@@ -34,7 +34,7 @@ const AddToy = () => {
 
   const handleDateChange = (newValue) => {
     console.log('newValue:', newValue);
-    setDate(newValue);
+    setDateValues(newValue);
 };
 
   return (
@@ -68,7 +68,7 @@ const AddToy = () => {
         <option>Cash & Venmo</option>
       </select>
       <div className="stat-title text-info-content">Input Dates Available</div>
-      <DatePicker multiple plugins={[<DatePanel key='1' />]} value={date} onChange={handleDateChange} />
+      <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)} plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
       <button className="btn btn-primary">Submit!</button>
     </div>
   );

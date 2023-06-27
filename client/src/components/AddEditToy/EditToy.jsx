@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import PhotoCarousel from '../IndividualToy/components/PhotoCarousel.jsx';
 import axios from 'axios';
+import DatePanel from 'react-multi-date-picker/plugins/date_panel';
+import DatePicker from 'react-multi-date-picker';
+
 
 const EditToy = ({ toyId, toyUserId }) => {
   const [toyName, setToyName] = useState('');
@@ -11,10 +14,7 @@ const EditToy = ({ toyId, toyUserId }) => {
   const [description, setDescription] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
-  const [date, setDate] = useState({
-    startDate: new Date(),
-    endDate: new Date().setMonth(11)
-  });
+  const [date, setDate] = useState(['2023-07-18', '2023-07-19', '2023-07-20', '2023-07-21']);
   console.log('toyid', toyId, 'user', toyUserId);
 
   const fetchToy = () => {
@@ -89,6 +89,8 @@ const EditToy = ({ toyId, toyUserId }) => {
         <option>Venmo</option>
         <option>Cash & Venmo</option>
       </select>
+      <div className="stat-title text-info-content">Update Dates Available</div>
+      <DatePicker multiple plugins={[<DatePanel key='1' />]} value={date} onChange={handleDateChange} />
       <button className="btn btn-primary">Submit!</button>
     </div>
   );
