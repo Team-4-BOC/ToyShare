@@ -4,7 +4,9 @@ import Map from '../../SharedComponents/Map.jsx';
 
 import getDistance from '../../SharedComponents/getDistance.js';
 
-const ToyInfo = ({ toy, setPage, setMap, map }) => {
+const ToyInfo = ({ toy, setPage, setMap, map, userCoords }) => {
+  const userCoordsArr = userCoords.split(',');
+  const toyCoordsArr = toy.latlng.split(',');
   return (
     <div className='pb-24 relative'>
       <div data-testid='it-location' >{toy.location}</div>
@@ -13,7 +15,7 @@ const ToyInfo = ({ toy, setPage, setMap, map }) => {
         <img src={toy.user_photo} data-testid='it-user' className='rounded-full w-16 h-16'/>
         <div className='text-white font-bold text-center'>{toy.user}</div>
       </div>
-      <div data-testid='it-distance' className='inline-block'>{getDistance()}</div>
+      <div data-testid='it-distance' className='inline-block'>{getDistance({ lat: userCoordsArr[0], lng: userCoordsArr[1] }, { lat: toyCoordsArr[0], lng: toyCoordsArr[1] })}</div>
       {map ? <Map latLng={toy.latlng} iconImage={toy.photos[0]}/> : <img data-testid='it-map' className='w-8 inline-block hover:opacity-30' src='./icons/mapIcon.png' onClick={() => setMap(true)}/>}
       <div className='h-0.5 bg-black w-40 mt-5 mb-5'></div>  {/* A simple line */}
       <div data-testid='it-description'>{toy.description}</div>

@@ -3,19 +3,9 @@ import axios from 'axios';
 // import TopBar from './TopBar.jsx';
 import ToyCard from './ToyCard.jsx';
 
-function Home ({ setToyId, setToyUserId, setPage, searchTerm, userCoords, setUserCoords, userId }) {
+function Home ({ setToyId, setToyUserId, setPage, searchTerm }) {
   const [toys, setToys] = useState([]);
   const [renderedToys, setRenderedToys] = useState([]);
-
-  const fetchUserCoords = () => {
-    axios.get('/userCoords', { params: { id: userId }})
-      .then((apiData) => {
-        console.log(apiData.data);
-      })
-      .catch((err) => {
-        console.log('ERROR fetching coords ', err);
-      });
-  };
 
   const fetchToys = () => {
     const count = 10;
@@ -30,8 +20,6 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, userCoords, setUse
         console.log("ERROR fetching toys ", err);
       });
   };
-
-  useEffect(() => { if (userId !== undefined) { fetchUserCoords(); } }, [userId]);
 
   useEffect(fetchToys, []);
 

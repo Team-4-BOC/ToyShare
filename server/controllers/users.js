@@ -52,17 +52,22 @@ module.exports = {
       });
   },
   getCoordinates: (req, res) => {
+    console.log(req.query.id);
     if (!req.query.id) {
       res.status(500).send('Please input id');
       return;
     }
     models.users.getCoordinates(req.query)
       .then((result) => {
+        if (!result.rows[0]) {
+          res.status(500).send(JSON.stringify('LAT_LNG field missing in database'));
+          return;
+        }
         res.send(result.rows[0].lat_lng);
       })
       .catch((err) => {
         res.status(500).send(JSON.stringify(err));
-        console.log('ERROR GET getRenteeData', err);
+        console.log('ERROR GET coords', err);
       });
   },
   addUser: (req, res) => {

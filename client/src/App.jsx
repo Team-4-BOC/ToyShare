@@ -21,10 +21,19 @@ const App = () => {
     axios
       .get('/userNew', { params: { email: 'JoshMan@email.com' } })
       .then((data) => {
-        // console.log('data', data.data[0].id);
+        getUserCoords(data.data[0].id);
         setUserId(data.data[0].id);
       })
       .catch((err) => console.log(err));
+  };
+  const getUserCoords = (id) => {
+    axios.get('/userCoordinates', { params: { id } }) // returns 'lat, lng'
+      .then((apiData) => {
+        setUserCoords(apiData.data);
+      })
+      .catch((err) => {
+        console.log('ERROR fetching coords ', err);
+      });
   };
   useEffect(() => {
     getUserId();
