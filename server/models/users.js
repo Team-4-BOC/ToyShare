@@ -86,6 +86,3 @@ module.exports = {
     return db.query('SELECT * from toyshare.users where email = $1', values);
   }
 };
-
-// INSERT INTO toyshare.users (first_name, last_name, email, signed_in) VALUES('John', 'Doe', 'test@test.com', false);
-// DELETE FROM toyshare.users WHERE email = 'test@test.com';
