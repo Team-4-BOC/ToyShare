@@ -7,6 +7,7 @@ import axios from 'axios';
 const AddToy = () => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
+  const [imageURLS, setImageURLS] = useState([]);
   const [originalPrice, setOriginalPrice] = useState('');
   const [rentalPrice, setRentalPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -16,17 +17,14 @@ const AddToy = () => {
 
   const uploadImages = async (photo) => {
     const url = await axios.get('/s3Url').then((res) => { return res.data.url; });
-    console.log(url);
-
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'image'
       }
     };
-
     await axios.put(url, photo, config);
     const imageUrl = url.split('?')[0];
-    console.log(imageUrl);
+    setImageURLS(imageURLS => [...imageURLS, imageUrl]);
   };
   const uploadAllImages = async () => {
     for (let i = 0; i < photos.length; i++) {
