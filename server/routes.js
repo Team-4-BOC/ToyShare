@@ -1,9 +1,15 @@
+import s3 from './s3.js';
 const express = require('express');
 const router = express.Router();
 const controllers = require('./controllers');
 
 router.get('/', function (req, res) {
   res.render('index.html');
+});
+
+router.get('/s3Url', async (req, res) => {
+  const url = s3.generateUploadURL();
+  res.send({ url });
 });
 
 router.post('/toys', controllers.toys.post);
