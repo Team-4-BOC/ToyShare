@@ -1,6 +1,7 @@
 node_modules
 coverage
 .env
+.env.local
 client/dist/bundle.js
 client/dist/styles.css
 database/uploadDBdata.txt
@@ -15,3 +16,5 @@ Raw Toys Data - Toys.csv
 Raw Toys Data - User Photos.csv
 Raw Toys Data - User.csv
 .DS_Store
+client/dist/158.bundle.js
+client/dist/158.bundle.js.LICENSE.txt
