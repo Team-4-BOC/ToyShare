@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
-import RenteeProfile from './components/RenteeProfile/RenteeProfile.jsx';
+import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
 import Home from './components/TempHome/Home.jsx';
 import EditToy from './components/AddEditToy/EditToy.jsx';
