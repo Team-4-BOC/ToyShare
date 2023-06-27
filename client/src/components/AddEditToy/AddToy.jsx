@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import Datepicker from 'react-tailwindcss-datepicker';
+import DatePicker from 'react-multi-date-picker';
+import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 // import axios from 'axios';
 
 const AddToy = () => {
@@ -11,10 +12,7 @@ const AddToy = () => {
   const [description, setDescription] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
-  const [date, setDate] = useState({
-    startDate: new Date(),
-    endDate: new Date().setMonth(11)
-  });
+  const [dateValues, setDateValues] = useState(new Date().setDate(new Date().getDate() + 1));
 
   const setStateNames = {
     toyName: setToyName,
@@ -36,7 +34,7 @@ const AddToy = () => {
 
   const handleDateChange = (newValue) => {
     console.log('newValue:', newValue);
-    setDate(newValue);
+    setDateValues(newValue);
 };
 
   return (
@@ -70,7 +68,7 @@ const AddToy = () => {
         <option>Cash & Venmo</option>
       </select>
       <div className="stat-title text-info-content">Input Dates Available</div>
-      <div className="stat-value"><Datepicker value={date} onChange={handleDateChange}/></div>
+      <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)} plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
       <button className="btn btn-primary">Submit!</button>
     </div>
   );
