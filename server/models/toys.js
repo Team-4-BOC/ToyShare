@@ -68,23 +68,22 @@ module.exports = {
     return (db.query(`
     SELECT
       t.id AS id,
-      t.name AS name,
+      t.toy_name AS name,
       u.lat_lng AS latLng,
-      p.photo AS photo
+      p.url AS photo
     FROM
         toyshare.toys t
     JOIN
-        toyshare.users u ON t.id = u.toy_id
+        toyshare.users u ON t.user_id = u.id
     JOIN
     (
       SELECT
           toy_id,
-          photo
+          MAX(url) AS url
       FROM
           toyshare.toy_photos
       GROUP BY
             toy_id
-      LIMIT 1
     ) p ON t.id = p.toy_id
     `));
   },

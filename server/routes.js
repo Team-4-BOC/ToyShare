@@ -20,6 +20,8 @@ router.get('/toy', controllers.toys.getOne);
 
 router.get('/toys', controllers.toys.getAll);
 
+router.get('/toysIDCoordsPhoto', controllers.toys.getAllIDCoordsPhoto);
+
 router.post('/saved', controllers.toys.saved);
 
 router.get('/bookings/getAllBooked', controllers.bookings.getAllBooked);
