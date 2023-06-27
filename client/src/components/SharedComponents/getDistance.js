@@ -2,8 +2,7 @@ const degreesToRadians = (degrees) => {
   return degrees * (Math.PI / 180);
 };
 
-export default (start, end) => { // Expects array 'lat,lng'
-  console.log(start, end);
+export default (start, end) => { // Expects 'lat,lng'
   const startCoords = start.split(',');
   const endCoords = end.split(',');
   const startLatRad = degreesToRadians(startCoords[0]);

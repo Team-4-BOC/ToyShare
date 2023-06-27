@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-// import MapBox, { Marker } from 'react-map-gl';
+import MapBox, { Marker } from 'react-map-gl';
 
-import mapBoxKey from './tempMapBoxKey'; // ---------- Fix Me!!!!!!!
+import mapBoxKey from './mapBoxKey.js';
 
 const Map = ({ latLng, iconImage, toysIDCoordsPhoto }) => {
   const [coordinates, setCoordinates] = useState();
@@ -29,7 +29,7 @@ const Map = ({ latLng, iconImage, toysIDCoordsPhoto }) => {
   };
   return (
       <div>
-        {/* {coordinates !== undefined
+        {coordinates !== undefined
           ? <MapBox initialViewState={{ latitude: coordinates[0], longitude: coordinates[1], zoom }} style={{ width: window.innerWidth / 1.1 + 'px', height: window.innerHeight / 1.4 + 'px', position: 'fixed', top: '50%', right: '50%', transform: 'translate(50%, -50%)', zIndex: 30 }} mapboxAccessToken={mapBoxKey} mapStyle="mapbox://styles/mapbox/streets-v9" onZoom={handleViewStateChange}>
             {toysIDCoordsPhoto !== undefined
               ? toysIDCoordsPhoto.map((toy, idx) => {
@@ -54,7 +54,7 @@ const Map = ({ latLng, iconImage, toysIDCoordsPhoto }) => {
                 </div>
               </Marker>}
         </MapBox>
-          : null} */}
+          : null}
       </div>
   );
 };
