@@ -15,7 +15,7 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 
 const App = () => {
   const [userId, setUserId] = useState(0);
-  const [userCoords, setUserCoords] = useState(0);
+  const [userCoords, setUserCoords] = useState();
   const getUserId = () => {
     // const userInfo = getCurrentUserInfo();
     axios
@@ -67,7 +67,8 @@ const App = () => {
           setToyId={setToyId}
           setToyUserId={setToyUserId}
           searchTerm={searchTerm}
-          setUserCoords={setUserCoords}
+          userCoords={userCoords}
+          toysIDCoordsPhoto={toysIDCoordsPhoto}
           userId={userId}
         />
       </>

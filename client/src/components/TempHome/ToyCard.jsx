@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-function ToyCard ({ toy, handleToyClick }) {
+import getDistance from '../SharedComponents/getDistance';
+
+function ToyCard ({ toy, handleToyClick, userCoords, toysIDCoordsPhoto }) {
+  const [toyCoords, setToyCoords] = useState();
+
+  useEffect(() => { if (toysIDCoordsPhoto !== undefined) { setToyCoords(toysIDCoordsPhoto[toy.id - 1].latlng); } }, [toysIDCoordsPhoto]);
+
   return (
     <div className="toycard" onClick={() => handleToyClick(toy.id, toy.user_id)}>
       <br></br>
@@ -11,6 +17,7 @@ function ToyCard ({ toy, handleToyClick }) {
           <p>{toy.toy_description.slice(0, 40)}...</p>
           <h3>Original Price: ${toy.original_price}</h3>
           <h3>Rental Price: ${toy.rental_price}</h3>
+          {toyCoords !== undefined && userCoords !== undefined ? <h3>{getDistance(userCoords, toyCoords)} miles away</h3> : null}
           <div className="card-actions justify-end">
           </div>
         </div>

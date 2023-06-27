@@ -4,7 +4,6 @@ module.exports = {
   // getAll: (Kevin) => {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
-
   getOne: (query) => {
     const values = [query.toyId, query.userId !== undefined ? query.userId : 0];
     return db.query(`
@@ -74,16 +73,15 @@ module.exports = {
         toyshare.toys t
     JOIN
         toyshare.users u ON t.user_id = u.id
-    JOIN
+    LEFT JOIN
     (
       SELECT
-          toy_id,
-          MAX(url) AS url
+        toy_id,
+        url,
+        ROW_NUMBER() OVER (PARTITION BY toy_id ORDER BY url) AS row_num
       FROM
-          toyshare.toy_photos
-      GROUP BY
-            toy_id
-    ) p ON t.id = p.toy_id
+        toyshare.toy_photos
+    ) p ON t.id = p.toy_id AND p.row_num = 1
     `));
   },
   // put: (Nick) => {
