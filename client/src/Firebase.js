@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 import { initializeApp } from 'firebase/app';
-// import axios from 'axios';
+import axios from 'axios';
 import {
   getAuth,
   GoogleAuthProvider,
@@ -27,33 +27,40 @@ const provider = new GoogleAuthProvider();
 const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      alert('you are sighned in');
-      // axios.get('/userNew', { params: { email: result.user.email } })
-      //   .then((response) => {
-      //     console.log('RESPONSE', response);
-      //     alert('You are now Logged in');
-      // if (response.data.length !== 0) {
-      //   alert('You are now Logged in');
-      // } else {
-      //   const name = result.user.displayName.split(' ');
-      //   console.log('name inside else block of get request then block', name);
+      alert('you are signed in');
+      axios.get('/userNew', { params: { email: result.user.email } })
+        .then((response) => {
+          console.log('RESPONSE', response);
+          // alert('You are now Logged in');
+          if (response.data.length !== 0) {
+            // alert('You are now Logged in');
+          } else {
+            const name = result.user.displayName.split(' ');
+            console.log('name inside else block of get request then block', name);
 
-      //   const data = {};
-      //   data.first_name = name[0];
-      //   data.last_name = name[1];
-      //   data.email = result.user.email;
+            const data = {};
+            data.first_name = name[0];
+            data.last_name = name[1];
+            data.email = result.user.email;
 
-      //   axios.post('/user', data)
-      //     .then(() => {
-      //       console.log('inside post request for signInWithGoogle then block');
-      // axios.post('/user/photos', { url: result.user.photoURL })
-      //   .then(() => {
-      //     alert('Thanks for logging in!!');
-      //   });
-      // });
-      // }
-    // })
-      // console.log('results', result);
+            axios.post('/user', data)
+              .then(() => {
+                axios.get('/userNew', { params: { email: result.user.email } })
+                  .then((data) => {
+                    console.log('inside second get request inside signupwithGoogle', data);
+                    const photoData = {};
+                    data.id = data.data[0].id;
+                    data.url = result.user.photoURL;
+                    axios.post('/user/photos', photoData)
+                      .then(() => {
+                        alert('Thanks for logging in!!');
+                      });
+                  });
+                // console.log('inside post request for signInWithGoogle then block');
+              });
+          }
+        });
+      console.log('results', result);
     })
     .catch((err) => {
       alert(err);
