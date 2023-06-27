@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import Datepicker from 'react-tailwindcss-datepicker';
-// import axios from 'axios';
+// import Datepicker from 'react-tailwindcss-datepicker';
+import axios from 'axios';
 
 const AddToy = () => {
   const [toyName, setToyName] = useState('');
@@ -15,6 +15,11 @@ const AddToy = () => {
     startDate: new Date(),
     endDate: new Date().setMonth(11)
   });
+
+  const uploadImage = async () => {
+    const { url } = await axios.get('/s3Url').then(res => res.json());
+    console.log(url);
+  }
 
   const setStateNames = {
     toyName: setToyName,
@@ -70,7 +75,7 @@ const AddToy = () => {
         <option>Cash & Venmo</option>
       </select>
       <div className="stat-title text-info-content">Input Dates Available</div>
-      <div className="stat-value"><Datepicker value={date} onChange={handleDateChange}/></div>
+      {/* <div className="stat-value"><Datepicker value={date} onChange={handleDateChange}/></div> */}
       <button className="btn btn-primary">Submit!</button>
     </div>
   );
