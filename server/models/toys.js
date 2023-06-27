@@ -53,12 +53,13 @@ module.exports = {
     return db.query(`
     SELECT
       toys.*,
-      array_agg(toy_photos.url) AS photos,
+      array_agg(toy_photos.url) AS photos
     FROM
       toyshare.toys
-      LEFT JOIN toyshare.toy_photos ON toys.id = toy_photos.toy_id
+    LEFT JOIN
+      toyshare.toy_photos ON toys.id = toy_photos.toy_id
     GROUP BY
-      toys.id, toy_users.lat_lng
+      toys.id
     ORDER BY
       toys.id
     LIMIT $1 OFFSET $2;

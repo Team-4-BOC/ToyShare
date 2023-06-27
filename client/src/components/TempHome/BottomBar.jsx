@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { verifySignedIn } from '../../Firebase.js';
 
 import Map from '../SharedComponents/Map.jsx';
 
+import axios from 'axios';
+
 const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto }) => {
   const [map, setMap] = useState(false);
+
+  const fetchToysIDCoordsPhoto = () => {
+    axios.get('/toysIDCoordsPhoto')
+      .then((apiData) => {
+        setToysIDCoordsPhoto(apiData.data);
+      })
+      .catch((err) => {
+        console.log('ERROR fetching toys map info ', err);
+      });
+  };
+
   const onAddToyClick = () => {
     const isSignedIn = verifySignedIn();
     if (isSignedIn) {
@@ -15,6 +28,8 @@ const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto }) => {
       alert('Please sign in to add a toy');
     }
   };
+
+  useEffect(fetchToysIDCoordsPhoto, []);
 
   return (
     <>
