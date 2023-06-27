@@ -3,14 +3,23 @@ import axios from 'axios';
 // import TopBar from './TopBar.jsx';
 import ToyCard from './ToyCard.jsx';
 
-function Home({ setToyId, setToyUserId, setPage, searchTerm }) {
+function Home ({ setToyId, setToyUserId, setPage, searchTerm, userCoords, setUserCoords, userId }) {
   const [toys, setToys] = useState([]);
   const [renderedToys, setRenderedToys] = useState([]);
 
-  useEffect(() => {
+  const fetchUserCoords = () => {
+    axios.get('/userCoords', { params: { id: userId }})
+      .then((apiData) => {
+        console.log(apiData.data);
+      })
+      .catch((err) => {
+        console.log('ERROR fetching coords ', err);
+      });
+  };
+
+  const fetchToys = () => {
     const count = 10;
     const page = Math.floor(Math.random() * 2) + 1;
-    console.log(page);
     axios
       .get("/toys", { params: { page, count } })
       .then((response) => {
@@ -20,7 +29,11 @@ function Home({ setToyId, setToyUserId, setPage, searchTerm }) {
       .catch((err) => {
         console.log("ERROR fetching toys ", err);
       });
-  }, []);
+  };
+
+  useEffect(() => { if (userId !== undefined) { fetchUserCoords(); } }, [userId]);
+
+  useEffect(fetchToys, []);
 
   useEffect(() => {
     if (toys.length !== 0) {

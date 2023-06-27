@@ -15,7 +15,7 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 
 const App = () => {
   const [userId, setUserId] = useState(0);
-
+  const [userCoords, setUserCoords] = useState(0);
   const getUserId = () => {
     // const userInfo = getCurrentUserInfo();
     axios
@@ -52,12 +52,14 @@ const App = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
-        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto}/>
+        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords}/>
         <Home
           setPage={setPage}
           setToyId={setToyId}
           setToyUserId={setToyUserId}
           searchTerm={searchTerm}
+          setUserCoords={setUserCoords}
+          userId={userId}
         />
       </>
     );
@@ -66,7 +68,7 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage}/>
-        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId}/>
+        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} userCoords={userCoords}/>
       </>
     );
   }
