@@ -3,8 +3,7 @@ import axios from 'axios';
 // import TopBar from './TopBar.jsx';
 import ToyCard from './ToyCard.jsx';
 
-function Home({ setToyId, setToyUserId, setPage, searchTerm }) {
-  const [toys, setToys] = useState([]);
+function Home ({ setToyId, setToyUserId, setPage, searchTerm, setToys, toys }) {
   const [renderedToys, setRenderedToys] = useState([]);
 
   useEffect(() => {
@@ -12,20 +11,20 @@ function Home({ setToyId, setToyUserId, setPage, searchTerm }) {
     const page = Math.floor(Math.random() * 2) + 1;
     console.log(page);
     axios
-      .get("/toys", { params: { page, count } })
+      .get('/toys', { params: { page, count } })
       .then((response) => {
         setRenderedToys(response.data);
         setToys(response.data);
       })
       .catch((err) => {
-        console.log("ERROR fetching toys ", err);
+        console.log('ERROR fetching toys ', err);
       });
   }, []);
 
   useEffect(() => {
     if (toys.length !== 0) {
       if (searchTerm.length > 0) {
-        let tempArr = [];
+        const tempArr = [];
         for (let i = 0; i < toys.length; i++) {
           if (
             toys[i].toy_name.toLowerCase().includes(searchTerm.toLowerCase())
