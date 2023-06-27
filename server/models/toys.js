@@ -1,5 +1,3 @@
-// const { query } = require('express');
-const { query } = require('express');
 const db = require('../../database/pg.js');
 
 module.exports = {

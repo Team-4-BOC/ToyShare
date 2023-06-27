@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import MapBox, { Marker } from 'react-map-gl';
 
-import mapBoxKey from './mapBoxKey';
+import mapBoxKey from './tempMapBoxKey'; // ---------- Fix Me!!!!!!!
 
 const Map = ({ latLng, iconImage, toysIDCoordsPhoto }) => {
   const [coordinates, setCoordinates] = useState();
