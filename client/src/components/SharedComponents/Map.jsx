@@ -4,12 +4,12 @@ import MapBox, { Marker } from 'react-map-gl';
 
 import mapBoxKey from './mapBoxKey';
 
-const Map = ({ latLng, iconImage, toys }) => {
+const Map = ({ latLng, iconImage, toysIDCoordsPhoto }) => {
   const [coordinates, setCoordinates] = useState();
   const [zoom, setZoom] = useState();
 
   const setMap = () => {
-    if (toys !== undefined) {
+    if (toysIDCoordsPhoto !== undefined) {
       setCoordinates([38.500000, -98.0000]);
       setZoom(4);
     } else if (latLng !== undefined) {
@@ -31,15 +31,15 @@ const Map = ({ latLng, iconImage, toys }) => {
       <div>
         {coordinates !== undefined
           ? <MapBox initialViewState={{ latitude: coordinates[0], longitude: coordinates[1], zoom }} style={{ width: window.innerWidth / 1.1 + 'px', height: window.innerHeight / 1.4 + 'px', position: 'fixed', top: '50%', right: '50%', transform: 'translate(50%, -50%)', zIndex: 30 }} mapboxAccessToken={mapBoxKey} mapStyle="mapbox://styles/mapbox/streets-v9" onZoom={handleViewStateChange}>
-            {toys !== undefined
-              ? toys.map((toy, idx) => {
+            {toysIDCoordsPhoto !== undefined
+              ? toysIDCoordsPhoto.map((toy, idx) => {
                 const markerCoordinates = toy.latlng.split(',');
                 return (
                   <Marker latitude={markerCoordinates[0]} longitude={markerCoordinates[1]} anchor="bottom" key={idx * 10}>
                     <div className="icon-container">
                       <div className="icon marker-element" style={{ width: '45px', height: '45px' }}>
                         <div className="marker-icon" />
-                        <img src={toy.photos[0]} alt="Image" />
+                        <img src={toy.photo} alt="Image" />
                       </div>
                     </div>
                   </Marker>

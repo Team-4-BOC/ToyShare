@@ -43,7 +43,7 @@ const App = () => {
   const [toyId, setToyId] = useState(1);
   const [toyUserId, setToyUserId] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [toys, setToys] = useState([]);
+  const [toysIDCoordsPhoto, setToysIDCoordsPhoto] = useState([]);
   if (page === 0) {
     return (
       <>
@@ -52,14 +52,12 @@ const App = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
-        <BottomBar setPage={setPage} toys={toys}/>
+        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto}/>
         <Home
           setPage={setPage}
           setToyId={setToyId}
           setToyUserId={setToyUserId}
           searchTerm={searchTerm}
-          setToys={setToys}
-          toys={toys}
         />
       </>
     );

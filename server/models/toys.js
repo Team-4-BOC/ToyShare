@@ -1,4 +1,5 @@
 // const { query } = require('express');
+const { query } = require('express');
 const db = require('../../database/pg.js');
 
 module.exports = {
@@ -6,8 +7,8 @@ module.exports = {
   //   return db.query("SELECT * FROM sdc.cart;");
   // },
 
-  getOne: (data) => {
-    const values = [data.toyId, data.userId !== undefined ? data.userId : 0];
+  getOne: (query) => {
+    const values = [query.toyId, query.userId !== undefined ? query.userId : 0];
     return db.query(`
     SELECT
       t.toy_name AS name,
@@ -43,7 +44,7 @@ module.exports = {
     LIMIT 1`
     , values);
   },
-  getAll: async (query) => {
+  getAll: (query) => {
     const page = query.page ? query.page : 1;
     const count = query.count ? query.count : 5;
     const offset = (page - 1) * count;
@@ -53,17 +54,39 @@ module.exports = {
     SELECT
       toys.*,
       array_agg(toy_photos.url) AS photos,
-      toy_users.lat_lng AS latLng
     FROM
       toyshare.toys
       LEFT JOIN toyshare.toy_photos ON toys.id = toy_photos.toy_id
-      LEFT JOIN toyshare.users AS toy_users ON toys.user_id = toy_users.id
     GROUP BY
       toys.id, toy_users.lat_lng
     ORDER BY
       toys.id
     LIMIT $1 OFFSET $2;
     `, values);
+  },
+  getAllIDCoordsPhoto: () => {
+    return (db.query(`
+    SELECT
+      t.id AS id,
+      t.name AS name,
+      u.lat_lng AS latLng,
+      p.photo AS photo
+    FROM
+        toyshare.toys t
+    JOIN
+        toyshare.users u ON t.id = u.toy_id
+    JOIN
+    (
+      SELECT
+          toy_id,
+          photo
+      FROM
+          toyshare.toy_photos
+      GROUP BY
+            toy_id
+      LIMIT 1
+    ) p ON t.id = p.toy_id
+    `));
   },
   // put: (Nick) => {
   //   return db.query("SELECT * FROM sdc.cart;");

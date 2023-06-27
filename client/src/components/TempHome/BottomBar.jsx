@@ -4,7 +4,7 @@ import { verifySignedIn } from '../../Firebase.js';
 
 import Map from '../SharedComponents/Map.jsx';
 
-const BottomBar = ({ setPage, toys }) => {
+const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto }) => {
   const [map, setMap] = useState(false);
   const onAddToyClick = () => {
     const isSignedIn = verifySignedIn();
@@ -23,9 +23,9 @@ const BottomBar = ({ setPage, toys }) => {
         <button className="active:bg-gray-100 text-black py-3 px-4 rounded-full border border-solid" onClick={onAddToyClick}>
           AddToy
         </button>
-        {!map && toys !== undefined ? <div className='shadow-sm shadow-black rounded-full'><img data-testid='it-map' className='inline-block hover:opacity-30 w-9 h-9 translate-y-2' src='./icons/mapIcon.png' onClick={() => setMap(true)}/></div> : null}
+        {!map && toysIDCoordsPhoto !== undefined ? <div className='shadow-sm shadow-black rounded-full'><img data-testid='it-map' className='inline-block hover:opacity-30 w-9 h-9 translate-y-2' src='./icons/mapIcon.png' onClick={() => setMap(true)}/></div> : null}
       </div>
-      {map ? <Map toys={toys}/> : null}
+      {map ? <Map toysIDCoordsPhoto={toysIDCoordsPhoto}/> : null}
     </>
   );
 };
