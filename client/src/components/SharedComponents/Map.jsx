@@ -7,34 +7,34 @@ import mapBoxKey from './mapBoxKey';
 const Map = ({ latLng, iconImage, toys }) => {
   const [coordinates, setCoordinates] = useState();
   const [zoom, setZoom] = useState();
-  console.log(coordinates);
+
   const setMap = () => {
     if (toys !== undefined) {
-      setCoordinates([37.05247, 95.42464]);
-      setZoom(1);
-    } else {
+      setCoordinates([38.500000, -98.0000]);
+      setZoom(4);
+    } else if (latLng !== undefined) {
       setCoordinates(latLng.split(','));
-      setZoom(5);
+      setZoom(6);
     }
   };
   useEffect(setMap, []);
 
   const handleViewStateChange = (props) => {
     const markerElements = document.querySelectorAll('.marker-element');
-    const size = props.viewState.zoom * 9;
+    const size = props.viewState.zoom * 20;
     markerElements.forEach((element) => {
       element.style.height = size + 'px';
       element.style.width = size + 'px';
     });
   };
-
   return (
-      <div className='absolute w-full h-full flex justify-center z-20'>
+      <div>
         {coordinates !== undefined
-          ? <MapBox initialViewState={{ latitude: coordinates[0], longitude: coordinates[1], zoom }} style={{ width: window.innerWidth + 'px', height: window.innerHeight / 2 + 'px', transform: 'translateY(-80vw)' }} mapboxAccessToken={mapBoxKey} mapStyle="mapbox://styles/mapbox/streets-v9" onZoom={handleViewStateChange}>
+          ? <MapBox initialViewState={{ latitude: coordinates[0], longitude: coordinates[1], zoom }} style={{ width: window.innerWidth / 1.1 + 'px', height: window.innerHeight / 1.4 + 'px', position: 'fixed', top: '50%', right: '50%', transform: 'translate(50%, -50%)', zIndex: 30 }} mapboxAccessToken={mapBoxKey} mapStyle="mapbox://styles/mapbox/streets-v9" onZoom={handleViewStateChange}>
             {toys !== undefined
               ? toys.map((toy, idx) => {
-                const markerCoordinates = toy.latLng.split(',');
+                const markerCoordinates = toy.latlng.split(',');
+                console.log(markerCoordinates);
                 return (
                   <Marker latitude={markerCoordinates[0]} longitude={markerCoordinates[1]} anchor="bottom" key={idx * 10}>
                     <div className="icon-container">

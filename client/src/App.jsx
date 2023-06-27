@@ -9,6 +9,7 @@ import AddToy from './components/AddEditToy/AddToy.jsx';
 import ReserveDates from './components/Checkout/reserveMvp.jsx';
 import BookingConfirmation from './components/Checkout/bookingConfirmation.js';
 import TopBar from './components/TempHome/TopBar.jsx';
+import BottomBar from './components/TempHome/BottomBar.jsx';
 // import { use } from 'matter';
 // import { getCurrentUserInfo } from './Firebase.js';
 
@@ -42,7 +43,8 @@ const App = () => {
   const [toyId, setToyId] = useState(1);
   const [toyUserId, setToyUserId] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-
+  const [toys, setToys] = useState([]);
+  console.log(toys);
   if (page === 0) {
     return (
       <>
@@ -51,11 +53,14 @@ const App = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
+        <BottomBar setPage={setPage} toys={toys}/>
         <Home
           setPage={setPage}
           setToyId={setToyId}
           setToyUserId={setToyUserId}
           searchTerm={searchTerm}
+          setToys={setToys}
+          toys={toys}
         />
       </>
     );

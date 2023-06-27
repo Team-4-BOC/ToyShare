@@ -3,8 +3,7 @@ import axios from 'axios';
 // import TopBar from './TopBar.jsx';
 import ToyCard from './ToyCard.jsx';
 
-function Home({ setToyId, setToyUserId, setPage, searchTerm }) {
-  const [toys, setToys] = useState([]);
+function Home({ setToyId, setToyUserId, setPage, searchTerm, setToys, toys }) {
   const [renderedToys, setRenderedToys] = useState([]);
 
   useEffect(() => {
