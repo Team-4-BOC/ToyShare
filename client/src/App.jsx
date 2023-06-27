@@ -77,7 +77,7 @@ const App = () => {
       <>
         <TopBar setPage={setPage}/>
         <br></br>
-        <UserProfile setPage={setPage} />
+        <UserProfile userId={userId} setPage={setPage} setToyId={setToyId}/>
       </>
     );
   }

@@ -5,12 +5,13 @@ import UserToys from './UserToys.jsx';
 import UserEdit from './UserEdit.jsx';
 
 // This is the parent component that displays the user profile information and rental details
-function UserProfile ({ setPage }) {
+function UserProfile ({ userId, setPage, setToyId }) {
+  console.log('user: ', userId);
   const [userData, setUserData] = useState(false);
   const [enableEdit, setEnableEdit] = useState(false);
 
   useEffect(() => {
-    axios.get('/userpf', { params: { id: 2 } })
+    axios.get('/userpf', { params: { id: userId } })
       .then((response) => {
         setUserData(response.data);
       });
@@ -22,7 +23,7 @@ function UserProfile ({ setPage }) {
       {userData && !enableEdit ? <UserInfo userData={userData} setEnableEdit={setEnableEdit}/> : null}
       {enableEdit ? <UserEdit userData={userData} setEnableEdit={setEnableEdit}/> : null }
       <br></br>
-      {userData ? <UserToys setPage={setPage} userData={userData}/> : null}
+      {userData ? <UserToys setToyId={setToyId} setPage={setPage} userData={userData}/> : null}
     </div>
     </div>
   );
