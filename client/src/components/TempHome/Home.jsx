@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import TopBar from './TopBar.jsx';
 import ToyCard from './ToyCard.jsx';
 
 function Home ({ setToyId, setToyUserId, setPage, searchTerm, setToys, toys }) {
   const [renderedToys, setRenderedToys] = useState([]);
 
   useEffect(() => {
+    getToys();
+  }, []);
+
+  useEffect(() => {
+    handleSearchTermChange();
+  }, [searchTerm]);
+
+  const getToys = () => {
     const count = 10;
     const page = Math.floor(Math.random() * 2) + 1;
-    console.log(page);
     axios
       .get('/toys', { params: { page, count } })
       .then((response) => {
@@ -19,9 +25,9 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, setToys, toys }) {
       .catch((err) => {
         console.log('ERROR fetching toys ', err);
       });
-  }, []);
+  }
 
-  useEffect(() => {
+  const handleSearchTermChange = () => {
     if (toys.length !== 0) {
       if (searchTerm.length > 0) {
         const tempArr = [];
@@ -37,7 +43,7 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, setToys, toys }) {
         setRenderedToys(toys);
       }
     }
-  }, [searchTerm]);
+  }
 
   const handleToyClick = (toyId, userId) => {
     setToyId(toyId);
