@@ -14,6 +14,20 @@ const AddToy = () => {
   const [deliveryMethod, setDeliveryMethod] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [dateValues, setDateValues] = useState(new Date().setDate(new Date().getDate() + 1));
+  const [currentCategories, setCurrentCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState([]);
+
+  const getCategories = () => {
+    axios.get('/toys/category')
+      .then((res) => {
+        setCurrentCategories(res.data);
+      })
+      .catch((err) => { console.log(err); });
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   const uploadImages = async (photo) => {
     const url = await axios.get('/s3Url').then((res) => { return res.data.url; });
@@ -38,7 +52,8 @@ const AddToy = () => {
     rentalPrice: setRentalPrice,
     description: setDescription,
     deliveryMethod: setDeliveryMethod,
-    paymentMethod: setPaymentMethod
+    paymentMethod: setPaymentMethod,
+    selectedCategory: setSelectedCategory
   };
 
   const handleChange = (e) => {
@@ -64,15 +79,16 @@ const AddToy = () => {
     <div className="h-screen flex items-center justify-center flex-col space-y-3">
       <div>Add a Toy!</div>
       <input onChange={handleChange} type="text" placeholder="Add Toy Name" className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
+      <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="selectedCategory">
+        <option disabled selected>Select Toy Category</option>
+       {currentCategories.map(category => <option key={category.id} > {category.name} </option>)}
+      </select>
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Upload Toy Image</span>
-          {/* <span className="label-text-alt">Alt label</span> */}
         </label>
         <input onChange={handlePhotoUpload} type="file" accept="image/*" multiple="multiple" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
         <label className="label">
-          {/* <span className="label-text-alt">Alt label</span>
-          <span className="label-text-alt">Alt label</span> */}
         </label>
       </div>
       <input onChange={handleChange} type="text" placeholder="Add Original Price" className="input input-bordered input-primary w-full max-w-xs" name="originalPrice"/>
