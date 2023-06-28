@@ -49,7 +49,17 @@ module.exports = {
         res.status(500).send('ERROR adding toy');
         console.log('ERROR ADDING TOY', err);
       });
-    // console.log(models.toys.post());
+  },
+  postPhotos: (req, res) => {
+    models.toys.postPhotos(req.body)
+      .then((results) => {
+        res.status(201).send('Successfully added toy photo!');
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR adding toy photo');
+        console.log('ERROR ADDING TOY photo', err);
+      });
+    console.log('Attempting to post photo');
   },
   saved: (req, res) => {
     if (!req.body.toyId || !req.body.userId) {

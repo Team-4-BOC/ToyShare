@@ -10,10 +10,10 @@ router.get('/', function (req, res) {
 router.get('/s3Url', async (req, res) => {
   const url = await generateUploadURL();
   res.send({ url });
-//  console.log(s3.generateUploadURL());
 });
 
 router.post('/toys', controllers.toys.post);
+router.post('/toys/photos', controllers.toys.postPhotos);
 
 router.get('/user', controllers.users.getOne);
 
