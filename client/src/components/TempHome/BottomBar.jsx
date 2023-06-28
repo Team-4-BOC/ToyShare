@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { verifySignedIn } from '../../Firebase.js';
 
 import Map from '../SharedComponents/Map.jsx';
 
-const BottomBar = ({ setPage, toys }) => {
+import axios from 'axios';
+
+const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto }) => {
   const [map, setMap] = useState(false);
+
+  const fetchToysIDCoordsPhoto = () => {
+    axios.get('/toysIDCoordsPhoto')
+      .then((apiData) => {
+        setToysIDCoordsPhoto(apiData.data);
+      })
+      .catch((err) => {
+        console.log('ERROR fetching toys map info ', err);
+      });
+  };
+
   const onAddToyClick = () => {
     const isSignedIn = verifySignedIn();
     if (isSignedIn) {
@@ -16,6 +29,8 @@ const BottomBar = ({ setPage, toys }) => {
     }
   };
 
+  useEffect(fetchToysIDCoordsPhoto, []);
+
   return (
     <>
       {map ? <div className='w-screen h-screen bg-slate-400/40 top-0 left-0 fixed z-30' onClick={() => { setMap(false); }}></div> : null}
@@ -23,9 +38,9 @@ const BottomBar = ({ setPage, toys }) => {
         <button className="active:bg-gray-100 text-black py-3 px-4 rounded-full border border-solid" onClick={onAddToyClick}>
           AddToy
         </button>
-        {!map && toys !== undefined ? <div className='shadow-sm shadow-black rounded-full'><img data-testid='it-map' className='inline-block hover:opacity-30 w-9 h-9 translate-y-2' src='./icons/mapIcon.png' onClick={() => setMap(true)}/></div> : null}
+        {!map && toysIDCoordsPhoto !== undefined ? <div className='shadow-sm shadow-black rounded-full'><img data-testid='it-map' className='inline-block hover:opacity-30 w-9 h-9 translate-y-2' src='./icons/mapIcon.png' onClick={() => setMap(true)}/></div> : null}
       </div>
-      {map ? <Map toys={toys}/> : null}
+      {map ? <Map toysIDCoordsPhoto={toysIDCoordsPhoto}/> : null}
     </>
   );
 };

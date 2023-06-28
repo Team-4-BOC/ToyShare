@@ -70,6 +70,17 @@ module.exports = {
     result.inventory = inventory.rows;
     return result;
   },
+  getCoordinates: (query) => {
+    const values = [query.id];
+    return db.query(`
+    SELECT
+      lat_lng
+    FROM
+      toyshare.users
+    WHERE
+      id = $1
+    `, values);
+  },
   addUser: (userInfo) => {
     console.log('inside addUser model', userInfo);
     const values = [userInfo.first_name, userInfo.last_name, userInfo.email, false];
@@ -86,6 +97,3 @@ module.exports = {
     return db.query('SELECT * from toyshare.users where email = $1', values);
   }
 };
-
-// INSERT INTO toyshare.users (first_name, last_name, email, signed_in) VALUES('John', 'Doe', 'test@test.com', false);
-// DELETE FROM toyshare.users WHERE email = 'test@test.com';
