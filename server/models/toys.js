@@ -96,6 +96,9 @@ module.exports = {
     console.log(values);
     return db.query('INSERT INTO toyshare.toy_photos(toy_id, url) VALUES($1, $2)', values);
   },
+  getCategory: (data) => {
+    return db.query('SELECT * from toyshare.category');
+  },
   save: (data) => {
     const values = [data.toyId, data.userId];
     return db.query('INSERT INTO toyshare.saved_toys(toy_id, user_id) VALUES($1, $2)', values);

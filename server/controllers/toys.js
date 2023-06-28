@@ -71,6 +71,16 @@ module.exports = {
       });
     console.log('Attempting to post photo');
   },
+  getCategory: (req, res) => {
+    models.toys.getCategory()
+      .then((results) => {
+        res.status(201).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR GET toys');
+        console.log('ERROR GET toys', err);
+      });
+  },
   saved: (req, res) => {
     if (!req.body.toyId || !req.body.userId) {
       res.status(500).send('Please input userId and toyId');
