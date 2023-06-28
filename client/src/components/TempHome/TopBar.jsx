@@ -1,5 +1,5 @@
 import React from 'react';
-import { signInWithGoogle, signOutOfGoogle } from '../../Firebase.js';
+import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo } from '../../Firebase.js';
 
 const Home = ({ setPage, searchTerm, setSearchTerm }) => {
   return (
@@ -47,7 +47,8 @@ const Home = ({ setPage, searchTerm, setSearchTerm }) => {
               <a onClick={() => { signOutOfGoogle(setPage); setPage(0); }}>Logout</a>
             </li>
             {/* <li><a onClick={() => setPage(3)}>RenteeProfile</a></li> */}
-            {/* <li><a onClick={() => { console.log(verifySignedIn()); }}>IsLoggedIn?</a></li> */}
+            <li><a onClick={() => { console.log(verifySignedIn()); }}>IsLoggedIn?</a></li>
+            <li><a onClick={() => { console.log(getCurrentUserInfo()); }}>getCurrentUserInfo</a></li>
           </ul>
         </div>
       </div>

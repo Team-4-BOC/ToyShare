@@ -92,8 +92,12 @@ const verifySignedIn = () => {
 };
 
 const getCurrentUserInfo = () => {
-  const userInfo = auth.currentUser;
-  return userInfo;
+  const idToken = auth.currentUser;
+  if (idToken) {
+    return idToken.email;
+  } else {
+    console.log('no user signed in');
+  };
 };
 
 export { auth, signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo };

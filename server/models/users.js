@@ -2,17 +2,6 @@ const { getByLabelText, renderHook } = require('@testing-library/react');
 const db = require('../../database/pg.js');
 const axios = require('axios');
 require('dotenv').config();
-// module.exports = {
-//   get: (Kyle) => {
-//     return db.query("SELECT * FROM sdc.cart;");
-//   },
-//   put: (Justin) => {
-//     return db.query("SELECT * FROM sdc.cart;");
-//   },
-//   post: (Justin) => {
-//     return db.query("SELECT * FROM sdc.cart;");
-//   },
-// };
 
 const getCoordinates = (location, cb) => {
   const city = location.split(',')[0];
