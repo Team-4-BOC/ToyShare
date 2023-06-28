@@ -18,7 +18,6 @@ const getCoordinates = (location, cb) => { // cb = (err, data) =>
   location = location.replace(' ', '%20');
   return axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${process.env.MAPBOX_KEY}&&limit=1`)
     .then((apiData) => {
-      console.log(apiData.data.features[0].geometry);
       const lngLat = apiData.data.features[0].geometry.coordinates;
       cb(null, lngLat[1] + ',' + lngLat[0]);
     })
