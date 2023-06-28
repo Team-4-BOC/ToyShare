@@ -99,6 +99,10 @@ module.exports = {
   getCategory: (data) => {
     return db.query('SELECT * from toyshare.category');
   },
+  postCategory: (data) => {
+    const values = [data.category];
+    return db.query('INSERT INTO toyshare.category(name) VALUES($1)', values);
+  },
   save: (data) => {
     const values = [data.toyId, data.userId];
     return db.query('INSERT INTO toyshare.saved_toys(toy_id, user_id) VALUES($1, $2)', values);

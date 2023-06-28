@@ -15,6 +15,7 @@ router.get('/s3Url', async (req, res) => {
 router.post('/toys', controllers.toys.post);
 router.post('/toys/photos', controllers.toys.postPhotos);
 router.get('/toys/category', controllers.toys.getCategory);
+router.post('/toys/category', controllers.toys.postCategory);
 
 router.get('/user', controllers.users.getOne);
 

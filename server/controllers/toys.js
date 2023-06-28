@@ -69,16 +69,25 @@ module.exports = {
         res.status(500).send('ERROR adding toy photo');
         console.log('ERROR ADDING TOY photo', err);
       });
-    console.log('Attempting to post photo');
   },
   getCategory: (req, res) => {
     models.toys.getCategory()
       .then((results) => {
-        res.status(201).send(results.rows);
+        res.status(200).send(results.rows);
       })
       .catch((err) => {
-        res.status(500).send('ERROR GET toys');
-        console.log('ERROR GET toys', err);
+        res.status(500).send('ERROR GET category');
+        console.log('ERROR GET category', err);
+      });
+  },
+  postCategory: (req, res) => {
+    models.toys.postCategory(req.body)
+      .then((results) => {
+        res.status(201).send('Successfully added category!');
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR adding category');
+        console.log('ERROR ADDING Category', err);
       });
   },
   saved: (req, res) => {
