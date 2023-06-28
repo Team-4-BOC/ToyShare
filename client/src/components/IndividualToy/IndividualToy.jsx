@@ -13,7 +13,7 @@ import StarCreator from '../SharedComponents/StarCreator';
 
 let justSaved = false;
 
-const IndividualToy = ({ testing, setPage, toyId, userId }) => {
+const IndividualToy = ({ testing, setPage, toyId, userId, userCoords }) => {
   const [map, setMap] = useState(false);
   const [toy, setToy] = useState(testing ? tempData : {});
   const fetchToy = () => {
@@ -64,7 +64,7 @@ const IndividualToy = ({ testing, setPage, toyId, userId }) => {
             </div>
             <PhotoCarousel toy={toy} handleSave={handleSave} setPage={setPage}/>
             <div className='card-body'>
-              <ToyInfo toy={toy} setPage={setPage} map={map} setMap={setMap}/>
+              <ToyInfo toy={toy} setPage={setPage} map={map} setMap={setMap} userCoords={userCoords}/>
             </div>
         </div>
         <div className='card-actions justify-end'></div>
