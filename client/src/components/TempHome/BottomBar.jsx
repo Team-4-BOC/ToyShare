@@ -6,7 +6,7 @@ import Map from '../SharedComponents/Map.jsx';
 
 import axios from 'axios';
 
-const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto }) => {
+const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto, userCoords }) => {
   const [map, setMap] = useState(false);
 
   const fetchToysIDCoordsPhoto = () => {
@@ -40,7 +40,7 @@ const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto }) => {
         </button>
         {!map && toysIDCoordsPhoto !== undefined ? <div className='shadow-sm shadow-black rounded-full'><img data-testid='it-map' className='inline-block hover:opacity-30 w-9 h-9 translate-y-2' src='./icons/mapIcon.png' onClick={() => setMap(true)}/></div> : null}
       </div>
-      {map ? <Map toysIDCoordsPhoto={toysIDCoordsPhoto}/> : null}
+      {map ? <Map userCoords={userCoords} toysIDCoordsPhoto={toysIDCoordsPhoto}/> : null}
     </>
   );
 };

@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 
 import MapBox, { Marker } from 'react-map-gl';
 
-import mapBoxKey from './mapBoxKey.js';
+import mapBoxKey from './tempMapBoxKey.js';
 
-const Map = ({ latLng, iconImage, toysIDCoordsPhoto }) => {
+const Map = ({ latLng, iconImage, toysIDCoordsPhoto, userCoords }) => {
   const [coordinates, setCoordinates] = useState();
   const [zoom, setZoom] = useState();
 
   const setMap = () => {
-    if (toysIDCoordsPhoto !== undefined) {
-      setCoordinates([38.500000, -98.0000]);
+    if (toysIDCoordsPhoto !== undefined && userCoords !== undefined) {
+      setCoordinates(userCoords.split(','));
       setZoom(4);
     } else if (latLng !== undefined) {
       setCoordinates(latLng.split(','));
       setZoom(6);
     }
   };
-  useEffect(setMap, []);
+  useEffect(setMap, [userCoords]);
 
   const handleViewStateChange = (props) => {
     const markerElements = document.querySelectorAll('.marker-element');
