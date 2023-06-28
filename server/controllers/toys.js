@@ -40,6 +40,16 @@ module.exports = {
         console.log('ERROR GET toys', err);
       });
   },
+  getAllIDCoordsPhoto: (req, res) => {
+    models.toys.getAllIDCoordsPhoto(req.query)
+      .then((results) => {
+        res.status(201).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR GET toys');
+        console.log('ERROR GET toys', err);
+      });
+  },
   post: (req, res) => {
     models.toys.post(req.body)
       .then((results) => {

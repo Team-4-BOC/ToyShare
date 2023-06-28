@@ -18,3 +18,4 @@ Raw Toys Data - User.csv
 .DS_Store
 client/dist/158.bundle.js
 client/dist/158.bundle.js.LICENSE.txt
+client/src/components/SharedComponents/tempMapBoxKey.js

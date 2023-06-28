@@ -3,13 +3,13 @@ import axios from 'axios';
 // import TopBar from './TopBar.jsx';
 import ToyCard from './ToyCard.jsx';
 
-function Home ({ setToyId, setToyUserId, setPage, searchTerm, setToys, toys }) {
+function Home ({ setToyId, setToyUserId, setPage, searchTerm, userCoords, toysIDCoordsPhoto }) {
+  const [toys, setToys] = useState([]);
   const [renderedToys, setRenderedToys] = useState([]);
 
-  useEffect(() => {
+  const fetchToys = () => {
     const count = 10;
     const page = Math.floor(Math.random() * 2) + 1;
-    console.log(page);
     axios
       .get('/toys', { params: { page, count } })
       .then((response) => {
@@ -19,7 +19,9 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, setToys, toys }) {
       .catch((err) => {
         console.log('ERROR fetching toys ', err);
       });
-  }, []);
+  };
+
+  useEffect(fetchToys, []);
 
   useEffect(() => {
     if (toys.length !== 0) {
@@ -50,7 +52,7 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, setToys, toys }) {
       <ul>
         {renderedToys.map((toy) => (
           <div key={toy.id}>
-            <ToyCard toy={toy} handleToyClick={handleToyClick} />
+            <ToyCard toy={toy} handleToyClick={handleToyClick} userCoords={userCoords} toysIDCoordsPhoto={toysIDCoordsPhoto} />
           </div>
         ))}
       </ul>
