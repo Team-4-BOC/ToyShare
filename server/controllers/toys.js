@@ -90,6 +90,26 @@ module.exports = {
         console.log('ERROR ADDING Category', err);
       });
   },
+  postDates: (req, res) => {
+    models.toys.postDates(req.body)
+      .then((results) => {
+        res.status(201).send('Succesfully added Dates');
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR posting rental');
+        console.log('ERROR posting rental', err);
+      });
+  },
+  getDates: (req, res) => {
+    models.toys.getDates(req.query)
+      .then((results) => {
+        res.status(200).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR posting rental');
+        console.log('ERROR posting rental', err);
+      });
+  },
   saved: (req, res) => {
     if (!req.body.toyId || !req.body.userId) {
       res.status(500).send('Please input userId and toyId');
