@@ -93,5 +93,9 @@ module.exports = {
     console.log('inside checkForNewUser model', email);
     const values = [email];
     return db.query('SELECT * from toyshare.users where email = $1', values);
+  },
+  updateUser: (userInfo) => {
+    const values = [userInfo.first_name, userInfo.last_name, userInfo.city_state, userInfo.introduction, userInfo.id];
+    return db.query('UPDATE toyshare.users SET first_name = $1, last_name = $2, city_state = $3, introduction = $4 where id = $5', values);
   }
 };
