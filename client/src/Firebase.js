@@ -24,7 +24,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-const signInWithGoogle = () => {
+const signInWithGoogle = (setPage) => {
   signInWithPopup(auth, provider)
     .then((result) => {
       alert('you are signed in');
@@ -53,7 +53,8 @@ const signInWithGoogle = () => {
                     data.url = result.user.photoURL;
                     axios.post('/user/photos', photoData)
                       .then(() => {
-                        alert('Thanks for logging in!!');
+                        setPage(2);
+                        alert('Please update Your information');
                       });
                   });
                 // console.log('inside post request for signInWithGoogle then block');
