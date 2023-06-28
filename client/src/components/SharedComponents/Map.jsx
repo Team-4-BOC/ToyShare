@@ -27,12 +27,17 @@ const Map = ({ latLng, iconImage, toysIDCoordsPhoto, userCoords }) => {
       element.style.width = size + 'px';
     });
   };
+  const curCoords = {};
   return (
       <div>
         {coordinates !== undefined
           ? <MapBox initialViewState={{ latitude: coordinates[0], longitude: coordinates[1], zoom }} style={{ width: window.innerWidth / 1.1 + 'px', height: window.innerHeight / 1.4 + 'px', position: 'fixed', top: '50%', right: '50%', transform: 'translate(50%, -50%)', zIndex: 30 }} mapboxAccessToken={mapBoxKey} mapStyle="mapbox://styles/mapbox/streets-v9" onZoom={handleViewStateChange}>
             {toysIDCoordsPhoto !== undefined
               ? toysIDCoordsPhoto.map((toy, idx) => {
+                if (curCoords[toy.latLng]) {
+                  // Fix me ------------
+                }
+                curCoords[toy.latLng] = true;
                 const markerCoordinates = toy.latlng.split(',');
                 return (
                   <Marker latitude={markerCoordinates[0]} longitude={markerCoordinates[1]} anchor="bottom" key={idx * 10}>
