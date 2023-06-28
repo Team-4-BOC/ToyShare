@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 // This component allows the user to edit their user profile information
-function UserEdit ({ userData, setEnableEdit }) {
+function UserEdit ({ getUserData, userData, setEnableEdit }) {
   const initialValues = {
+    id: userData.user.id,
     first_name: userData.user.first_name,
     last_name: userData.user.last_name,
     city_state: userData.user.city_state,
-    introduction: 'Proud parent of amazing kids. Check out my inventory of toys for rental!'
+    introduction: userData.user.introduction
   };
 
   const [values, setValues] = useState(initialValues);
@@ -17,6 +19,17 @@ function UserEdit ({ userData, setEnableEdit }) {
       ...values,
       [name]: value
     });
+  };
+
+  const saveChanges = () => {
+    axios.put('/userpf', values)
+      .then(() => {
+        console.log('Update user success');
+        getUserData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -39,12 +52,12 @@ function UserEdit ({ userData, setEnableEdit }) {
           <br></br>
           Introduction:
           <br></br>
-          <textarea type="text" className="input input-bordered w-full max-w-xs" name="introduction" defaultValue='Proud parent of amazing kids. Check out my inventory of toys for rental!'/>
+          <textarea type="text" className="input input-bordered w-full max-w-xs" name="introduction" onChange={handleInputChange} defaultValue={ userData.user.introduction }/>
         </label>
       </form>
       <div className="card-actions justify-end">
       </div>
-      <button onClick={() => setEnableEdit(false)} className="btn-sm" style={{ fontSize: 12, textAlign: 'right' }}>Save Changes</button>
+      <button onClick={() => { saveChanges(); setEnableEdit(false); }} className="btn-sm" style={{ fontSize: 12, textAlign: 'right' }}>Save Changes</button>
     </div>
   </div>
   );
