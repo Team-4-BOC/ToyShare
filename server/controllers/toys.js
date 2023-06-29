@@ -1,17 +1,6 @@
 const models = require('../models');
 
 module.exports = {
-//   get: (req, res) => {
-//     models.cart
-//       .get()
-//       .then((results) => {
-//         res.status(200).send(results.rows);
-//         console.log(results);
-//       })
-//       .catch((err) => {
-//         res.status(500).send("ERROR getting cart data");
-//       });
-//   },
   getOne: (req, res) => {
     if (!req.query.toyId) {
       res.status(404).send('Please input toy_id');
@@ -53,7 +42,7 @@ module.exports = {
   post: (req, res) => {
     models.toys.post(req.body)
       .then((results) => {
-        res.status(201).send('Succesfully added toy!');
+        res.status(201).send({ success: 'Succesfully added toy!', data: results.rows });
       })
       .catch((err) => {
         res.status(500).send('ERROR adding toy');
@@ -106,8 +95,8 @@ module.exports = {
         res.status(201).send('Succesfully added Dates');
       })
       .catch((err) => {
-        res.status(500).send('ERROR posting rental');
-        console.log('ERROR posting rental', err);
+        res.status(500).send('ERROR posting dates');
+        console.log('ERROR posting dates', err);
       });
   },
   getDates: (req, res) => {
@@ -116,8 +105,8 @@ module.exports = {
         res.status(200).send(results.rows);
       })
       .catch((err) => {
-        res.status(500).send('ERROR posting rental');
-        console.log('ERROR posting rental', err);
+        res.status(500).send('ERROR getting dates');
+        console.log('ERROR getting dates', err);
       });
   },
   saved: (req, res) => {

@@ -4,7 +4,7 @@ import DatePicker from 'react-multi-date-picker';
 import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 import axios from 'axios';
 
-const AddToy = () => {
+const AddToy = (userId) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [imageURLS, setImageURLS] = useState([]);
@@ -14,8 +14,10 @@ const AddToy = () => {
   const [deliveryMethod, setDeliveryMethod] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [dateValues, setDateValues] = useState(new Date().setDate(new Date().getDate() + 1));
+  const [datesFormatted, setDatesFormatted] = useState([]);
   const [currentCategories, setCurrentCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
+  const [rating, setRating] = useState('');
 
   const getCategories = () => {
     axios.get('/toys/category')
@@ -25,9 +27,45 @@ const AddToy = () => {
       .catch((err) => { console.log(err); });
   };
 
+  const setRandomRating = () => { // min and max included
+    const randomRating = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+    setRating(randomRating);
+  };
+
+  const addPhotoRecords = () => {
+    axios.post('/toys/photos', { toyId: 40, photoURLs: imageURLS });
+  };
+
+  const addDateRecords = () => {
+    axios.post('/toys/dates', { toyId: 40, dates: datesFormatted });
+  };
+
+
   useEffect(() => {
     getCategories();
+    setRandomRating();
   }, []);
+
+
+
+
+  // const addToy = async () => {
+  //   const toyId = await axios.post('/toys', {
+  //     toy_name: toyName,
+  //     category_id: selectedCategory,
+  //     rating: rating,
+  //     user_id: userId,
+  //     toy_description: description,
+  //     original_price: originalPrice,
+  //     rental_price: rentalPrice,
+  //     delivery_method: deliveryMethod,
+  //     payment_method: paymentMethod
+  //   });
+  //   await axios.post('/toys/photos', { toyId: toyId, photoURLs: imageURLS });
+  //   await axios.post('/toys/dates', { toyId: toyId, dates: dateValues });
+  //   // eslint-disable-next-line no-undef
+  //   alert('Toy Added!');
+  // };
 
   const uploadImages = async (photo) => {
     const url = await axios.get('/s3Url').then((res) => { return res.data.url; });
@@ -40,6 +78,7 @@ const AddToy = () => {
     const imageUrl = url.split('?')[0];
     setImageURLS(imageURLS => [...imageURLS, imageUrl]);
   };
+
   const uploadAllImages = async () => {
     for (let i = 0; i < photos.length; i++) {
       uploadImages(photos[i]);
@@ -59,9 +98,17 @@ const AddToy = () => {
   const handleChange = (e) => {
     e.preventDefault();
     const dataName = e.target.name;
-    const data = e.target.value;
-    const updateState = setStateNames[dataName];
-    updateState(data);
+    if (dataName === 'selectedCategory') {
+      const selectedOption = e.target.options[e.target.selectedIndex];
+      const id = selectedOption.getAttribute('data-key');
+      const data = id;
+      const updateState = setStateNames[dataName];
+      updateState(data);
+    } else {
+      const data = e.target.value;
+      const updateState = setStateNames[dataName];
+      updateState(data);
+    }
   };
 
   const handlePhotoUpload = (e) => {
@@ -70,9 +117,15 @@ const AddToy = () => {
     setPhotos(files);
   };
 
-  const handleDateChange = (newValue) => {
-    console.log('newValue:', newValue);
-    setDateValues(newValue);
+  const handleDateChange = (inputDates) => {
+    // eslint-disable-next-line quotes
+    const newDatesList = [];
+    for (let i = 0; i < inputDates.length; i++) {
+      const date = `${inputDates[i].year}-${String(inputDates[i].month).padStart(2, '0')}-${String(inputDates[i].day).padStart(2, '0')}`;
+      newDatesList.push(date);
+    }
+    setDatesFormatted(newDatesList);
+    setDateValues(inputDates);
   };
 
   return (
@@ -81,7 +134,7 @@ const AddToy = () => {
       <input onChange={handleChange} type="text" placeholder="Add Toy Name" className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
       <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="selectedCategory">
         <option disabled selected>Select Toy Category</option>
-       {currentCategories.map(category => <option key={category.id} > {category.name} </option>)}
+       {currentCategories.map(category => <option key={category.id} data-key={category.id}> {category.name} </option>)}
       </select>
       <div className="form-control w-full max-w-xs">
         <label className="label">
@@ -109,6 +162,7 @@ const AddToy = () => {
       <div className="stat-title text-info-content">Input Dates Available</div>
       <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)} plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
       <button onClick={uploadAllImages} className="btn btn-primary">Submit!</button>
+      <button onClick={addDateRecords} className="btn btn-primary">Testing button!</button>
     </div>
   );
 };
