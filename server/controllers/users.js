@@ -1,25 +1,5 @@
 const models = require('../models');
 
-// module.exports = {
-//   get: (req, res) => {
-//     models.cart
-//       .get()
-//       .then((results) => {
-//         res.status(200).send(results.rows);
-//         console.log(results);
-//       })
-//       .catch((err) => {
-//         res.status(500).send("ERROR getting cart data");
-//       });
-//   },
-//   post: (req, res) => {
-//     res.send("Posting cart in controllers");
-//   },
-//   put: (req, res) => {
-//     res.send("Updating cart in controllers");
-//   },
-// };
-
 module.exports = {
   getOne: (req, res) => {
     models.users.getOne(req.query)
@@ -97,6 +77,15 @@ module.exports = {
       .then((data) => {
         console.log('inside then of checkForNewUser controller', data.rows);
         res.send(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
+  },
+  updateUser: (req, res) => {
+    models.users.updateUser(req.body)
+      .then(() => {
+        res.status(200).send();
       })
       .catch((err) => {
         res.status(500).send(err);
