@@ -41,10 +41,10 @@ const Home = ({ setPage, searchTerm, setSearchTerm }) => {
               </a>
             </li>
             <li>
-              <a onClick={() => signInWithGoogle()}>Login</a>
+              <a onClick={() => signInWithGoogle(setPage)}>Login</a>
             </li>
             <li>
-              <a onClick={() => { signOutOfGoogle(setPage); setPage(0); }}>Logout</a>
+              <a onClick={() => { signOutOfGoogle(); setPage(0); }}>Logout</a>
             </li>
             {/* <li><a onClick={() => setPage(3)}>RenteeProfile</a></li> */}
             <li><a onClick={() => { console.log(verifySignedIn()); }}>IsLoggedIn?</a></li>

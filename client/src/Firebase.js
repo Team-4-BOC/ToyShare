@@ -27,16 +27,12 @@ const provider = new GoogleAuthProvider();
 const signInWithGoogle = (setPage) => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      alert('you are signed in');
       axios.get('/userNew', { params: { email: result.user.email } })
         .then((response) => {
-          console.log('RESPONSE', response);
-          // alert('You are now Logged in');
           if (response.data.length !== 0) {
-            // alert('You are now Logged in');
+            alert('You are now Logged in');
           } else {
             const name = result.user.displayName.split(' ');
-            console.log('name inside else block of get request then block', name);
 
             const data = {};
             data.first_name = name[0];
@@ -47,21 +43,18 @@ const signInWithGoogle = (setPage) => {
               .then(() => {
                 axios.get('/userNew', { params: { email: result.user.email } })
                   .then((data) => {
-                    console.log('inside second get request inside signupwithGoogle', data);
                     const photoData = {};
                     data.id = data.data[0].id;
                     data.url = result.user.photoURL;
                     axios.post('/user/photos', photoData)
                       .then(() => {
+                        alert('Please update Your city/state information in your profile to see toy locations');
                         setPage(2);
-                        alert('Please update Your information');
                       });
                   });
-                // console.log('inside post request for signInWithGoogle then block');
               });
           }
         });
-      console.log('results', result);
     })
     .catch((err) => {
       alert(err);
