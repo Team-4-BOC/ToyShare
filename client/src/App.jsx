@@ -15,16 +15,25 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 
 const App = () => {
   const [userId, setUserId] = useState(0);
-
+  const [userCoords, setUserCoords] = useState();
   const getUserId = () => {
     // const userInfo = getCurrentUserInfo();
     axios
       .get('/userNew', { params: { email: 'JoshMan@email.com' } })
       .then((data) => {
-        // console.log('data', data.data[0].id);
+        getUserCoords(data.data[0].id);
         setUserId(data.data[0].id);
       })
       .catch((err) => console.log(err));
+  };
+  const getUserCoords = (id) => {
+    axios.get('/userCoordinates', { params: { id } }) // returns 'lat, lng'
+      .then((apiData) => {
+        setUserCoords(apiData.data);
+      })
+      .catch((err) => {
+        console.log('ERROR fetching coords ', err);
+      });
   };
   useEffect(() => {
     getUserId();
@@ -43,7 +52,7 @@ const App = () => {
   const [toyId, setToyId] = useState(1);
   const [toyUserId, setToyUserId] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [toys, setToys] = useState([]);
+  const [toysIDCoordsPhoto, setToysIDCoordsPhoto] = useState([]);
   if (page === 0) {
     return (
       <>
@@ -52,14 +61,15 @@ const App = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
-        <BottomBar setPage={setPage} toys={toys}/>
+        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords}/>
         <Home
           setPage={setPage}
           setToyId={setToyId}
           setToyUserId={setToyUserId}
           searchTerm={searchTerm}
-          setToys={setToys}
-          toys={toys}
+          userCoords={userCoords}
+          toysIDCoordsPhoto={toysIDCoordsPhoto}
+          userId={userId}
         />
       </>
     );
@@ -68,7 +78,7 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage}/>
-        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId}/>
+        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} userCoords={userCoords}/>
       </>
     );
   }
