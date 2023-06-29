@@ -60,6 +60,16 @@ module.exports = {
         console.log('ERROR ADDING TOY', err);
       });
   },
+  getOnePhotos: (req, res) => {
+    models.toys.getOnePhotos(req.query)
+      .then((results) => {
+        res.status(200).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR getting toy photos');
+        console.log('RROR getting toy photos', err);
+      });
+  },
   postPhotos: (req, res) => {
     models.toys.postPhotos(req.body)
       .then((results) => {
