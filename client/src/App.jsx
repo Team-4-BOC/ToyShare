@@ -15,7 +15,7 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 // import { use } from 'matter';
 
 const App = () => {
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState(1);
   const [userCoords, setUserCoords] = useState();
   console.log('You can do this!!!!');
   // const email = auth.currentUser;
@@ -65,6 +65,8 @@ const App = () => {
   const [toyId, setToyId] = useState(1);
   const [toyUserId, setToyUserId] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sort, setSort] = useState('');
+  const [filter, setFilter] = useState('');
   const [toysIDCoordsPhoto, setToysIDCoordsPhoto] = useState([]);
   if (page === 0) {
     return (
@@ -76,12 +78,14 @@ const App = () => {
           userId={userId}
           setUserId={setUserId}
         />
-        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords}/>
+        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter}/>
         <Home
           setPage={setPage}
           setToyId={setToyId}
           setToyUserId={setToyUserId}
           searchTerm={searchTerm}
+          sort={sort}
+          filter={filter}
           userCoords={userCoords}
           toysIDCoordsPhoto={toysIDCoordsPhoto}
           userId={userId}

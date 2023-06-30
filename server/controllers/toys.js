@@ -1,17 +1,6 @@
 const models = require('../models');
 
 module.exports = {
-//   get: (req, res) => {
-//     models.cart
-//       .get()
-//       .then((results) => {
-//         res.status(200).send(results.rows);
-//         console.log(results);
-//       })
-//       .catch((err) => {
-//         res.status(500).send("ERROR getting cart data");
-//       });
-//   },
   getOne: (req, res) => {
     if (!req.query.toyId) {
       res.status(404).send('Please input toy_id');
@@ -53,13 +42,72 @@ module.exports = {
   post: (req, res) => {
     models.toys.post(req.body)
       .then((results) => {
-        res.status(201).send('Succesfully added toy!');
+        res.status(201).send(results);
       })
       .catch((err) => {
         res.status(500).send('ERROR adding toy');
         console.log('ERROR ADDING TOY', err);
       });
-    // console.log(models.toys.post());
+  },
+  getOnePhotos: (req, res) => {
+    models.toys.getOnePhotos(req.query)
+      .then((results) => {
+        res.status(200).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR getting toy photos');
+        console.log('RROR getting toy photos', err);
+      });
+  },
+  postPhotos: (req, res) => {
+    models.toys.postPhotos(req.body)
+      .then((results) => {
+        res.status(201).send('Successfully added toy photo!');
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR adding toy photo');
+        console.log('ERROR ADDING TOY photo', err);
+      });
+  },
+  getCategory: (req, res) => {
+    models.toys.getCategory()
+      .then((results) => {
+        res.status(200).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR GET category');
+        console.log('ERROR GET category', err);
+      });
+  },
+  postCategory: (req, res) => {
+    models.toys.postCategory(req.body)
+      .then((results) => {
+        res.status(201).send('Successfully added category!');
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR adding category');
+        console.log('ERROR ADDING Category', err);
+      });
+  },
+  postDates: (req, res) => {
+    models.toys.postDates(req.body)
+      .then((results) => {
+        res.status(201).send('Succesfully added Dates');
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR posting dates');
+        console.log('ERROR posting dates', err);
+      });
+  },
+  getDates: (req, res) => {
+    models.toys.getDates(req.query)
+      .then((results) => {
+        res.status(200).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR getting dates');
+        console.log('ERROR getting dates', err);
+      });
   },
   saved: (req, res) => {
     if (!req.body.toyId || !req.body.userId) {

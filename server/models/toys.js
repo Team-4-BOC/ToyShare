@@ -89,7 +89,36 @@ module.exports = {
   // },
   post: (data) => {
     const values = [data.toy_name, data.category_id, data.rating, data.user_id, data.toy_description, data.original_price, data.rental_price, data.delivery_method, data.payment_method];
-    return db.query('INSERT INTO toyshare.toys(toy_name, category_id, rating, user_id, toy_description, original_price, rental_price, delivery_method, payment_method) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);', values);
+    return db.query('INSERT INTO toyshare.toys(toy_name, category_id, rating, user_id, toy_description, original_price, rental_price, delivery_method, payment_method) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id;', values);
+  },
+  getOnePhotos: (data) => {
+    const values = [data.toyId];
+    return db.query('SELECT * from toyshare.toy_photos where toy_id = $1;', values);
+  },
+  postPhotos: (data) => {
+    const queries = data.photoURLs.map((url) => {
+      const values = [data.toyId, url];
+      return db.query('INSERT INTO toyshare.toy_photos(toy_id, url) VALUES($1, $2)', values);
+    });
+    return Promise.all(queries);
+  },
+  getCategory: (data) => {
+    return db.query('SELECT * from toyshare.category');
+  },
+  postCategory: (data) => {
+    const values = [data.category];
+    return db.query('INSERT INTO toyshare.category(name) VALUES($1)', values);
+  },
+  postDates: (data) => {
+    const queries = data.dates.map((date) => {
+      const values = [data.toyId, date, 1];
+      return db.query('INSERT INTO toyshare.dates_available(toy_id, dates, toy_status) VALUES($1, $2, $3)', values);
+    });
+    return Promise.all(queries);
+  },
+  getDates: (data) => {
+    const values = [data.toyId];
+    return db.query('SELECT * FROM toyshare.dates_available WHERE toy_id = $1;', values);
   },
   save: (data) => {
     const values = [data.toyId, data.userId];
