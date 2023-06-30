@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo } from '../../Firebase.js';
+import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
 
 const Home = ({ setPage, searchTerm, setSearchTerm }) => {
+  const [notifications, setNotifications] = useState(['Josh Man has rented your toy!']);
+  const [showNotifs, setShowNotifs] = useState(false);
   return (
     <div className="navbar bg-base-100 border-solid">
       <div className="flex-1">
@@ -11,6 +14,9 @@ const Home = ({ setPage, searchTerm, setSearchTerm }) => {
         >
           ToyShare
         </a>
+      </div>
+      <div style={{marginRight: '10px'}}>
+      <NotificationDropdown showNotifs={showNotifs} setShowNotifs={setShowNotifs} notifications={notifications} />
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
