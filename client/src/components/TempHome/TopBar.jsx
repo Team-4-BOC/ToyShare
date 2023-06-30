@@ -1,13 +1,53 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo } from '../../Firebase.js';
 import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
 
-const Home = ({ setPage, searchTerm, setSearchTerm }) => {
+const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
+  const getOne = () => {
+    axios.get('/renteepf', { params: { id: userId } })
+      .then((data) => {
+        console.log('data from user from inside homebar', data);
+      });
+  };
+  const deleteUser = () => {
+    axios.delete('/deleteUser', { params: { id: 48 } })
+      .then((data) => {
+        console.log('data from user from inside homebar', data);
+      });
+  };
+  const handleAcessProfileRequest = () => {
+    if (!verifySignedIn()) {
+      // eslint-disable-next-line no-undef
+      alert('Please signin to see your profile ');
+    } else {
+      setPage(2);
+    }
+  };
+
+  const signIn = () => {
+    return signInWithGoogle()
+      .then((data) => {
+        setUserId(data);
+        setPage(2);
+      })
+      .catch((err) => err);
+  };
+
+  const signOut = () => {
+    return signOutOfGoogle()
+      .then((data) => {
+        setUserId(0);
+        setPage(0);
+      })
+      .catch((err) => err);
+  };
+
   const [notifications, setNotifications] = useState(['Josh Man has rented your toy!']);
   const [showNotifs, setShowNotifs] = useState(false);
   const [newNotifs, setNewNotifs] = useState(true);
   return (
-    <div className="navbar bg-base-100 border-solid">
+    <div className="fixed navbar bg-base-100 bg-white z-10 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
       <div className="flex-1">
         <a
           className="btn btn-ghost normal-case text-xl"
@@ -47,20 +87,22 @@ const Home = ({ setPage, searchTerm, setSearchTerm }) => {
             className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
           >
             <li>
-              <a className="justify-between" onClick={() => setPage(2)}>
+              <a className="justify-between" onClick={handleAcessProfileRequest}>
                 Profile
                 <span className="badge">Edit</span>
               </a>
             </li>
             <li>
-              <a onClick={() => signInWithGoogle(setPage)}>Login</a>
+              <a onClick={() => { signIn(); }}>Signin</a>
             </li>
             <li>
-              <a onClick={() => { signOutOfGoogle(); setPage(0); }}>Logout</a>
+              <a onClick={() => { signOut(); }}>Signout</a>
             </li>
             {/* <li><a onClick={() => setPage(3)}>RenteeProfile</a></li> */}
             <li><a onClick={() => { console.log(verifySignedIn()); }}>IsLoggedIn?</a></li>
             <li><a onClick={() => { console.log(getCurrentUserInfo()); }}>getCurrentUserInfo</a></li>
+            <li><a onClick={() => { console.log(getOne()); }}>getOne</a></li>
+            <li><a onClick={() => { console.log(deleteUser()); }}>deleteUser</a></li>
           </ul>
         </div>
       </div>
@@ -68,4 +110,4 @@ const Home = ({ setPage, searchTerm, setSearchTerm }) => {
   );
 };
 
-export default Home;
+export default TopBar;
