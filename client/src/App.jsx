@@ -17,7 +17,7 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 const App = () => {
   const [userId, setUserId] = useState(0);
   const [userCoords, setUserCoords] = useState();
-  console.log('You can do this!!');
+  console.log('You can do this!');
   // const email = auth.currentUser;
   // const getUserId = (email) => {
   //   console.log('email', email.email);
@@ -78,7 +78,9 @@ const App = () => {
           userId={userId}
           setUserId={setUserId}
         />
-        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter}/>
+        <br></br>
+        <br></br>
+        <br></br>
         <Home
           setPage={setPage}
           setToyId={setToyId}
@@ -90,6 +92,9 @@ const App = () => {
           toysIDCoordsPhoto={toysIDCoordsPhoto}
           userId={userId}
         />
+        <br></br>
+        <br></br>
+        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter}/>
       </>
     );
   }
@@ -97,6 +102,8 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
         <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} userCoords={userCoords} />
       </>
     );
@@ -114,6 +121,8 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
         <RenteeProfile userId={userId} setPage={setPage} toyUserId={toyUserId} />
       </>
     );
@@ -138,6 +147,10 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <ReserveDates setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} />
       </>
     );
@@ -146,6 +159,10 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         Dates reserved! Now pay them: <br />
         <br />
         <img src="https://www.belvoirterrace.com/wp-content/uploads/2020/10/Venmo-QR-Code-@Edna-260x300.jpg" alt="venmo payment link"></img>
@@ -159,6 +176,10 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <BookingConfirmation/>
         <a className="justify-between" onClick={() => setPage(0)}>
                 Booking success! Click <b>here</b> to return to home page
