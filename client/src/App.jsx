@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { auth } from './Firebase.js';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
 import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
@@ -11,21 +12,28 @@ import BookingConfirmation from './components/Checkout/bookingConfirmation.js';
 import TopBar from './components/TempHome/TopBar.jsx';
 import BottomBar from './components/TempHome/BottomBar.jsx';
 // import { use } from 'matter';
-// import { getCurrentUserInfo } from './Firebase.js';
 
 const App = () => {
   const [userId, setUserId] = useState(0);
   const [userCoords, setUserCoords] = useState();
-  const getUserId = () => {
-    // const userInfo = getCurrentUserInfo();
+
+  const getUserId = (email) => {
     axios
-      .get('/userNew', { params: { email: 'JoshMan@email.com' } })
+      .get('/userNew', { params: { email } })
       .then((data) => {
         getUserCoords(data.data[0].id);
         setUserId(data.data[0].id);
       })
       .catch((err) => console.log(err));
   };
+
+  const userInfo = auth.currentUser;
+  if (userInfo) {
+    getUserId(userInfo.email);
+  } else {
+    console.log('No user signed in');
+  }
+
   const getUserCoords = (id) => {
     axios.get('/userCoordinates', { params: { id } }) // returns 'lat, lng'
       .then((apiData) => {
@@ -52,6 +60,8 @@ const App = () => {
   const [toyId, setToyId] = useState(1);
   const [toyUserId, setToyUserId] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sort, setSort] = useState('');
+  const [filter, setFilter] = useState('');
   const [toysIDCoordsPhoto, setToysIDCoordsPhoto] = useState([]);
   if (page === 0) {
     return (
@@ -61,12 +71,14 @@ const App = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
-        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords}/>
+        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter}/>
         <Home
           setPage={setPage}
           setToyId={setToyId}
           setToyUserId={setToyUserId}
           searchTerm={searchTerm}
+          sort={sort}
+          filter={filter}
           userCoords={userCoords}
           toysIDCoordsPhoto={toysIDCoordsPhoto}
           userId={userId}
