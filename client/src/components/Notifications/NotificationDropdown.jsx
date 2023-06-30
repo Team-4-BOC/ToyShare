@@ -1,7 +1,7 @@
 import React from 'react';
-import { RiNotification2Line } from 'react-icons/ri';
+import { VscBell, VscBellDot } from "react-icons/vsc";
 
-const NotificationDropdown = ({ showNotifs, setShowNotifs, notifications }) => {
+const NotificationDropdown = ({ newNotifs, setNewNotifs, showNotifs, setShowNotifs, unread, notifications }) => {
   const style = {
     position: 'flex',
     left: '0',
@@ -10,9 +10,13 @@ const NotificationDropdown = ({ showNotifs, setShowNotifs, notifications }) => {
 };
   return (
     <div className="notification-dropdown">
-      <div onClick={()=>setShowNotifs(!showNotifs)} className="bell-icon">
-        <RiNotification2Line />
-      </div>
+        {newNotifs ?
+        <div onClick={()=>{ setNewNotifs(false); setShowNotifs(!showNotifs); }} className="bell-icon">
+          <VscBellDot />
+        </div> :
+        <div onClick={()=>setShowNotifs(!showNotifs)} className="bell-icon">
+          <VscBell />
+        </div>}
       {showNotifs ? <div style={style} className="notification-list">
         {notifications.map((notification, index) => (
           <div className="notification" key={index}>

@@ -5,6 +5,7 @@ import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
 const Home = ({ setPage, searchTerm, setSearchTerm }) => {
   const [notifications, setNotifications] = useState(['Josh Man has rented your toy!']);
   const [showNotifs, setShowNotifs] = useState(false);
+  const [newNotifs, setNewNotifs] = useState(true);
   return (
     <div className="navbar bg-base-100 border-solid">
       <div className="flex-1">
@@ -16,7 +17,12 @@ const Home = ({ setPage, searchTerm, setSearchTerm }) => {
         </a>
       </div>
       <div style={{marginRight: '10px'}}>
-      <NotificationDropdown showNotifs={showNotifs} setShowNotifs={setShowNotifs} notifications={notifications} />
+      <NotificationDropdown
+        newNotifs={newNotifs}
+        setNewNotifs={setNewNotifs}
+        showNotifs={showNotifs}
+        setShowNotifs={setShowNotifs}
+        notifications={notifications} />
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
