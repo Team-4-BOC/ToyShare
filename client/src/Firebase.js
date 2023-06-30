@@ -24,9 +24,10 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-const signInWithGoogle = (setPage) => {
+const signInWithGoogle = (set) => {
   signInWithPopup(auth, provider)
     .then((result) => {
+      console.log('RESULT________--->', result.user.photoURL);
       axios.get('/userNew', { params: { email: result.user.email } })
         .then((response) => {
           if (response.data.length !== 0) {
@@ -44,17 +45,22 @@ const signInWithGoogle = (setPage) => {
                 axios.get('/userNew', { params: { email: result.user.email } })
                   .then((data) => {
                     const photoData = {};
-                    data.id = data.data[0].id;
-                    data.url = result.user.photoURL;
+                    photoData.user_id = data.data[0].id;
+                    const id = data.data[0].id;
+                    photoData.url = result.user.photoURL;
+                    alert('Please update Your city/state information in your profile to see toy locations');
                     axios.post('/user/photos', photoData)
-                      .then(() => {
-                        alert('Please update Your city/state information in your profile to see toy locations');
-                        setPage(2);
+                      .then((data) => {
+                        set(id);
+                        // console.log('photoData', photoData);
                       });
-                  });
-              });
+                  })
+                  .catch((err) => console.log(err));
+              })
+              .catch((err) => console.log(err));
           }
-        });
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => {
       alert(err);

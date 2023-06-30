@@ -70,6 +70,7 @@ const App = () => {
           setPage={setPage}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          userId={userId}
         />
         <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter}/>
         <Home
@@ -89,48 +90,48 @@ const App = () => {
   if (page === 1) {
     return (
       <>
-        <TopBar setPage={setPage}/>
-        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} userCoords={userCoords}/>
+        <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} userCoords={userCoords} />
       </>
     );
   }
   if (page === 2) {
     return (
       <>
-        <TopBar setPage={setPage}/>
+        <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
         <br></br>
-        <UserProfile userId={userId} setPage={setPage} setToyId={setToyId}/>
+        <UserProfile userId={userId} setPage={setPage} setToyId={setToyId} />
       </>
     );
   }
   if (page === 3) {
     return (
       <>
-        <TopBar setPage={setPage}/>
-        <RenteeProfile userId={userId} setPage={setPage} toyUserId={toyUserId}/>
+        <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <RenteeProfile userId={userId} setPage={setPage} toyUserId={toyUserId} />
       </>
     );
   }
   if (page === 4) {
     return (
      <>
-       <TopBar setPage={setPage}/>
-       <AddToy setPage={setPage}/>
+       <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+       <AddToy setPage={setPage} />
      </>
     );
   }
   if (page === 5) {
     return (
       <>
-        <TopBar setPage={setPage}/>
-        <EditToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId}/> /
+        <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <EditToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} />
       </>
     );
   }
   if (page === 6) {
     return (
       <>
-        <TopBar setPage={setPage}/>
+        <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
         <ReserveDates setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} />
       </>
     );
@@ -138,7 +139,7 @@ const App = () => {
   if (page === 7) {
     return (
       <>
-        <TopBar setPage={setPage}/>
+        <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
         Dates reserved! Now pay them: <br />
         <br />
         <img src="https://www.belvoirterrace.com/wp-content/uploads/2020/10/Venmo-QR-Code-@Edna-260x300.jpg" alt="venmo payment link"></img>
@@ -151,7 +152,7 @@ const App = () => {
   if (page === 8) {
     return (
       <>
-        <TopBar setPage={setPage}/>
+        <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
         <BookingConfirmation/>
         <a className="justify-between" onClick={() => setPage(0)}>
                 Booking success! Click <b>here</b> to return to home page
