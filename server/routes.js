@@ -1,3 +1,4 @@
+const generateUploadURL = require('./s3.js');
 const express = require('express');
 const router = express.Router();
 const controllers = require('./controllers');
@@ -6,7 +7,18 @@ router.get('/', function (req, res) {
   res.render('index.html');
 });
 
+router.get('/s3Url', async (req, res) => {
+  const url = await generateUploadURL();
+  res.send({ url });
+});
+
 router.post('/toys', controllers.toys.post);
+router.post('/toys/photos', controllers.toys.postPhotos);
+router.get('/toys/photos', controllers.toys.getOnePhotos);
+router.get('/toys/category', controllers.toys.getCategory);
+router.post('/toys/category', controllers.toys.postCategory);
+router.get('/toys/dates', controllers.toys.getDates);
+router.post('/toys/dates', controllers.toys.postDates);
 
 router.get('/user', controllers.users.getOne);
 
