@@ -67,10 +67,7 @@ const AddToy = (userId) => {
       payment_method: paymentMethod
     });
     const toyId = addToy.data.rows[0].id;
-    console.log(toyId);
-
     const imageURLS = await uploadAllImages();
-    console.log('inside addToy', imageURLS);
     await axios.post('/toys/photos', { toyId: toyId, photoURLs: imageURLS });
     await axios.post('/toys/dates', { toyId: toyId, dates: datesFormatted });
     // eslint-disable-next-line no-undef
