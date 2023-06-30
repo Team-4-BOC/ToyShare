@@ -30,7 +30,7 @@ const signInWithGoogle = (set) => {
       return axios.get('/userNew', { params: { email: result.user.email } })
         .then((response) => {
           if (response.data.length !== 0) {
-            alert('You are now Logged in');
+            alert('You are now signed in');
             return response.data[0].id;
           } else {
             const name = result.user.displayName.split(' ');
@@ -68,7 +68,7 @@ const signInWithGoogle = (set) => {
 
 const signOutOfGoogle = () => {
   if (auth.currentUser === null) {
-    alert('You are already signed out, please sign in to checkout or edit your profile');
+    alert('You are already signed out, please signin to checkout or edit your profile');
   } else {
     return signOut(auth)
       .then(() => {
