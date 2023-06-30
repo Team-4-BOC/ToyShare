@@ -50,7 +50,6 @@ const AddToy = (userId) => {
     for (let i = 0; i < photos.length; i++) {
       resultURLs.push(uploadImages(photos[i]));
     }
-    console.log(resultURLs);
     return Promise.all(resultURLs);
   };
 
@@ -162,7 +161,6 @@ const AddToy = (userId) => {
       <div className="stat-title text-info-content">Input Dates Available</div>
       <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)} plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
       <button onClick={addToy} className="btn btn-primary">Submit!</button>
-      {/* <button onClick={addDateRecords} className="btn btn-primary">Testing button!</button> */}
     </div>
   );
 };
