@@ -40,7 +40,11 @@ module.exports = {
       toysSaved.push(toy.rows[0]);
     }
     result.user = user.rows[0];
-    result.photo = photo.rows[0].url;
+    if (photo.rows.length === 0) {
+      result.photo = 'https://villagesonmacarthur.com/wp-content/uploads/2020/12/Blank-Avatar.png';
+    } else {
+      result.photo = photo.rows[0].url;
+    }
     result.inventory = inventory.rows;
     result.history = toysHist;
     result.saved = toysSaved;
