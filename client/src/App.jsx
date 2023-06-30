@@ -16,36 +16,40 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 const App = () => {
   const [userId, setUserId] = useState(0);
   const [userCoords, setUserCoords] = useState();
+  console.log('You can do this!!!!');
+  // const email = auth.currentUser;
+  // const getUserId = (email) => {
+  //   console.log('email', email.email);
+  //   axios
+  //     .get('/userNew', { params: { email: email.email } })
+  //     .then((data) => {
+  //       // getUserCoords(data.data[0].id);
+  //       setUserId(data.data[0].id);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+  console.log('USERID----->', userId);
 
-  const getUserId = (email) => {
-    axios
-      .get('/userNew', { params: { email } })
-      .then((data) => {
-        getUserCoords(data.data[0].id);
-        setUserId(data.data[0].id);
-      })
-      .catch((err) => console.log(err));
-  };
+  // const userInfo = auth.currentUser;
+  // console.log('userInfo', auth.currentUser);
+  // if (userInfo) {
+  //   getUserId(userInfo.email);
+  // } else {
+  //   console.log('No user signed in 1');
+  // }
 
-  const userInfo = auth.currentUser;
-  if (userInfo) {
-    getUserId(userInfo.email);
-  } else {
-    console.log('No user signed in');
-  }
-
-  const getUserCoords = (id) => {
-    axios.get('/userCoordinates', { params: { id } }) // returns 'lat, lng'
-      .then((apiData) => {
-        setUserCoords(apiData.data);
-      })
-      .catch((err) => {
-        console.log('ERROR fetching coords ', err);
-      });
-  };
-  useEffect(() => {
-    getUserId();
-  }, []);
+  // const getUserCoords = (id) => {
+  //   axios.get('/userCoordinates', { params: { id } }) // returns 'lat, lng'
+  //     .then((apiData) => {
+  //       setUserCoords(apiData.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log('ERROR fetching coords ', err);
+  //     });
+  // };
+  // useEffect(() => {
+  //   getUserId(email);
+  // }, []);
 
   // 0 === homepage
   // 1 === individual toy page
@@ -69,6 +73,7 @@ const App = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           userId={userId}
+          setUserId={setUserId}
         />
         <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords}/>
         <Home

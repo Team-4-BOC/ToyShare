@@ -25,13 +25,15 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 const signInWithGoogle = (set) => {
-  signInWithPopup(auth, provider)
+  return signInWithPopup(auth, provider)
     .then((result) => {
       console.log('RESULT________--->', result.user.photoURL);
-      axios.get('/userNew', { params: { email: result.user.email } })
+      return axios.get('/userNew', { params: { email: result.user.email } })
         .then((response) => {
           if (response.data.length !== 0) {
+            console.log('response.data', response.data[0].id);
             alert('You are now Logged in');
+            return response.data[0].id;
           } else {
             const name = result.user.displayName.split(' ');
 
@@ -40,19 +42,19 @@ const signInWithGoogle = (set) => {
             data.last_name = name[1];
             data.email = result.user.email;
 
-            axios.post('/user', data)
+            return axios.post('/user', data)
               .then(() => {
-                axios.get('/userNew', { params: { email: result.user.email } })
+                return axios.get('/userNew', { params: { email: result.user.email } })
                   .then((data) => {
                     const photoData = {};
                     photoData.user_id = data.data[0].id;
                     const id = data.data[0].id;
                     photoData.url = result.user.photoURL;
                     alert('Please update Your city/state information in your profile to see toy locations');
-                    axios.post('/user/photos', photoData)
+                    return axios.post('/user/photos', photoData)
                       .then((data) => {
-                        set(id);
-                        // console.log('photoData', photoData);
+                        console.log('USER_ID', id);
+                        return id;
                       });
                   })
                   .catch((err) => console.log(err));
@@ -71,9 +73,10 @@ const signOutOfGoogle = () => {
   if (auth.currentUser === null) {
     alert('You are already signed out, please sign in to checkout or edit your profile');
   } else {
-    signOut(auth)
+    return signOut(auth)
       .then(() => {
         alert('You have signed out');
+        return ('signed out');
       })
       .catch((err) => {
         alert(err);

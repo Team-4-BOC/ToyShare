@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo } from '../../Firebase.js';
 
-const Home = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
+const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
   const getOne = () => {
     axios.get('/renteepf', { params: { id: userId } })
       .then((data) => {
@@ -10,10 +10,28 @@ const Home = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
       });
   };
   const deleteUser = () => {
-    axios.delete('/deleteUser', { params: { id: 43 } })
+    axios.delete('/deleteUser', { params: { id: 48 } })
       .then((data) => {
         console.log('data from user from inside homebar', data);
       });
+  };
+
+  const signIn = () => {
+    return signInWithGoogle()
+      .then((data) => {
+        setUserId(data);
+        setPage(2);
+      })
+      .catch((err) => err);
+  };
+
+  const signOut = () => {
+    return signOutOfGoogle()
+      .then((data) => {
+        setUserId(0);
+        setPage(0);
+      })
+      .catch((err) => err);
   };
 
   return (
@@ -55,10 +73,10 @@ const Home = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
               </a>
             </li>
             <li>
-              <a onClick={() => { signInWithGoogle(setUserId); setPage(0); }}>Login</a>
+              <a onClick={() => { signIn(); }}>Login</a>
             </li>
             <li>
-              <a onClick={() => { signOutOfGoogle(); setPage(0); }}>Logout</a>
+              <a onClick={() => { signOut(); }}>Logout</a>
             </li>
             {/* <li><a onClick={() => setPage(3)}>RenteeProfile</a></li> */}
             <li><a onClick={() => { console.log(verifySignedIn()); }}>IsLoggedIn?</a></li>
@@ -72,4 +90,4 @@ const Home = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
   );
 };
 
-export default Home;
+export default TopBar;
