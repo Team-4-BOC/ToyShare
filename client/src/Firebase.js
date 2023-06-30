@@ -27,11 +27,9 @@ const provider = new GoogleAuthProvider();
 const signInWithGoogle = (set) => {
   return signInWithPopup(auth, provider)
     .then((result) => {
-      console.log('RESULT________--->', result.user.photoURL);
       return axios.get('/userNew', { params: { email: result.user.email } })
         .then((response) => {
           if (response.data.length !== 0) {
-            console.log('response.data', response.data[0].id);
             alert('You are now Logged in');
             return response.data[0].id;
           } else {
@@ -53,7 +51,6 @@ const signInWithGoogle = (set) => {
                     alert('Please update Your city/state information in your profile to see toy locations');
                     return axios.post('/user/photos', photoData)
                       .then((data) => {
-                        console.log('USER_ID', id);
                         return id;
                       });
                   })
