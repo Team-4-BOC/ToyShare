@@ -19,6 +19,8 @@ const AddToy = (userId) => {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [rating, setRating] = useState('');
 
+  // FUNCTIONS
+  // - API CALLS
   const getCategories = () => {
     axios.get('/toys/category')
       .then((res) => {
@@ -40,33 +42,6 @@ const AddToy = (userId) => {
     axios.post('/toys/dates', { toyId: 40, dates: datesFormatted });
   };
 
-
-  useEffect(() => {
-    getCategories();
-    setRandomRating();
-  }, []);
-
-
-
-
-  // const addToy = async () => {
-  //   const toyId = await axios.post('/toys', {
-  //     toy_name: toyName,
-  //     category_id: selectedCategory,
-  //     rating: rating,
-  //     user_id: userId,
-  //     toy_description: description,
-  //     original_price: originalPrice,
-  //     rental_price: rentalPrice,
-  //     delivery_method: deliveryMethod,
-  //     payment_method: paymentMethod
-  //   });
-  //   await axios.post('/toys/photos', { toyId: toyId, photoURLs: imageURLS });
-  //   await axios.post('/toys/dates', { toyId: toyId, dates: dateValues });
-  //   // eslint-disable-next-line no-undef
-  //   alert('Toy Added!');
-  // };
-
   const uploadImages = async (photo) => {
     const url = await axios.get('/s3Url').then((res) => { return res.data.url; });
     const config = {
@@ -81,9 +56,35 @@ const AddToy = (userId) => {
 
   const uploadAllImages = async () => {
     for (let i = 0; i < photos.length; i++) {
-      uploadImages(photos[i]);
+      await uploadImages(photos[i]);
+      console.log('inside uploadAll', imageURLS);
     }
   };
+
+  const addToy = async () => {
+    const addToy = await axios.post('/toys', {
+      toy_name: toyName,
+      category_id: selectedCategory,
+      rating: rating,
+      user_id: 3,
+      toy_description: description,
+      original_price: originalPrice,
+      rental_price: rentalPrice,
+      delivery_method: deliveryMethod,
+      payment_method: paymentMethod
+    });
+    const toyId = addToy.data.rows[0].id;
+    console.log(toyId);
+
+    await uploadAllImages();
+    console.log('inside addToy', imageURLS);
+    await axios.post('/toys/photos', { toyId: toyId, photoURLs: imageURLS });
+    await axios.post('/toys/dates', { toyId: toyId, dates: datesFormatted });
+    // eslint-disable-next-line no-undef
+    alert('Toy Added!');
+  };
+
+  // - CHANGE FUNCTIONS
 
   const setStateNames = {
     toyName: setToyName,
@@ -127,7 +128,16 @@ const AddToy = (userId) => {
     setDatesFormatted(newDatesList);
     setDateValues(inputDates);
   };
+  // END FUNCTIONS----
 
+  // USE EFFECTS
+  useEffect(() => {
+    getCategories();
+    setRandomRating();
+  }, []);
+  // END USE EFFECTS
+
+  // ELEMENTS
   return (
     <div className="h-screen flex items-center justify-center flex-col space-y-3">
       <div>Add a Toy!</div>
@@ -161,8 +171,8 @@ const AddToy = (userId) => {
       </select>
       <div className="stat-title text-info-content">Input Dates Available</div>
       <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)} plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
-      <button onClick={uploadAllImages} className="btn btn-primary">Submit!</button>
-      <button onClick={addDateRecords} className="btn btn-primary">Testing button!</button>
+      <button onClick={addToy} className="btn btn-primary">Submit!</button>
+      {/* <button onClick={addDateRecords} className="btn btn-primary">Testing button!</button> */}
     </div>
   );
 };

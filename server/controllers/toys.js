@@ -42,7 +42,7 @@ module.exports = {
   post: (req, res) => {
     models.toys.post(req.body)
       .then((results) => {
-        res.status(201).send({ success: 'Succesfully added toy!', data: results.rows });
+        res.status(201).send(results);
       })
       .catch((err) => {
         res.status(500).send('ERROR adding toy');

@@ -89,9 +89,7 @@ module.exports = {
   // },
   post: (data) => {
     const values = [data.toy_name, data.category_id, data.rating, data.user_id, data.toy_description, data.original_price, data.rental_price, data.delivery_method, data.payment_method];
-    return db.query('INSERT INTO toyshare.toys(toy_name, category_id, rating, user_id, toy_description, original_price, rental_price, delivery_method, payment_method) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);', values)
-      .then(() => { return db.query("SELECT currval('toyshare.toys_id_seq');"); })
-      .catch((err) => { return err; });
+    return db.query('INSERT INTO toyshare.toys(toy_name, category_id, rating, user_id, toy_description, original_price, rental_price, delivery_method, payment_method) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id;', values);
   },
   getOnePhotos: (data) => {
     const values = [data.toyId];
@@ -99,6 +97,7 @@ module.exports = {
     return db.query('SELECT * from toyshare.toy_photos where toy_id = $1;', values);
   },
   postPhotos: (data) => {
+    console.log('-----THIS IS INSIDE postPhotos', data);
     const queries = data.photoURLs.map((url) => {
       const values = [data.toyId, url];
       return db.query('INSERT INTO toyshare.toy_photos(toy_id, url) VALUES($1, $2)', values);
