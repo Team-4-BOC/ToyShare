@@ -17,6 +17,7 @@ router.get('/userCoordinates', controllers.users.getCoordinates);
 router.post('/user', controllers.users.addUser);
 router.post('/user/photos', controllers.users.addUserPhoto);
 router.get('/userNew', controllers.users.checkForNewUser);
+router.delete('/deleteUser', controllers.users.deleteUser);
 
 router.get('/toy', controllers.toys.getOne);
 

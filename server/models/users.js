@@ -75,7 +75,7 @@ module.exports = {
   },
   addUserPhoto: (photoData) => {
     console.log('inside addUserPhoto model', photoData);
-    const values = [photoData.id, photoData.url];
+    const values = [photoData.user_id, photoData.url];
     return db.query('INSERT INTO toyshare.user_photos (user_id, url) VALUES($1, $2)', values);
   },
   checkForNewUser: (email) => {
@@ -86,5 +86,10 @@ module.exports = {
   updateUser: (userInfo) => {
     const values = [userInfo.first_name, userInfo.last_name, userInfo.city_state, userInfo.introduction, userInfo.id];
     return db.query('UPDATE toyshare.users SET first_name = $1, last_name = $2, city_state = $3, introduction = $4 where id = $5', values);
+  },
+  deleteOne: (id) => {
+    console.log('inside deleteOne model', id);
+    const value = [id];
+    return db.query('DELETE FROM toyshare.users WHERE id = $1', value);
   }
 };
