@@ -97,7 +97,6 @@ module.exports = {
     return db.query('SELECT * from toyshare.toy_photos where toy_id = $1;', values);
   },
   postPhotos: (data) => {
-    console.log('-----THIS IS INSIDE postPhotos', data);
     const queries = data.photoURLs.map((url) => {
       const values = [data.toyId, url];
       return db.query('INSERT INTO toyshare.toy_photos(toy_id, url) VALUES($1, $2)', values);

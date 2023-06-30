@@ -7,7 +7,6 @@ import axios from 'axios';
 const AddToy = (userId) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
-  const [imageURLS, setImageURLS] = useState([]);
   const [originalPrice, setOriginalPrice] = useState('');
   const [rentalPrice, setRentalPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -29,17 +28,9 @@ const AddToy = (userId) => {
       .catch((err) => { console.log(err); });
   };
 
-  const setRandomRating = () => { // min and max included
+  const setRandomRating = () => {
     const randomRating = Math.floor(Math.random() * (5 - 1 + 1) + 1);
     setRating(randomRating);
-  };
-
-  const addPhotoRecords = () => {
-    axios.post('/toys/photos', { toyId: 40, photoURLs: imageURLS });
-  };
-
-  const addDateRecords = () => {
-    axios.post('/toys/dates', { toyId: 40, dates: datesFormatted });
   };
 
   const uploadImages = async (photo) => {
@@ -51,14 +42,16 @@ const AddToy = (userId) => {
     };
     await axios.put(url, photo, config);
     const imageUrl = url.split('?')[0];
-    setImageURLS(imageURLS => [...imageURLS, imageUrl]);
+    return imageUrl;
   };
 
-  const uploadAllImages = async () => {
+  const uploadAllImages = () => {
+    const resultURLs = [];
     for (let i = 0; i < photos.length; i++) {
-      await uploadImages(photos[i]);
-      console.log('inside uploadAll', imageURLS);
+      resultURLs.push(uploadImages(photos[i]));
     }
+    console.log(resultURLs);
+    return Promise.all(resultURLs);
   };
 
   const addToy = async () => {
@@ -76,7 +69,7 @@ const AddToy = (userId) => {
     const toyId = addToy.data.rows[0].id;
     console.log(toyId);
 
-    await uploadAllImages();
+    const imageURLS = await uploadAllImages();
     console.log('inside addToy', imageURLS);
     await axios.post('/toys/photos', { toyId: toyId, photoURLs: imageURLS });
     await axios.post('/toys/dates', { toyId: toyId, dates: datesFormatted });
