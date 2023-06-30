@@ -3,6 +3,7 @@ coverage
 .env
 .env.local
 client/dist/bundle.js
+client/dist/bundle.js.map
 client/dist/styles.css
 database/uploadDBdata.txt
 client/src/styles.css
@@ -18,4 +19,5 @@ Raw Toys Data - User.csv
 .DS_Store
 client/dist/158.bundle.js
 client/dist/158.bundle.js.LICENSE.txt
+client/dist/158.bundle.js.map
 client/src/components/SharedComponents/tempMapBoxKey.js
