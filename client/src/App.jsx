@@ -14,7 +14,7 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 // import { use } from 'matter';
 
 const App = () => {
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState(1);
   const [userCoords, setUserCoords] = useState();
 
   const getUserId = (email) => {
