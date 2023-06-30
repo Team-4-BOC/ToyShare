@@ -60,6 +60,8 @@ const App = () => {
   const [toyId, setToyId] = useState(1);
   const [toyUserId, setToyUserId] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sort, setSort] = useState('');
+  const [filter, setFilter] = useState('');
   const [toysIDCoordsPhoto, setToysIDCoordsPhoto] = useState([]);
   if (page === 0) {
     return (
@@ -69,12 +71,14 @@ const App = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
-        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords}/>
+        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter}/>
         <Home
           setPage={setPage}
           setToyId={setToyId}
           setToyUserId={setToyUserId}
           searchTerm={searchTerm}
+          sort={sort}
+          filter={filter}
           userCoords={userCoords}
           toysIDCoordsPhoto={toysIDCoordsPhoto}
           userId={userId}
