@@ -56,8 +56,12 @@ module.exports = {
     const user = await db.query('SELECT * from toyshare.users where id = $1', values);
     const photo = await db.query('SELECT * from toyshare.user_photos where user_id = $1', values);
     const inventory = await db.query('SELECT * from toyshare.toys where user_id = $1', values);
+    if (photo.rows.length === 0) {
+      result.photo = 'https://villagesonmacarthur.com/wp-content/uploads/2020/12/Blank-Avatar.png';
+    } else {
+      result.photo = photo.rows[0].url;
+    }
     result.user = user.rows[0];
-    result.photo = photo.rows[0].url;
     result.inventory = inventory.rows;
     return result;
   },
@@ -79,6 +83,9 @@ module.exports = {
   },
   addUserPhoto: (photoData) => {
     console.log('inside addUserPhoto model', photoData);
+    if (!photoData.url) {
+      photoData.url = 'https://villagesonmacarthur.com/wp-content/uploads/2020/12/Blank-Avatar.png';
+    }
     const values = [photoData.user_id, photoData.url];
     return db.query('INSERT INTO toyshare.user_photos (user_id, url) VALUES($1, $2)', values);
   },

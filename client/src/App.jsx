@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { auth } from './Firebase.js';
@@ -14,38 +15,42 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 // import { use } from 'matter';
 
 const App = () => {
-  const [userId, setUserId] = useState(1);
+  const [userId, setUserId] = useState(0);
   const [userCoords, setUserCoords] = useState();
+  console.log('You can do this!');
+  // const email = auth.currentUser;
+  // const getUserId = (email) => {
+  //   console.log('email', email.email);
+  //   axios
+  //     .get('/userNew', { params: { email: email.email } })
+  //     .then((data) => {
+  //       // getUserCoords(data.data[0].id);
+  //       setUserId(data.data[0].id);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+  console.log('USERID----->', userId);
 
-  const getUserId = (email) => {
-    axios
-      .get('/userNew', { params: { email } })
-      .then((data) => {
-        getUserCoords(data.data[0].id);
-        setUserId(data.data[0].id);
-      })
-      .catch((err) => console.log(err));
-  };
+  // const userInfo = auth.currentUser;
+  // console.log('userInfo', auth.currentUser);
+  // if (userInfo) {
+  //   getUserId(userInfo.email);
+  // } else {
+  //   console.log('No user signed in 1');
+  // }
 
-  const userInfo = auth.currentUser;
-  if (userInfo) {
-    getUserId(userInfo.email);
-  } else {
-    console.log('No user signed in');
-  }
-
-  const getUserCoords = (id) => {
-    axios.get('/userCoordinates', { params: { id } }) // returns 'lat, lng'
-      .then((apiData) => {
-        setUserCoords(apiData.data);
-      })
-      .catch((err) => {
-        console.log('ERROR fetching coords ', err);
-      });
-  };
-  useEffect(() => {
-    getUserId();
-  }, []);
+  // const getUserCoords = (id) => {
+  //   axios.get('/userCoordinates', { params: { id } }) // returns 'lat, lng'
+  //     .then((apiData) => {
+  //       setUserCoords(apiData.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log('ERROR fetching coords ', err);
+  //     });
+  // };
+  // useEffect(() => {
+  //   getUserId(email);
+  // }, []);
 
   // 0 === homepage
   // 1 === individual toy page
@@ -71,8 +76,11 @@ const App = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           userId={userId}
+          setUserId={setUserId}
         />
-        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter}/>
+        <br></br>
+        <br></br>
+        <br></br>
         <Home
           setPage={setPage}
           setToyId={setToyId}
@@ -84,6 +92,9 @@ const App = () => {
           toysIDCoordsPhoto={toysIDCoordsPhoto}
           userId={userId}
         />
+        <br></br>
+        <br></br>
+        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter}/>
       </>
     );
   }
@@ -91,6 +102,8 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
         <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} userCoords={userCoords} />
       </>
     );
@@ -108,6 +121,8 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
         <RenteeProfile userId={userId} setPage={setPage} toyUserId={toyUserId} />
       </>
     );
@@ -132,6 +147,10 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <ReserveDates setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} />
       </>
     );
@@ -140,6 +159,10 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         Dates reserved! Now pay them: <br />
         <br />
         <img src="https://www.belvoirterrace.com/wp-content/uploads/2020/10/Venmo-QR-Code-@Edna-260x300.jpg" alt="venmo payment link"></img>
@@ -153,6 +176,10 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <BookingConfirmation/>
         <a className="justify-between" onClick={() => setPage(0)}>
                 Booking success! Click <b>here</b> to return to home page
