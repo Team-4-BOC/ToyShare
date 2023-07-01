@@ -142,5 +142,15 @@ module.exports = {
         res.status(500).send('ERROR favoriting toy');
         console.log('ERROR ADDING TOY', err);
       });
+  },
+  getSaved: (req, res) => {
+    models.toys.getSaved(req.query)
+      .then((results) => {
+        res.status(201).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR GET user saved toys');
+        console.log('ERROR GET user saved toys', err);
+      })
   }
 };
