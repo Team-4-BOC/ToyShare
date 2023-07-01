@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo } from '../../Firebase.js';
+import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
 
 const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
   const getOne = () => {
@@ -42,6 +43,9 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
       .catch((err) => err);
   };
 
+  const [notifications, setNotifications] = useState(['Josh Man has rented your toy!']);
+  const [showNotifs, setShowNotifs] = useState(false);
+  const [newNotifs, setNewNotifs] = useState(true);
   return (
     <div className="fixed navbar bg-base-100 bg-white z-10 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
       <div className="flex-1">
@@ -51,6 +55,14 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
         >
           ToyShare
         </a>
+      </div>
+      <div style={{marginRight: '10px'}}>
+      <NotificationDropdown
+        newNotifs={newNotifs}
+        setNewNotifs={setNewNotifs}
+        showNotifs={showNotifs}
+        setShowNotifs={setShowNotifs}
+        notifications={notifications} />
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
