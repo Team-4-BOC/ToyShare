@@ -14,6 +14,7 @@ router.get('/s3Url', async (req, res) => {
 
 router.post('/toys', controllers.toys.post);
 router.put('/toys', controllers.toys.put);
+router.delete('/toys', controllers.toys.delete);
 router.post('/toys/photos', controllers.toys.postPhotos);
 router.get('/toys/photos', controllers.toys.getOnePhotos);
 router.delete('/toys/photos', controllers.toys.deletePhotos);

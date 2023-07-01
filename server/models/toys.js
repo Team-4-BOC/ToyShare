@@ -95,6 +95,10 @@ module.exports = {
     const values = [data.toy_name, data.category_id, data.toy_description, data.original_price, data.rental_price, data.delivery_method, data.payment_method, data.toyId];
     return db.query('UPDATE toyshare.toys SET toy_name = $1, category_id = $2, toy_description = $3, original_price = $4, rental_price = $5, delivery_method = $6, payment_method = $7 WHERE id = $8;', values)
   },
+  delete: (data) => {
+    const values = [data.toyId];
+    return db.query('DELETE FROM toyshare.toys WHERE toyshare.toys.id = $1', values);
+  },
   getOnePhotos: (data) => {
     const values = [data.toyId];
     return db.query('SELECT * from toyshare.toy_photos where toy_id = $1;', values);

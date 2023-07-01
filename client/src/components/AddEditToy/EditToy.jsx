@@ -26,7 +26,7 @@ const EditToy = ({ toyId, userId }) => {
 
 
   const fetchToy = () => {
-    axios.get('toy', { params: { toyId: toyId, current_user_id: userId } }) // Fix current user id and toy id
+    axios.get('toy', { params: { toyId: toyId, userId: userId } }) // Fix current user id and toy id
       .then((apiResults) => {
         const data = apiResults.data;
         setToyName(data.name);
@@ -95,6 +95,7 @@ const EditToy = ({ toyId, userId }) => {
     console.log('Selected Photo', selectedPhoto);
     axios.delete('toys/photos', { data: { url: selectedPhoto, toyId: toyId } })
       .then(() => {
+        console.log('Image get');
         getOnePhotos();
       })
       .catch((err) => {
@@ -139,6 +140,16 @@ const EditToy = ({ toyId, userId }) => {
       const updateState = setStateNames[dataName];
       updateState(data);
     }
+  };
+  const deleteToy = () => {
+    axios.delete('toys', { data: { toyId: toyId } })
+      .then(() => {
+        console.log('Image get');
+        getOnePhotos();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleDateChange = (inputDates) => {
@@ -198,10 +209,7 @@ const EditToy = ({ toyId, userId }) => {
       <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)}plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
       <div>
         <button className="btn btn-primary" onClick={editToy}>Submit Edits!</button>
-        <button className="btn btn-secondary" onClick={(event) => {
-          // eslint-disable-next-line no-undef
-          confirm('Are you sure?');
-        }}>Delete Toy!</button>
+        <button className="btn btn-secondary" onClick={deleteToy}>Delete Toy!</button>
       </div>
     </div>
   );
