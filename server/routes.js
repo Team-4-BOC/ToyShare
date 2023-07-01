@@ -38,6 +38,7 @@ router.get('/toys', controllers.toys.getAll);
 router.get('/toysIDCoordsPhoto', controllers.toys.getAllIDCoordsPhoto);
 
 router.post('/saved', controllers.toys.saved);
+router.get('/saved', controllers.toys.getSaved);
 
 router.get('/bookings/getAllBooked', controllers.bookings.getAllBooked);
 router.get('/bookings/getAllAvailable', controllers.bookings.getAllAvailable);
@@ -46,6 +47,7 @@ router.get('/bookings/getRental', controllers.bookings.getRental);
 
 router.post('/bookings/postInventory', controllers.bookings.postInventory);
 router.post('/bookings/postRental', controllers.bookings.postRental);
+router.get('/bookings/getEarliestInstanceOfEachToy', controllers.bookings.getEarliestInstanceOfEachToy);
 
 router.put('/bookings/updateStatus', controllers.bookings.updateStatus);
 

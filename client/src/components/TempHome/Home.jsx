@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ToyCard from './ToyCard.jsx';
 
-function Home ({ setToyId, setToyUserId, setPage, searchTerm, sort, filter, userCoords, toysIDCoordsPhoto }) {
+function Home ({ setToyId, setToyUserId, setPage, searchTerm, sort, filter, userCoords, toysIDCoordsPhoto, userId }) {
   const [toys, setToys] = useState([]);
   const [renderedToys, setRenderedToys] = useState([]);
 
@@ -12,6 +12,9 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, sort, filter, user
 
   useEffect(() => {
     handleSearchTermChange();
+    // fetchUser();
+    // fetchSaved();
+    fetchEarliest();
   }, [searchTerm]);
 
   useEffect(() => {
@@ -21,6 +24,48 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, sort, filter, user
   useEffect(() => {
     handleFilterChange();
   }, [filter]);
+
+  const fetchUser = () => { //testing query
+    const id = 1;
+    axios
+    .get('/user', { params: { id } })
+    .then((response) => {
+      console.log(response.data)
+    })
+    .catch((err) => {
+      console.log('ERROR fetching user ', err);
+    });
+  }
+
+  const fetchSaved = () => { //testing query
+    axios
+    .get('/saved', { params: { userId } })
+    .then((response) => {
+      console.log(response.data)
+    })
+    .catch((err) => {
+      console.log('ERROR fetching user saved toys ', err);
+    });
+  }
+
+  const fetchEarliest = () => {
+    axios
+    .get('/bookings/getEarliestInstanceOfEachToy')
+    .then((response) => {
+      console.log(response.data)
+    })
+    .catch((err) => {
+      console.log('ERROR fetching earliest instance of each toy ', err);
+    });
+  }
+
+
+
+
+
+
+
+
 
   const fetchToys = () => {
     const count = 100;
@@ -59,12 +104,28 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, sort, filter, user
       if (sort == "") {
         setRenderedToys(toys);
       } else if (sort == "newest") {
-        setRenderedToys(toys); //need to change
+        axios
+          .get('/bookings/getEarliestInstanceOfEachToy')
+          .then((response) => {
+            var sortedDates = JSON.parse(JSON.stringify(response.data));
+            sortedDates.sort((a, b) => {return new Date(b.dates) - new Date(a.dates)});
+            var sortedToys = [];
+            for (let i = 0; i < sortedDates.length; i++) {
+              for (let j = 0; j < toys.length; j++) {
+                if (sortedDates[i].toy_id == toys[j].id) {
+                  sortedToys.push(toys[j]);
+                }
+              }
+            }
+            console.log(sortedToys);
+            setRenderedToys(sortedToys);
+          })
+          .catch((err) => {
+            console.log('ERROR fetching earliest instance of each toy ', err);
+          });
       } else if (sort == "rating") {
         var sorted = JSON.parse(JSON.stringify(toys));
-        console.log(sorted)
         sorted.sort((a, b) => {return b.rating - a.rating});
-        console.log(sorted)
         setRenderedToys(sorted);
       } else if (sort == "distance") {
         setRenderedToys(toys); //need to change
@@ -79,14 +140,31 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, sort, filter, user
       if (filter == "") {
         setRenderedToys(toys);
       } else if (filter = "recommend") {
-        var mockUserRecommendCategories = [4, 7, 11]; // based on user's saved toys, probably max of 3 categories even if they have more different categories saved
-        var filtered = [];
-        for (let i = 0; i < toys.length; i++) {
-          if (mockUserRecommendCategories.includes(toys[i].category_id)) {
-            filtered.push(toys[i]);
-          }
-        }
-        setRenderedToys(filtered);
+        // const userId = 11;
+        axios
+          .get('/saved', { params: { userId } })
+          .then((response) => {
+            var userSavedToys = [];
+            var userRecommendCategories = [];
+            var filtered = [];
+            for (let i = 0; i < response.data.length; i++) {
+              userSavedToys.push(response.data[i].toy_id);
+            }
+            for (let i = 0; i < toys.length; i++) {
+              if (userSavedToys.includes(toys[i].id)) {
+                userRecommendCategories.push(toys[i].category_id);
+              }
+            }
+            for (let i = 0; i < toys.length; i++) {
+              if (userRecommendCategories.includes(toys[i].category_id)) {
+                filtered.push(toys[i]);
+              }
+            }
+            setRenderedToys(filtered);
+          })
+          .catch((err) => {
+            console.log('ERROR fetching user saved toys ', err);
+          });
       }
     } else {
       setRenderedToys(toys);
