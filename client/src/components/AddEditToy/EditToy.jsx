@@ -196,7 +196,13 @@ const EditToy = ({ toyId, userId }) => {
       </select>
       <div className="stat-title text-info-content">Update Dates Available</div>
       <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)}plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
-      <button className="btn btn-primary" onClick={editToy}>Submit Edits!</button>
+      <div>
+        <button className="btn btn-primary" onClick={editToy}>Submit Edits!</button>
+        <button className="btn btn-secondary" onClick={(event) => {
+          // eslint-disable-next-line no-undef
+          confirm('Are you sure?');
+        }}>Delete Toy!</button>
+      </div>
     </div>
   );
 };
