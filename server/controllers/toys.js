@@ -49,6 +49,16 @@ module.exports = {
         console.log('ERROR ADDING TOY', err);
       });
   },
+  patch: (req, res) => {
+    models.toys.patch(req.body)
+      .then((results) => {
+        res.status(201).send(results);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR adding toy');
+        console.log('ERROR ADDING TOY', err);
+      });
+  },
   getOnePhotos: (req, res) => {
     models.toys.getOnePhotos(req.query)
       .then((results) => {
@@ -70,7 +80,7 @@ module.exports = {
       });
   },
   getCategory: (req, res) => {
-    models.toys.getCategory()
+    models.toys.getCategory(req.query)
       .then((results) => {
         res.status(200).send(results.rows);
       })

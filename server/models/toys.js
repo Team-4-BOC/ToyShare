@@ -91,6 +91,10 @@ module.exports = {
     const values = [data.toy_name, data.category_id, data.rating, data.user_id, data.toy_description, data.original_price, data.rental_price, data.delivery_method, data.payment_method];
     return db.query('INSERT INTO toyshare.toys(toy_name, category_id, rating, user_id, toy_description, original_price, rental_price, delivery_method, payment_method) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id;', values);
   },
+  patch: (data) => {
+    const values = [data.toy_name, data.category_id, data.toy_description, data.original_price, data.rental_price, data.delivery_method, data.payment_method, data.toyId];
+    return db.query('UPDATE toyshare.toys SET toy_name = $1, category_id = $2, toy_description = $3, original_price = $4, rental_price = $5, delivery_method = $6, payment_method = $7 WHERE id = $8;', values)
+  },
   getOnePhotos: (data) => {
     const values = [data.toyId];
     return db.query('SELECT * from toyshare.toy_photos where toy_id = $1;', values);
@@ -103,7 +107,13 @@ module.exports = {
     return Promise.all(queries);
   },
   getCategory: (data) => {
-    return db.query('SELECT * from toyshare.category');
+    console.log('---categoyr', data);
+    if (Object.keys(data).length !== 0) {
+      const values = [data.toyId];
+      return db.query('SELECT toyshare.category.id, toyshare.category.name FROM toyshare.category INNER JOIN toyshare.toys ON toyshare.toys.category_id = toyshare.category.id WHERE toyshare.toys.id = $1;', values);
+    } else {
+      return db.query('SELECT * from toyshare.category');
+    }
   },
   postCategory: (data) => {
     const values = [data.category];
@@ -118,7 +128,7 @@ module.exports = {
   },
   getDates: (data) => {
     const values = [data.toyId];
-    return db.query('SELECT * FROM toyshare.dates_available WHERE toy_id = $1;', values);
+    return db.query('SELECT array_agg(dates) AS dates_array FROM toyshare.dates_available WHERE toy_id = $1;', values);
   },
   save: (data) => {
     const values = [data.toyId, data.userId];

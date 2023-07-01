@@ -128,7 +128,7 @@ const AddToy = (userId) => {
 
   // ELEMENTS
   return (
-    <div className="h-screen flex items-center justify-center flex-col space-y-3">
+    <div className="h-screen flex items-center justify-center flex-col space-y-3 overflow-y-scroll">
       <div>Add a Toy!</div>
       <input onChange={handleChange} type="text" placeholder="Add Toy Name" className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
       <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="selectedCategory">
