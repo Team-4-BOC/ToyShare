@@ -93,7 +93,6 @@ module.exports = {
   },
   getOnePhotos: (data) => {
     const values = [data.toyId];
-    console.log(values);
     return db.query('SELECT * from toyshare.toy_photos where toy_id = $1;', values);
   },
   postPhotos: (data) => {
@@ -119,7 +118,6 @@ module.exports = {
   },
   getDates: (data) => {
     const values = [data.toyId];
-    console.log(values);
     return db.query('SELECT * FROM toyshare.dates_available WHERE toy_id = $1;', values);
   },
   save: (data) => {
