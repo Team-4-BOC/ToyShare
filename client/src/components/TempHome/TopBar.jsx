@@ -1,20 +1,22 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+// import axios from 'axios';
+// eslint-disable-next-line no-unused-vars
 import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo } from '../../Firebase.js';
+import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
 
 const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
-  const getOne = () => {
-    axios.get('/renteepf', { params: { id: userId } })
-      .then((data) => {
-        console.log('data from user from inside homebar', data);
-      });
-  };
-  const deleteUser = () => {
-    axios.delete('/deleteUser', { params: { id: 48 } })
-      .then((data) => {
-        console.log('data from user from inside homebar', data);
-      });
-  };
+  // const getOne = () => {
+  //   axios.get('/renteepf', { params: { id: userId } })
+  //     .then((data) => {
+  //       console.log('data from user from inside homebar', data);
+  //     });
+  // };
+  // const deleteUser = () => {
+  //   axios.delete('/deleteUser', { params: { id: 48 } })
+  //     .then((data) => {
+  //       console.log('data from user from inside homebar', data);
+  //     });
+  // };
   const handleAcessProfileRequest = () => {
     if (!verifySignedIn()) {
       // eslint-disable-next-line no-undef
@@ -42,6 +44,9 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
       .catch((err) => err);
   };
 
+  const [notifications, setNotifications] = useState(['Josh Man has rented your toy!']);
+  const [showNotifs, setShowNotifs] = useState(false);
+  const [newNotifs, setNewNotifs] = useState(true);
   return (
     <div className="fixed navbar bg-base-100 bg-white z-10 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
       <div className="flex-1">
@@ -51,6 +56,14 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
         >
           ToyShare
         </a>
+      </div>
+      <div style={{marginRight: '10px'}}>
+      <NotificationDropdown
+        newNotifs={newNotifs}
+        setNewNotifs={setNewNotifs}
+        showNotifs={showNotifs}
+        setShowNotifs={setShowNotifs}
+        notifications={notifications} />
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
@@ -87,10 +100,10 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
               <a onClick={() => { signOut(); }}>Signout</a>
             </li>
             {/* <li><a onClick={() => setPage(3)}>RenteeProfile</a></li> */}
-            <li><a onClick={() => { console.log(verifySignedIn()); }}>IsLoggedIn?</a></li>
+            {/* <li><a onClick={() => { console.log(verifySignedIn()); }}>IsLoggedIn?</a></li>
             <li><a onClick={() => { console.log(getCurrentUserInfo()); }}>getCurrentUserInfo</a></li>
             <li><a onClick={() => { console.log(getOne()); }}>getOne</a></li>
-            <li><a onClick={() => { console.log(deleteUser()); }}>deleteUser</a></li>
+            <li><a onClick={() => { console.log(deleteUser()); }}>deleteUser</a></li> */}
           </ul>
         </div>
       </div>

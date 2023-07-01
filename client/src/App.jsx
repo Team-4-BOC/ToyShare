@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { auth } from './Firebase.js';
+import { auth, getCurrentUserInfo } from './Firebase.js';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
 import RenteeProfile from './components/RenteeProfile/renteeProfile.jsx';
 import IndividualToy from './components/IndividualToy/IndividualToy.jsx';
@@ -17,27 +17,21 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 const App = () => {
   const [userId, setUserId] = useState(3);
   const [userCoords, setUserCoords] = useState();
-  console.log('You can do this!');
-  // const email = auth.currentUser;
-  // const getUserId = (email) => {
-  //   console.log('email', email.email);
-  //   axios
-  //     .get('/userNew', { params: { email: email.email } })
-  //     .then((data) => {
-  //       // getUserCoords(data.data[0].id);
-  //       setUserId(data.data[0].id);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-  console.log('USERID----->', userId);
+  // const [userEmail, setUserEmail] = useState('');
+  console.log('You can do this!!!');
+  const email = getCurrentUserInfo();
 
-  // const userInfo = auth.currentUser;
-  // console.log('userInfo', auth.currentUser);
-  // if (userInfo) {
-  //   getUserId(userInfo.email);
-  // } else {
-  //   console.log('No user signed in 1');
-  // }
+  const getUserId = (input) => {
+    axios
+      .get('/userNew', { params: { email: input } })
+      .then((data) => {
+        // getUserCoords(data.data[0].id);
+        setUserId(data.data[0].id);
+      })
+      .catch((err) => console.log(err));
+  };
+  getUserId(email);
+  console.log('USERID----->', userId);
 
   // const getUserCoords = (id) => {
   //   axios.get('/userCoordinates', { params: { id } }) // returns 'lat, lng'
@@ -48,9 +42,6 @@ const App = () => {
   //       console.log('ERROR fetching coords ', err);
   //     });
   // };
-  // useEffect(() => {
-  //   getUserId(email);
-  // }, []);
 
   // 0 === homepage
   // 1 === individual toy page

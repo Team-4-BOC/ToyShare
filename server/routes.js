@@ -24,13 +24,13 @@ router.post('/toys/dates', controllers.toys.postDates);
 // router.delete('/toys/dates', controllers.toys.deleteDate);
 
 router.get('/user', controllers.users.getOne);
-
 router.get('/userpf', controllers.users.getOneMeta);
 router.put('/userpf', controllers.users.updateUser);
 router.get('/renteepf', controllers.users.getRenteeData);
 router.get('/userCoordinates', controllers.users.getCoordinates);
 router.post('/user', controllers.users.addUser);
 router.post('/user/photos', controllers.users.addUserPhoto);
+router.put('/user/photos', controllers.users.updateUserPhoto);
 router.get('/userNew', controllers.users.checkForNewUser);
 router.delete('/deleteUser', controllers.users.deleteUser);
 
