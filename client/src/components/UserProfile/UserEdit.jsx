@@ -11,6 +11,7 @@ function UserEdit ({ getUserData, userData, setEnableEdit }) {
     introduction: userData.user.introduction
   };
 
+  const [photo, setPhoto] = useState('');
   const [values, setValues] = useState(initialValues);
 
   const handleInputChange = (e) => {
@@ -21,15 +22,36 @@ function UserEdit ({ getUserData, userData, setEnableEdit }) {
     });
   };
 
-  const saveChanges = () => {
-    axios.put('/userpf', values)
-      .then(() => {
-        console.log('Update user success');
-        getUserData();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const uploadImages = async (photo) => {
+    const url = await axios.get('/s3Url').then((res) => { return res.data.url; });
+    const config = {
+      headers: {
+        'Content-Type': 'image'
+      }
+    };
+    await axios.put(url, photo, config);
+    const imageUrl = url.split('?')[0];
+    return imageUrl;
+  };
+
+  const uploadAllImages = () => {
+    const resultURL = [];
+    resultURL.push(uploadImages(photo[0]));
+    return Promise.all(resultURL);
+  };
+
+  const handlePhotoUpload = (e) => {
+    e.preventDefault();
+    const file = e.target.files;
+    setPhoto(file);
+    console.log(file);
+  };
+
+  const saveChanges = async () => {
+    const imageURLS = await uploadAllImages();
+    await axios.put('/user/photos', { id: userData.user.id, photoURL: imageURLS });
+    await axios.put('/userpf', values);
+    getUserData();
   };
 
   return (
@@ -38,6 +60,10 @@ function UserEdit ({ getUserData, userData, setEnableEdit }) {
     <div className="card-body">
       <form>
         <label>
+          Photo:
+          <br></br>
+          <input onChange={handlePhotoUpload} type="file" accept="image/*" multiple="multiple" className="file-input-xs file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
+          <br></br>
           First Name:
           <br></br>
           <input type="text" className="input input-bordered w-full max-w-xs" name="first_name" onChange={handleInputChange} defaultValue={ userData.user.first_name }/>
