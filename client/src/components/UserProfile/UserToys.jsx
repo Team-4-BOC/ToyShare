@@ -9,7 +9,7 @@ function UserToys ({ userData, setPage, toyId, setToyId }) {
   return (
     <div className="user-toys">
       {/* //////// RENTAL INVENTORY LIST //////// */}
-      <ul className="menu bg-base-200 w-100 rounded-box">
+      <ul className="menu bg-secondary bg-base-200 w-100 rounded-box">
       <li>
         <h2 className="rental-inventory" style={titleStyle}>Rental Inventory <button onClick={() => { setPage(4); }} className="btn-sm">Add toy</button></h2>
         <ul>
@@ -20,7 +20,7 @@ function UserToys ({ userData, setPage, toyId, setToyId }) {
     <br></br>
     {/* //////// CURRENTLY RENTING LIST -- excluding for now //////// */}
     {/* //////// RENTAL HISTORY LIST //////// */}
-    <ul className="menu bg-base-200 w-100 rounded-box">
+    <ul className="menu bg-secondary bg-base-200 w-100 rounded-box">
       <li>
         <h2 className="rental-history" style={titleStyle}>Rental History</h2>
         <ul>
@@ -30,7 +30,7 @@ function UserToys ({ userData, setPage, toyId, setToyId }) {
     </ul>
     <br></br>
     {/* //////// SAVED TOYS LIST //////// */}
-    <ul className="menu bg-base-200 w-100 rounded-box">
+    <ul className="menu bg-secondary bg-base-200 w-100 rounded-box">
       <li>
         <h2 className="saved" style={titleStyle}>Saved Toys</h2>
         <ul>
