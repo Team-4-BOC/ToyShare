@@ -14,7 +14,7 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, sort, filter, user
     handleSearchTermChange();
     // fetchUser();
     // fetchSaved();
-    fetchEarliest();
+    // fetchEarliest();
   }, [searchTerm]);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, sort, filter, user
     });
   }
 
-  const fetchEarliest = () => {
+  const fetchEarliest = () => { //testing query
     axios
     .get('/bookings/getEarliestInstanceOfEachToy')
     .then((response) => {
@@ -117,7 +117,6 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, sort, filter, user
                 }
               }
             }
-            console.log(sortedToys);
             setRenderedToys(sortedToys);
           })
           .catch((err) => {
