@@ -152,6 +152,7 @@ const EditToy = ({ toyId, userId }) => {
     setDateValues(inputDates);
   };
 
+  console.log('GIVE ME PHOTOS', photoURLs);
   return (
     <div className="flex items-center justify-center flex-col space-y-3 overflow-y-scroll">
       <CarouselEdit photoURLs={photoURLs} setSelectedPhoto={setSelectedPhoto} deletePhoto={deletePhoto}/>
