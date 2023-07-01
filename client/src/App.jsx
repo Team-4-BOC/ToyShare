@@ -15,7 +15,7 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 // import { use } from 'matter';
 
 const App = () => {
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState(3);
   const [userCoords, setUserCoords] = useState();
   // const [userEmail, setUserEmail] = useState('');
   console.log('You can do this!!!');
@@ -122,7 +122,11 @@ const App = () => {
     return (
      <>
        <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
-       <AddToy setPage={setPage} />
+       <br></br>
+       <br></br>
+       <br></br>
+       <br></br>
+       <AddToy setPage={setPage} userId={userId}/>
      </>
     );
   }
@@ -130,6 +134,10 @@ const App = () => {
     return (
       <>
         <TopBar setPage={setPage} setUserId={setUserId} userId={userId} />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <EditToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} />
       </>
     );
