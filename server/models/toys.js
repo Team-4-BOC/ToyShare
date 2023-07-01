@@ -101,7 +101,7 @@ module.exports = {
   },
   getOnePhotos: (data) => {
     const values = [data.toyId];
-    return db.query('SELECT * from toyshare.toy_photos where toy_id = $1;', values);
+    return db.query('SELECT array_agg(url) AS urls from toyshare.toy_photos where toy_id = $1;', values);
   },
   postPhotos: (data) => {
     const queries = data.photoURLs.map((url) => {

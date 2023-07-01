@@ -87,15 +87,15 @@ const EditToy = ({ toyId, userId }) => {
     axios.get('/toys/photos', { params: { toyId: toyId } })
       .then((results) => {
         const data = results.data;
-        console.log(data);
-        setPhotoURLs(results.data);
+        console.log('Image get');
+        console.log(data[0].urls);
+        setPhotoURLs(data[0].urls);
       });
   };
   const deletePhoto = () => {
     console.log('Selected Photo', selectedPhoto);
     axios.delete('toys/photos', { data: { url: selectedPhoto, toyId: toyId } })
       .then(() => {
-        console.log('Image get');
         getOnePhotos();
       })
       .catch((err) => {
