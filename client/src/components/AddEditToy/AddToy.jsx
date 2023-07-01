@@ -4,7 +4,7 @@ import DatePicker from 'react-multi-date-picker';
 import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 import axios from 'axios';
 
-const AddToy = (userId) => {
+const AddToy = ({ userId }) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
@@ -58,7 +58,7 @@ const AddToy = (userId) => {
       toy_name: toyName,
       category_id: selectedCategory,
       rating: rating,
-      user_id: 3,
+      user_id: userId,
       toy_description: description,
       original_price: originalPrice,
       rental_price: rentalPrice,

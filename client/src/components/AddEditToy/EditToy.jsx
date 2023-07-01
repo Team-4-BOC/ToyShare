@@ -6,7 +6,7 @@ import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 import DatePicker from 'react-multi-date-picker';
 import CarouselEdit from './CarouselEdit.jsx';
 
-const EditToy = ({ toyId, toyUserId }) => {
+const EditToy = ({ toyId, userId }) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [photoURLs, setPhotoURLs] = useState('');
@@ -22,10 +22,11 @@ const EditToy = ({ toyId, toyUserId }) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
   const [selectedURL, setSelectedURL] = useState('');
   const [editSubmit, setEditSubmit] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState('');
 
 
   const fetchToy = () => {
-    axios.get('toy', { params: { toyId: toyId, current_user_id: toyUserId } }) // Fix current user id and toy id
+    axios.get('toy', { params: { toyId: toyId, current_user_id: userId } }) // Fix current user id and toy id
       .then((apiResults) => {
         const data = apiResults.data;
         setToyName(data.name);
@@ -41,7 +42,7 @@ const EditToy = ({ toyId, toyUserId }) => {
       });
   };
   const editToy = async () => {
-    const addToy = await axios.patch('/toys', {
+    await axios.put('/toys', {
       toy_name: toyName,
       category_id: selectedCategoryId,
       toy_description: description,
@@ -82,7 +83,24 @@ const EditToy = ({ toyId, toyUserId }) => {
       })
       .catch((err) => { console.log(err); });
   };
-
+  const getOnePhotos = () => {
+    axios.get('/toys/photos', { params: { toyId: toyId } })
+      .then((results) => {
+        const data = results.data;
+        console.log(data);
+        setPhotoURLs(results.data);
+      });
+  };
+  const deletePhoto = () => {
+    console.log('Selected Photo', selectedPhoto);
+    axios.delete('toys/photos', { data: { url: selectedPhoto, toyId: toyId } })
+      .then(() => {
+        getOnePhotos();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     fetchToy();
     getCategories();
@@ -136,7 +154,7 @@ const EditToy = ({ toyId, toyUserId }) => {
 
   return (
     <div className="flex items-center justify-center flex-col space-y-3 overflow-y-scroll">
-      <CarouselEdit photoURLs={photoURLs}/>
+      <CarouselEdit photoURLs={photoURLs} setSelectedPhoto={setSelectedPhoto} deletePhoto={deletePhoto}/>
       <div>Edit {toyName} </div>
       <input onChange={handleChange} type="text" placeholder="Edit Toy Name" defaultValue={toyName} className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
       <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="selectedCategory">

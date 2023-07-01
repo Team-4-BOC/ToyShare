@@ -91,7 +91,7 @@ module.exports = {
     const values = [data.toy_name, data.category_id, data.rating, data.user_id, data.toy_description, data.original_price, data.rental_price, data.delivery_method, data.payment_method];
     return db.query('INSERT INTO toyshare.toys(toy_name, category_id, rating, user_id, toy_description, original_price, rental_price, delivery_method, payment_method) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id;', values);
   },
-  patch: (data) => {
+  put: (data) => {
     const values = [data.toy_name, data.category_id, data.toy_description, data.original_price, data.rental_price, data.delivery_method, data.payment_method, data.toyId];
     return db.query('UPDATE toyshare.toys SET toy_name = $1, category_id = $2, toy_description = $3, original_price = $4, rental_price = $5, delivery_method = $6, payment_method = $7 WHERE id = $8;', values)
   },
@@ -105,6 +105,10 @@ module.exports = {
       return db.query('INSERT INTO toyshare.toy_photos(toy_id, url) VALUES($1, $2)', values);
     });
     return Promise.all(queries);
+  },
+  deletePhotos: (data) => {
+    const values = [data.toyId, data.url];
+    return db.query('DELETE FROM toyshare.toy_photos WHERE toyshare.toy_photos.url = $2 AND toyshare.toy_photos.toy_id = $1', values);
   },
   getCategory: (data) => {
     console.log('---categoyr', data);

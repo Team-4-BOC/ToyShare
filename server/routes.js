@@ -13,10 +13,10 @@ router.get('/s3Url', async (req, res) => {
 });
 
 router.post('/toys', controllers.toys.post);
-router.patch('/toys', controllers.toys.patch);
+router.put('/toys', controllers.toys.put);
 router.post('/toys/photos', controllers.toys.postPhotos);
 router.get('/toys/photos', controllers.toys.getOnePhotos);
-// router.delete('/toys/photos', controllers.toys.deletePhoto);
+router.delete('/toys/photos', controllers.toys.deletePhotos);
 router.get('/toys/category', controllers.toys.getCategory);
 router.post('/toys/category', controllers.toys.postCategory);
 router.get('/toys/dates', controllers.toys.getDates);

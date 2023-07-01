@@ -49,14 +49,14 @@ module.exports = {
         console.log('ERROR ADDING TOY', err);
       });
   },
-  patch: (req, res) => {
-    models.toys.patch(req.body)
+  put: (req, res) => {
+    models.toys.put(req.body)
       .then((results) => {
-        res.status(201).send(results);
+        res.status(200).send(results);
       })
       .catch((err) => {
-        res.status(500).send('ERROR adding toy');
-        console.log('ERROR ADDING TOY', err);
+        res.status(500).send('ERROR updating toy');
+        console.log('ERROR updating TOY', err);
       });
   },
   getOnePhotos: (req, res) => {
@@ -77,6 +77,16 @@ module.exports = {
       .catch((err) => {
         res.status(500).send('ERROR adding toy photo');
         console.log('ERROR ADDING TOY photo', err);
+      });
+  },
+  deletePhotos: (req, res) => {
+    models.toys.deletePhotos(req.body)
+      .then((results) => {
+        res.status(204).send('Successfully deleted toy photo!');
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR deleting toy photo');
+        console.log('ERROR deleting TOY photo', err);
       });
   },
   getCategory: (req, res) => {
