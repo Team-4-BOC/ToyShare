@@ -5,10 +5,9 @@ import Map from '../../SharedComponents/Map.jsx';
 import getDistance from '../../SharedComponents/getDistance.js';
 
 const ToyInfo = ({ toy, setPage, setMap, map, userCoords }) => {
-  console.log(userCoords);
   const [distance, setDistance] = useState();
 
-  useEffect(() => { if (userCoords !== undefined) { setDistance(getDistance(userCoords, toy.latlng)); } }, [userCoords]);
+  useEffect(() => { if (userCoords !== undefined && toy.latlng !== undefined) { setDistance(getDistance(userCoords, toy.latlng)); } }, [userCoords]);
 
   return (
     <div className='pb-24 relative'>

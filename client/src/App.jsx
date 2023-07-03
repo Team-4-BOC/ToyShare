@@ -59,6 +59,8 @@ const App = () => {
   const [sort, setSort] = useState('');
   const [filter, setFilter] = useState('');
   const [toysIDCoordsPhoto, setToysIDCoordsPhoto] = useState([]);
+
+  console.log(toysIDCoordsPhoto);
   if (page === 0) {
     return (
       <>
