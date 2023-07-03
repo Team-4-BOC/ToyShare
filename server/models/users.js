@@ -16,6 +16,17 @@ const getCoordinates = (location, cb) => { // cb = (err, data) =>
     });
 };
 
+// getCoordinates('Tahoe city, C.A ', (err, data) => { Example
+//   console.log(data);
+//   db.query(`UPDATE toyshare.users SET lat_lng = '${data}' where id = 49;`)
+//   .then(() => {
+//     console.log('worled')
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
+// });
+
 module.exports = {
   getOne: (data) => {
     const values = [data.id];

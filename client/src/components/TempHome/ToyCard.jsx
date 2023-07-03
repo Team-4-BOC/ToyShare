@@ -5,7 +5,7 @@ import getDistance from '../SharedComponents/getDistance';
 function ToyCard ({ toy, handleToyClick, userCoords, toysIDCoordsPhoto }) {
   const [distance, setDistance] = useState();
 
-  useEffect(() => { if (toysIDCoordsPhoto !== undefined && userCoords !== undefined) { setDistance(getDistance(userCoords, toysIDCoordsPhoto[toy.id - 1].latlng)); } }, [toysIDCoordsPhoto, userCoords]);
+  useEffect(() => { if (toysIDCoordsPhoto !== undefined && userCoords !== undefined && toysIDCoordsPhoto[toy.id - 1] !== undefined && toysIDCoordsPhoto[toy.id - 1].latlng !== undefined) { setDistance(getDistance(userCoords, toysIDCoordsPhoto[toy.id - 1].latlng)); } }, [toysIDCoordsPhoto, userCoords]);
   return (
     <li class="card bg-base-100 shadow-xl" key={toy.id} onClick={() => handleToyClick(toy.id, toy.user_id)}>
       <figure>
