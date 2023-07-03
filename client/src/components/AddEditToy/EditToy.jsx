@@ -166,9 +166,22 @@ const EditToy = ({ toyId, userId }) => {
   console.log('GIVE ME PHOTOS', photoURLs);
   return (
     <div className="flex items-center justify-center flex-col space-y-3 overflow-y-scroll">
+
       <CarouselEdit photoURLs={photoURLs} setSelectedPhoto={setSelectedPhoto} deletePhoto={deletePhoto}/>
+
       <div>Edit {toyName} </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">Edit Toy Name</span>
+        </label>
       <input onChange={handleChange} type="text" placeholder="Edit Toy Name" defaultValue={toyName} className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">Edit Category</span>
+        </label>
       <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="selectedCategory">
         <option disabled selected>Select Toy Category</option>
        {selectedCategory
@@ -182,6 +195,8 @@ const EditToy = ({ toyId, userId }) => {
          )
          : null}
       </select>
+      </div>
+
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Upload Toy Image</span>
@@ -190,21 +205,51 @@ const EditToy = ({ toyId, userId }) => {
         <label className="label">
         </label>
       </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">Edit Original Price</span>
+        </label>
       <input onChange={handleChange} type="text" placeholder="EditOriginal Price" defaultValue={originalPrice} className="input input-bordered input-primary w-full max-w-xs" name="originalPrice"/>
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">Edit Rental Price</span>
+        </label>
       <input onChange={handleChange} type="text" placeholder="Edit Rental Price" className="input input-bordered input-primary w-full max-w-xs" defaultValue={rentalPrice} name="rentalPrice"/>
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">Edit Description</span>
+        </label>
       <input onChange={handleChange} type="text" placeholder="Edit Description" className="input input-bordered input-primary w-full max-w-xs" defaultValue={description} name="description"/>
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">Edit Delivery Method</span>
+        </label>
       <select onChange={handleChange} className="select select-primary w-full max-w-xs" defaultValue={deliveryMethod} name="deliveryMethod">
         <option disabled selected>Select Delivery Methods</option>
         <option>Pick Up</option>
         <option>Delivery</option>
         <option>Pick Up & Delivery</option>
       </select>
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">Edit Payment Method</span>
+        </label>
       <select onChange={handleChange} className="select select-primary w-full max-w-xs" defaultValue={paymentMethod}name="paymentMethod">
         <option disabled selected>Select Payment Methods</option>
         <option>Cash</option>
         <option>Venmo</option>
         <option>Cash & Venmo</option>
       </select>
+      </div>
       <div className="stat-title text-info-content">Update Dates Available</div>
       <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)}plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
       <div>
