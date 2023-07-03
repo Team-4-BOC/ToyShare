@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 
-import MapBox, { Marker } from 'react-map-gl';
+// import MapBox, { Marker } from 'react-map-gl';
 
 import mapBoxKey from './tempMapBoxKey.js';
 
@@ -64,4 +64,4 @@ const Map = ({ latLng, iconImage, toysIDCoordsPhoto, userCoords }) => {
   );
 };
 
-export default Map;
+// export default Map;

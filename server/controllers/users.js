@@ -66,6 +66,16 @@ module.exports = {
     models.users.addUserPhoto(req.body)
       .then(() => {
         console.log('photo added to users photos table');
+        res.status(201).send('hello');
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
+  },
+  updateUserPhoto: (req, res) => {
+    models.users.updateUserPhoto(req.body)
+      .then(() => {
+        res.status(201).send('user photo updated');
       })
       .catch((err) => {
         res.status(500).send(err);
@@ -85,6 +95,17 @@ module.exports = {
   updateUser: (req, res) => {
     models.users.updateUser(req.body)
       .then(() => {
+        res.status(200).send();
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
+  },
+  deleteUser: (req, res) => {
+    // console.log('ID----><><><><', req.query.id)
+    models.users.deleteOne(req.query.id)
+      .then(() => {
+        console.log('user deleted');
         res.status(200).send();
       })
       .catch((err) => {

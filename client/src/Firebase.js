@@ -24,43 +24,42 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-const signInWithGoogle = () => {
-  signInWithPopup(auth, provider)
+const signInWithGoogle = (set) => {
+  return signInWithPopup(auth, provider)
     .then((result) => {
-      alert('you are signed in');
-      axios.get('/userNew', { params: { email: result.user.email } })
+      return axios.get('/userNew', { params: { email: result.user.email } })
         .then((response) => {
-          console.log('RESPONSE', response);
-          // alert('You are now Logged in');
           if (response.data.length !== 0) {
-            // alert('You are now Logged in');
+            alert('You are now signed in');
+            return response.data[0].id;
           } else {
             const name = result.user.displayName.split(' ');
-            console.log('name inside else block of get request then block', name);
 
             const data = {};
             data.first_name = name[0];
             data.last_name = name[1];
             data.email = result.user.email;
 
-            axios.post('/user', data)
+            return axios.post('/user', data)
               .then(() => {
-                axios.get('/userNew', { params: { email: result.user.email } })
+                return axios.get('/userNew', { params: { email: result.user.email } })
                   .then((data) => {
-                    console.log('inside second get request inside signupwithGoogle', data);
                     const photoData = {};
-                    data.id = data.data[0].id;
-                    data.url = result.user.photoURL;
-                    axios.post('/user/photos', photoData)
-                      .then(() => {
-                        alert('Thanks for logging in!!');
+                    photoData.user_id = data.data[0].id;
+                    const id = data.data[0].id;
+                    photoData.url = result.user.photoURL;
+                    alert('Please update Your city/state information in your profile to see toy locations');
+                    return axios.post('/user/photos', photoData)
+                      .then((data) => {
+                        return id;
                       });
-                  });
-                // console.log('inside post request for signInWithGoogle then block');
-              });
+                  })
+                  .catch((err) => console.log(err));
+              })
+              .catch((err) => console.log(err));
           }
-        });
-      console.log('results', result);
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => {
       alert(err);
@@ -69,11 +68,12 @@ const signInWithGoogle = () => {
 
 const signOutOfGoogle = () => {
   if (auth.currentUser === null) {
-    alert('You are already signed out, please sign in to checkout or edit your profile');
+    alert('You are already signed out, please signin to checkout or edit your profile');
   } else {
-    signOut(auth)
+    return signOut(auth)
       .then(() => {
         alert('You have signed out');
+        return ('signed out');
       })
       .catch((err) => {
         alert(err);
@@ -91,8 +91,12 @@ const verifySignedIn = () => {
 };
 
 const getCurrentUserInfo = () => {
-  const userInfo = auth.currentUser;
-  return userInfo;
+  const idToken = auth.currentUser;
+  if (idToken) {
+    return idToken.email;
+  } else {
+    console.log('no user signed in');
+  };
 };
 
 export { auth, signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo };

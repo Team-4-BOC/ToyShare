@@ -48,3 +48,31 @@
   background-repeat: no-repeat;
 }
 /*---------- MARKER ICON -------*/
+
+/*---------- NOTIFS --------- */
+
+.notification-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.bell-icon {
+  cursor: pointer;
+}
+
+.notification-list {
+  position: absolute;
+  top: 100%;
+  right: 50;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  min-width: 180px;
+  max-width: 180px;
+}
+
+.notification {
+  padding: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+}
