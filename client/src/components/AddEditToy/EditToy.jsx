@@ -10,6 +10,7 @@ const EditToy = ({ toyId, userId }) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [photoURLs, setPhotoURLs] = useState('');
+  const [currentPhotoURLs, setCurrentPhotoURLs] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
   const [rentalPrice, setRentalPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -30,7 +31,7 @@ const EditToy = ({ toyId, userId }) => {
       .then((apiResults) => {
         const data = apiResults.data;
         setToyName(data.name);
-        setPhotoURLs(data.photos);
+        setCurrentPhotoURLs(data.photos);
         setOriginalPrice(data.original_price);
         setRentalPrice(data.rental_price);
         setDescription(data.description);
@@ -41,6 +42,27 @@ const EditToy = ({ toyId, userId }) => {
         console.log('EROR fetching toy: ', err);
       });
   };
+
+  const uploadImages = async (photo) => {
+    const url = await axios.get('/s3Url').then((res) => { return res.data.url; });
+    const config = {
+      headers: {
+        'Content-Type': 'image'
+      }
+    };
+    await axios.put(url, photo, config);
+    const imageUrl = url.split('?')[0];
+    return imageUrl;
+  };
+
+  const uploadAllImages = () => {
+    const resultURLs = [];
+    for (let i = 0; i < photos.length; i++) {
+      resultURLs.push(uploadImages(photos[i]));
+    }
+    return Promise.all(resultURLs);
+  };
+
   const editToy = async () => {
     await axios.put('/toys', {
       toy_name: toyName,
@@ -52,8 +74,8 @@ const EditToy = ({ toyId, userId }) => {
       payment_method: paymentMethod,
       toyId: toyId
     });
-    // const imageURLS = await uploadAllImages();
-    // await axios.post('/toys/photos', { toyId: toyId, photoURLs: imageURLS });
+    const imageURLS = await uploadAllImages();
+    await axios.post('/toys/photos', { toyId: toyId, photoURLs: imageURLS });
     // await axios.post('/toys/dates', { toyId: toyId, dates: datesFormatted });
     setEditSubmit(!editSubmit);
     // eslint-disable-next-line no-undef
@@ -89,7 +111,7 @@ const EditToy = ({ toyId, userId }) => {
         const data = results.data;
         console.log('Image get');
         console.log(data[0].urls);
-        setPhotoURLs(data[0].urls);
+        setCurrentPhotoURLs(data[0].urls);
       });
   };
   const deletePhoto = () => {
@@ -163,11 +185,16 @@ const EditToy = ({ toyId, userId }) => {
     setDateValues(inputDates);
   };
 
-  console.log('GIVE ME PHOTOS', photoURLs);
+  const handlePhotoUpload = (e) => {
+    e.preventDefault();
+    const files = e.target.files;
+    setPhotos(files);
+  };
+
   return (
     <div className="flex items-center justify-center flex-col space-y-3 overflow-y-scroll">
 
-      <CarouselEdit photoURLs={photoURLs} setSelectedPhoto={setSelectedPhoto} deletePhoto={deletePhoto}/>
+      <CarouselEdit photoURLs={currentPhotoURLs} setSelectedPhoto={setSelectedPhoto} deletePhoto={deletePhoto}/>
 
       <div>Edit {toyName} </div>
 
@@ -201,7 +228,7 @@ const EditToy = ({ toyId, userId }) => {
         <label className="label">
           <span className="label-text">Upload Toy Image</span>
         </label>
-        <input onChange={handleChange} type="file" multiple="multiple" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
+        <input onChange={handlePhotoUpload} type="file" multiple="multiple" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
         <label className="label">
         </label>
       </div>
