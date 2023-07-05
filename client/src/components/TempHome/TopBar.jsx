@@ -44,6 +44,7 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
       .catch((err) => err);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const [notifications, setNotifications] = useState(['Josh Man has rented your toy!']);
   const [showNotifs, setShowNotifs] = useState(false);
   const [newNotifs, setNewNotifs] = useState(true);
@@ -57,7 +58,7 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
           ToyShare
         </a>
       </div>
-      <div style={{marginRight: '10px'}}>
+      <div style={{ marginRight: '10px' }}>
       <NotificationDropdown
         newNotifs={newNotifs}
         setNewNotifs={setNewNotifs}
