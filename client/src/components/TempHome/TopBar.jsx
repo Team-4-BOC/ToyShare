@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import swal from 'sweetalert';
 // import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo } from '../../Firebase.js';
@@ -19,8 +20,12 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
   // };
   const handleAcessProfileRequest = () => {
     if (!verifySignedIn()) {
-      // eslint-disable-next-line no-undef
-      alert('Please signin to see your profile ');
+      swal({
+        title: 'Warning!',
+        text: 'Please sign in to view your profile',
+        icon: 'warning',
+        button: 'OK'
+      });
     } else {
       setPage(2);
     }
