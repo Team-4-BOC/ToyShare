@@ -17,11 +17,11 @@ const RenteeProfile = ({ userId, setPage, toyUserId }) => {
   }, []);
 
   if (!renteeData.user) {
-    return (
-      <div>
-        Loading......
-      </div>
-    );
+    // return (
+    //   <div>
+    console.log('Loading......');
+    //   </div>
+    // );
   } else {
     return (
       <div className="h-screen flex items-center justify-center flex-col">
