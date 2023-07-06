@@ -131,8 +131,8 @@ const AddToy = ({ userId }) => {
     <div className="h-screen flex items-center justify-center flex-col space-y-3 overflow-y-scroll">
       <div>Add a Toy!</div>
       <input onChange={handleChange} type="text" placeholder="Add Toy Name" className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
-      <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="selectedCategory">
-        <option disabled selected>Select Toy Category</option>
+      <select onChange={handleChange} className="select select-primary w-full max-w-xs" defaultValue='Select Toy Category' name="selectedCategory">
+        <option disabled>Select Toy Category</option>
        {currentCategories.map(category => <option key={category.id} data-key={category.id}> {category.name} </option>)}
       </select>
       <div className="form-control w-full max-w-xs">
@@ -146,14 +146,14 @@ const AddToy = ({ userId }) => {
       <input onChange={handleChange} type="text" placeholder="Add Original Price" className="input input-bordered input-primary w-full max-w-xs" name="originalPrice"/>
       <input onChange={handleChange} type="text" placeholder="Add Rental Price" className="input input-bordered input-primary w-full max-w-xs" name="rentalPrice"/>
       <input onChange={handleChange} type="text" placeholder="Add Description" className="input input-bordered input-primary w-full max-w-xs" name="description"/>
-      <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="deliveryMethod">
-        <option disabled selected>Select Delivery Methods</option>
+      <select onChange={handleChange} defaultValue='Select Delivery Methods' className="select select-primary w-full max-w-xs" name="deliveryMethod">
+        <option disabled>Select Delivery Methods</option>
         <option>Pick Up</option>
         <option>Delivery</option>
         <option>Pick Up & Delivery</option>
       </select>
-      <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="paymentMethod">
-        <option disabled selected>Select Payment Methods</option>
+      <select onChange={handleChange} defaultValue='Select Payment Methods' className="select select-primary w-full max-w-xs" name="paymentMethod">
+        <option disabled>Select Payment Methods</option>
         <option>Cash</option>
         <option>Venmo</option>
         <option>Cash & Venmo</option>
