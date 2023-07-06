@@ -237,12 +237,10 @@ const EditToy = ({ toyId, userId }) => {
            } else {
              return (<option key={category.id} data-key={category.id}> {category.name} </option>);
            }
-         }
-         )
+         })
          : null}
       </select>
       </div>
-
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Upload Toy Image</span>
@@ -273,7 +271,8 @@ const EditToy = ({ toyId, userId }) => {
       <input onChange={handleChange} type="text" placeholder="Edit Description" className="input input-bordered input-primary w-full max-w-xs" defaultValue={description} name="description"/>
       </div>
 
-      <div className="form-control w-full max-w-xs">
+      {deliveryMethod
+        ? <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Edit Delivery Method</span>
         </label>
@@ -284,8 +283,9 @@ const EditToy = ({ toyId, userId }) => {
         <option>Pick Up & Delivery</option>
       </select>
       </div>
-
-      <div className="form-control w-full max-w-xs">
+        : null}
+      {paymentMethod
+        ? <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Edit Payment Method</span>
         </label>
@@ -296,6 +296,7 @@ const EditToy = ({ toyId, userId }) => {
         <option>Cash & Venmo</option>
       </select>
       </div>
+        : null}
       <div className="stat-title text-info-content">Update Dates Available</div>
       <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)}plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
       <div>
