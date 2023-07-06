@@ -7,7 +7,7 @@ const RenteeInventory = ({ inventoryData }) => {
   };
   return (
     <div className="user-toys">
-      <ul className="menu bg-base-200 w-100 rounded-box">
+      <ul className="menu bg-secondary bg-base-200 w-100 rounded-box">
         <li>
           <h2 className="rental-inventory" style={titleStyle}>Rental Inventory</h2>
           <ul>

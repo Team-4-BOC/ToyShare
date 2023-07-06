@@ -17,7 +17,7 @@ import BottomBar from './components/TempHome/BottomBar.jsx';
 const App = () => {
   const [userId, setUserId] = useState(3);
   const [userCoords, setUserCoords] = useState();
-  // const [userEmail, setUserEmail] = useState('');
+  const [userEmail, setUserEmail] = useState('');
   console.log('You can do this!!!');
   const email = getCurrentUserInfo();
 

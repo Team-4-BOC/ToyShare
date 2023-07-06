@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import swal from 'sweetalert';
 
 import { verifySignedIn } from '../../Firebase.js';
 
@@ -24,8 +25,12 @@ const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto, userCoord
     if (isSignedIn) {
       setPage(4);
     } else {
-      // eslint-disable-next-line no-undef
-      alert('Please sign in to add a toy');
+      swal({
+        title: 'Warning!',
+        text: 'Please sign in to add a toy',
+        icon: 'warning',
+        button: 'OK'
+      });
     }
   };
 
@@ -38,13 +43,13 @@ const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto, userCoord
         <button className="active:bg-gray-100 text-black py-3 px-4 rounded-full border border-solid" onClick={onAddToyClick}>
           AddToy
         </button>
-        <select class="select sort" value={sort} onChange={() => { setSort(event.target.value) }}>
+        <select className="select sort" value={sort} onChange={() => { setSort(event.target.value) }}>
           <option value="">Sort by</option>
           <option value="newest">Newest</option>
           <option value="rating">Rating</option>
           <option value="distance">Distance</option>
         </select>
-        <select class="select filter" value={filter} onChange={() => { setFilter(event.target.value) }}>
+        <select className="select filter" value={filter} onChange={() => { setFilter(event.target.value) }}>
           <option value="">Filter</option>
           <option value="recommend">Recommend</option>
           <option value="">All</option>
