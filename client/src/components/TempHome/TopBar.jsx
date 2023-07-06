@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import swal from 'sweetalert';
 // import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo } from '../../Firebase.js';
@@ -19,8 +20,12 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
   // };
   const handleAcessProfileRequest = () => {
     if (!verifySignedIn()) {
-      // eslint-disable-next-line no-undef
-      alert('Please signin to see your profile ');
+      swal({
+        title: 'Warning!',
+        text: 'Please sign in to view your profile',
+        icon: 'warning',
+        button: 'OK'
+      });
     } else {
       setPage(2);
     }
@@ -44,11 +49,12 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
       .catch((err) => err);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const [notifications, setNotifications] = useState(['Josh Man has rented your toy!']);
   const [showNotifs, setShowNotifs] = useState(false);
   const [newNotifs, setNewNotifs] = useState(true);
   return (
-    <div className="fixed navbar bg-base-100 bg-white z-10 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
+    <div className="fixed navbar bg-primary z-10 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
       <div className="flex-1">
         <a
           className="btn btn-ghost normal-case text-xl"
@@ -57,7 +63,7 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
           ToyShare
         </a>
       </div>
-      <div style={{marginRight: '10px'}}>
+      <div style={{ marginRight: '10px' }}>
       <NotificationDropdown
         newNotifs={newNotifs}
         setNewNotifs={setNewNotifs}

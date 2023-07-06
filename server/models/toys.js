@@ -145,5 +145,9 @@ module.exports = {
   save: (data) => {
     const values = [data.toyId, data.userId];
     return db.query('INSERT INTO toyshare.saved_toys(toy_id, user_id) VALUES($1, $2)', values);
+  },
+  getSaved: (data) => {
+    const values = [data.userId];
+    return db.query('SELECT * FROM toyshare.saved_toys WHERE user_id = $1;', values);
   }
 };
