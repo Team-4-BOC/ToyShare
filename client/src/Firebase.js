@@ -79,7 +79,12 @@ const signInWithGoogle = (set) => {
 
 const signOutOfGoogle = () => {
   if (auth.currentUser === null) {
-    alert('You are already signed out, please signin to checkout or edit your profile');
+    swal({
+      title: 'Sorry',
+      text: 'You are already signed out, please signin to checkout or edit your profile',
+      icon: 'warning',
+      button: 'OK'
+    });
   } else {
     return signOut(auth)
       .then(() => {
