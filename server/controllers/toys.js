@@ -59,6 +59,16 @@ module.exports = {
         console.log('ERROR updating TOY', err);
       });
   },
+  delete: (req, res) => {
+    models.toys.delete(req.body)
+      .then((results) => {
+        res.status(200).send('Deleted Toy!');
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR deleting toy');
+        console.log('ERROR deleting TOY', err);
+      });
+  },
   getOnePhotos: (req, res) => {
     models.toys.getOnePhotos(req.query)
       .then((results) => {
@@ -82,7 +92,7 @@ module.exports = {
   deletePhotos: (req, res) => {
     models.toys.deletePhotos(req.body)
       .then((results) => {
-        res.status(204).send('Successfully deleted toy photo!');
+        res.status(200).send('Successfully deleted toy photo!');
       })
       .catch((err) => {
         res.status(500).send('ERROR deleting toy photo');
@@ -127,6 +137,16 @@ module.exports = {
       .catch((err) => {
         res.status(500).send('ERROR getting dates');
         console.log('ERROR getting dates', err);
+      });
+  },
+  deleteAllDates: (req, res) => {
+    models.toys.deleteAllDates(req.body)
+      .then((results) => {
+        res.status(200).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR deleting dates');
+        console.log('ERROR deleting dates', err);
       });
   },
   saved: (req, res) => {

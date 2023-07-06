@@ -14,6 +14,7 @@ router.get('/s3Url', async (req, res) => {
 
 router.post('/toys', controllers.toys.post);
 router.put('/toys', controllers.toys.put);
+router.delete('/toys', controllers.toys.delete);
 router.post('/toys/photos', controllers.toys.postPhotos);
 router.get('/toys/photos', controllers.toys.getOnePhotos);
 router.delete('/toys/photos', controllers.toys.deletePhotos);
@@ -21,7 +22,7 @@ router.get('/toys/category', controllers.toys.getCategory);
 router.post('/toys/category', controllers.toys.postCategory);
 router.get('/toys/dates', controllers.toys.getDates);
 router.post('/toys/dates', controllers.toys.postDates);
-// router.delete('/toys/dates', controllers.toys.deleteDate);
+router.delete('/toys/dates', controllers.toys.deleteAllDates);
 
 router.get('/user', controllers.users.getOne);
 router.get('/userpf', controllers.users.getOneMeta);
