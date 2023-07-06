@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 
 import { initializeApp } from 'firebase/app';
+import swal from 'sweetalert';
 import axios from 'axios';
 import {
   getAuth,
@@ -30,7 +31,12 @@ const signInWithGoogle = (set) => {
       return axios.get('/userNew', { params: { email: result.user.email } })
         .then((response) => {
           if (response.data.length !== 0) {
-            alert('You are now signed in');
+            swal({
+              title: 'Success!',
+              text: 'You are signed in!',
+              icon: 'success',
+              button: 'OK'
+            });
             return response.data[0].id;
           } else {
             const name = result.user.displayName.split(' ');
@@ -48,7 +54,12 @@ const signInWithGoogle = (set) => {
                     photoData.user_id = data.data[0].id;
                     const id = data.data[0].id;
                     photoData.url = result.user.photoURL;
-                    alert('Please update Your city/state information in your profile to see toy locations');
+                    swal({
+                      title: 'Welcome!',
+                      text: 'You are signed in! Please update Your city/state information in your profile to see toy locations',
+                      icon: 'success',
+                      button: 'OK'
+                    });
                     return axios.post('/user/photos', photoData)
                       .then((data) => {
                         return id;
@@ -72,7 +83,12 @@ const signOutOfGoogle = () => {
   } else {
     return signOut(auth)
       .then(() => {
-        alert('You have signed out');
+        swal({
+          title: 'Good bye!',
+          text: 'You are signed out!',
+          icon: 'success',
+          button: 'OK'
+        });
         return ('signed out');
       })
       .catch((err) => {
