@@ -138,6 +138,10 @@ module.exports = {
     const values = [data.toyId];
     return db.query('SELECT array_agg(dates) AS dates_array FROM toyshare.dates_available WHERE toy_id = $1;', values);
   },
+  deleteAllDates: (data) => {
+    const values = [data.toyId];
+    return db.query('DELETE FROM toyshare.dates_available WHERE toy_id = $1;', values);
+  },
   save: (data) => {
     const values = [data.toyId, data.userId];
     return db.query('INSERT INTO toyshare.saved_toys(toy_id, user_id) VALUES($1, $2)', values);

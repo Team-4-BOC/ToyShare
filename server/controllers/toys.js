@@ -139,6 +139,16 @@ module.exports = {
         console.log('ERROR getting dates', err);
       });
   },
+  deleteAllDates: (req, res) => {
+    models.toys.deleteAllDates(req.body)
+      .then((results) => {
+        res.status(200).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR deleting dates');
+        console.log('ERROR deleting dates', err);
+      });
+  },
   saved: (req, res) => {
     if (!req.body.toyId || !req.body.userId) {
       res.status(500).send('Please input userId and toyId');

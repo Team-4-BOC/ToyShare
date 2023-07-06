@@ -22,7 +22,7 @@ router.get('/toys/category', controllers.toys.getCategory);
 router.post('/toys/category', controllers.toys.postCategory);
 router.get('/toys/dates', controllers.toys.getDates);
 router.post('/toys/dates', controllers.toys.postDates);
-// router.delete('/toys/dates', controllers.toys.deleteDate);
+router.delete('/toys/dates', controllers.toys.deleteAllDates);
 
 router.get('/user', controllers.users.getOne);
 router.get('/userpf', controllers.users.getOneMeta);

@@ -63,6 +63,11 @@ const EditToy = ({ toyId, userId }) => {
     return Promise.all(resultURLs);
   };
 
+  const deleteDates = () => {
+    axios.delete('/toys/dates', { data: { toyId: toyId } })
+      .catch((err) => { console.log(err); });
+  };
+
   const editToy = async () => {
     await axios.put('/toys', {
       toy_name: toyName,
@@ -76,7 +81,8 @@ const EditToy = ({ toyId, userId }) => {
     });
     const imageURLS = await uploadAllImages();
     await axios.post('/toys/photos', { toyId: toyId, photoURLs: imageURLS });
-    // await axios.post('/toys/dates', { toyId: toyId, dates: datesFormatted });
+    await deleteDates();
+    await axios.post('/toys/dates', { toyId: toyId, dates: datesFormatted });
     setEditSubmit(!editSubmit);
     // eslint-disable-next-line no-undef
     alert('Toy Updated!');
@@ -97,16 +103,34 @@ const EditToy = ({ toyId, userId }) => {
       .catch((err) => { console.log(err); });
   };
 
+  const formatDates = (inputDates) => {
+    const newDatesList = [];
+    if (typeof inputDates[0] === 'string') {
+      for (let i = 0; i < inputDates.length; i++) {
+        const date = inputDates[i].slice(0, 10);
+        newDatesList.push(date);
+      }
+    } else {
+      for (let i = 0; i < inputDates.length; i++) {
+        const date = `${inputDates[i].year}-${String(inputDates[i].month).padStart(2, '0')}-${String(inputDates[i].day).padStart(2, '0')}`;
+        newDatesList.push(date);
+      }
+    }
+    return newDatesList;
+  };
   const getDates = () => {
     axios.get('/toys/dates', { params: { toyId: toyId } })
       .then((res) => {
         console.log(res.data[0].dates_array);
+        const formattedDates = formatDates(res.data[0].dates_array);
+        setDatesFormatted(formattedDates);
         setDateValues(res.data[0].dates_array);
       })
       .catch((err) => { console.log(err); });
   };
+
   const getOnePhotos = () => {
-    axios.get('/toys/photos', { params: { toyId: toyId } })
+    axios.get('/toys/photos', { data: { toyId: toyId } })
       .then((results) => {
         const data = results.data;
         console.log('Image get');
@@ -145,7 +169,7 @@ const EditToy = ({ toyId, userId }) => {
     description: setDescription,
     deliveryMethod: setDeliveryMethod,
     paymentMethod: setPaymentMethod,
-    selectedCategory: setSelectedCategory
+    selectedCategory: setSelectedCategoryId
   };
 
   const handleChange = (e) => {
@@ -175,12 +199,7 @@ const EditToy = ({ toyId, userId }) => {
   };
 
   const handleDateChange = (inputDates) => {
-    // eslint-disable-next-line quotes
-    const newDatesList = [];
-    for (let i = 0; i < inputDates.length; i++) {
-      const date = `${inputDates[i].year}-${String(inputDates[i].month).padStart(2, '0')}-${String(inputDates[i].day).padStart(2, '0')}`;
-      newDatesList.push(date);
-    }
+    const newDatesList = formatDates(inputDates);
     setDatesFormatted(newDatesList);
     setDateValues(inputDates);
   };
@@ -228,7 +247,7 @@ const EditToy = ({ toyId, userId }) => {
         <label className="label">
           <span className="label-text">Upload Toy Image</span>
         </label>
-        <input onChange={handlePhotoUpload} type="file" multiple="multiple" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
+        <input onChange={handlePhotoUpload} type="file" accept="image/*" multiple="multiple" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
         <label className="label">
         </label>
       </div>
