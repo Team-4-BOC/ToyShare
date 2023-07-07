@@ -7,50 +7,92 @@ import mapBoxKey from './tempMapBoxKey.js';
 const Map = ({ latLng, iconImage, toysIDCoordsPhoto, userCoords }) => {
   const [coordinates, setCoordinates] = useState();
   const [zoom, setZoom] = useState();
+  const [groupedToyCoordinates, setGroupedToyCoordinates] = useState();
+
+  const distanceWithinRadius = (lat1, lon1, lat2, lon2, radius) => { // Returns a close enough distance
+    const latDiff = Math.abs(lat1 - lat2);
+    const lonDiff = Math.abs(lon1 - lon2);
+
+    const latDistance = latDiff * 69;
+    const lonDistance = lonDiff * 69;
+
+    const distance = Math.sqrt(latDistance ** 2 + lonDistance ** 2);
+
+    return distance <= radius;
+  };
+
+  const groupSimilarLocations = (toys, radius) => { // raduis in miles
+    const groups = [];
+
+    for (let i = 0; i < toys.length; i++) {
+      let location;
+      if (toys[i].latlng) {
+        location = toys[i].latlng.split(',');
+      } else {
+        break;
+      }
+      let groupFound = false;
+
+      // Check if the location can be added to an existing group
+      for (let j = 0; j < groups.length; j++) {
+        const group = groups[j];
+        const groupLocation = group.location;
+
+        if (distanceWithinRadius(groupLocation[0], groupLocation[1], location[0], location[1], radius)) {
+          group.toys.push(toys[i].photo); // Add toy photo to the existing group
+          groupFound = true;
+          break;
+        }
+      }
+
+      // If no existing group found, create a new group
+      if (!groupFound) {
+        groups.push({ location, toys: [toys[i].photo] }); // Create a new group with the toy photo
+      }
+    }
+    console.log(groups);
+    return groups;
+  };
 
   const setMap = () => {
-    if (toysIDCoordsPhoto !== undefined && userCoords !== undefined) {
-      setCoordinates(userCoords.split(','));
+    if (toysIDCoordsPhoto) {
+      if (userCoords) {
+        console.log('User location working!');
+        setCoordinates(userCoords.split(','));
+      } else {
+        setCoordinates([38.500000, -98.0000]);
+      }
+      setGroupedToyCoordinates(groupSimilarLocations(toysIDCoordsPhoto, 30));
       setZoom(4);
     } else if (latLng !== undefined) {
       setCoordinates(latLng.split(','));
       setZoom(6);
-    } else {
-      setCoordinates([38.500000, -98.0000]);
     }
   };
-  useEffect(setMap, [userCoords]);
+  useEffect(setMap, [toysIDCoordsPhoto]);
 
   const handleViewStateChange = (props) => {
     const markerElements = document.querySelectorAll('.marker-element');
     const size = props.viewState.zoom * 20;
-    console.log(size);
+
     markerElements.forEach((element) => {
       element.style.height = size + 'px';
       element.style.width = size + 'px';
     });
   };
-  const curCoords = {};
   return (
       <div>
         {coordinates !== undefined
           ? <MapBox initialViewState={{ latitude: coordinates[0], longitude: coordinates[1], zoom }} style={{ width: window.innerWidth / 1.1 + 'px', height: window.innerHeight / 1.4 + 'px', position: 'fixed', top: '50%', right: '50%', transform: 'translate(50%, -50%)', zIndex: 30 }} mapboxAccessToken={mapBoxKey} mapStyle="mapbox://styles/mapbox/streets-v9" onZoom={handleViewStateChange}>
-            {toysIDCoordsPhoto !== undefined
-              ? toysIDCoordsPhoto.map((toy, idx) => {
-                if (!toy.latlng) {
-                  return (null);
-                }
-                if (curCoords[toy.latlng]) {
-                  // Fix me ------------
-                }
-                curCoords[toy.latLng] = true;
-                const markerCoordinates = toy.latlng.split(',');
+            {groupedToyCoordinates !== undefined
+              ? groupedToyCoordinates.map((toyGroup, idx) => {
+                const markerCoordinates = toyGroup.location;
                 return (
                   <Marker latitude={markerCoordinates[0]} longitude={markerCoordinates[1]} anchor="bottom" key={idx * 10}>
                     <div className="icon-container">
                       <div className="icon marker-element" style={{ width: '10px', height: '10px' }}>
                         <div className="marker-icon" />
-                        <img src={toy.photo} alt="Image" />
+                        {toyGroup.toys.length === 1 ? <img src={toyGroup.toys[0]} alt="Image" /> : <img src='https://thumbs.dreamstime.com/b/hand-cursor-click-icon-isolated-blue-round-button-illustration-hand-cursor-click-icon-blue-round-button-illustration-167324051.jpg' alt="Click"/>}
                       </div>
                     </div>
                   </Marker>
