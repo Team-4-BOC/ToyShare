@@ -6,7 +6,7 @@ import DatePicker from 'react-multi-date-picker';
 import CarouselEdit from './CarouselEdit.jsx';
 import swal from 'sweetalert';
 
-const EditToy = ({ toyId, userId }) => {
+const EditToy = ({ toyId, userId, setPage }) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [photoURLs, setPhotoURLs] = useState('');
@@ -130,7 +130,7 @@ const EditToy = ({ toyId, userId }) => {
   };
 
   const getOnePhotos = () => {
-    axios.get('/toys/photos', { data: { toyId: toyId } })
+    axios.get('/toys/photos', { params: { toyId: toyId } })
       .then((results) => {
         const data = results.data;
         console.log('Image get');
@@ -188,13 +188,31 @@ const EditToy = ({ toyId, userId }) => {
     }
   };
   const deleteToy = () => {
-    axios.delete('toys', { data: { toyId: toyId } })
-      .then(() => {
-        console.log('Image get');
-        getOnePhotos();
-      })
-      .catch((err) => {
-        console.log(err);
+    swal({
+      title: 'Are you sure you want to delete this toy?',
+      text: 'There is no undo button!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          axios.delete('toys', { data: { toyId: toyId } })
+            .then(() => {
+              // getOnePhotos();
+              swal('Poof! it has now been deleted', {
+                icon: 'success'
+              })
+                .then(() => {
+                  setPage(2);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          swal('Good think you didn\'t click delete! The toy is still there.');
+        }
       });
   };
 
