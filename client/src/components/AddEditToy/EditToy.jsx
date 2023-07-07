@@ -220,7 +220,7 @@ const EditToy = ({ toyId, userId, setPage, setToyId }) => {
               console.log(err);
             });
         } else {
-          swal('Good think you didn\'t click delete! The toy is still there.');
+          swal('Good thing you didn\'t click delete! The toy is still there.');
         }
       });
   };
