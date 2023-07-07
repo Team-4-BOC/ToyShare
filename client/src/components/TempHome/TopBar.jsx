@@ -42,7 +42,7 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
   const [showNotifs, setShowNotifs] = useState(false);
   const [newNotifs, setNewNotifs] = useState(true);
   return (
-    <div className="fixed navbar bg-primary z-10 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
+    <div className="fixed navbar bg-primary z-20 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
       <div className="flex-1">
         <a
           className="btn btn-ghost normal-case text-xl"

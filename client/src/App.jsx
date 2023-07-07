@@ -85,7 +85,7 @@ const App = () => {
         />
         <br></br>
         <br></br>
-        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter}/>
+        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter} setToyId={setToyId}/>
       </>
     );
   }
