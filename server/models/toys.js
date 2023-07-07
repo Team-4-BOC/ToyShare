@@ -18,7 +18,7 @@ module.exports = {
       t.user_id,
       u.first_name AS user,
       u.city_state AS location,
-      d.dates AS next_date,
+      COALESCE(d.dates, NULL) AS next_date,
       u.lat_lng AS latLng,
       (
         SELECT json_agg(tp.url)

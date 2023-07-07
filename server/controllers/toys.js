@@ -9,6 +9,7 @@ module.exports = {
     models.toys.getOne(req.query)
       .then((results) => {
         if (!results.rows[0]) {
+          console.log(results);
           res.status(404).send('No toys with this id found');
           return;
         }
