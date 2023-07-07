@@ -138,7 +138,7 @@ const App = () => {
         <br></br>
         <br></br>
         <br></br>
-        <EditToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} />
+        <EditToy setPage={setPage} toyId={toyId} setToyId={setToyId} toyUserId={toyUserId} userId={userId} />
       </>
     );
   }

@@ -6,7 +6,7 @@ import DatePicker from 'react-multi-date-picker';
 import CarouselEdit from './CarouselEdit.jsx';
 import swal from 'sweetalert';
 
-const EditToy = ({ toyId, userId, setPage }) => {
+const EditToy = ({ toyId, userId, setPage, setToyId }) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [photoURLs, setPhotoURLs] = useState('');
@@ -84,8 +84,17 @@ const EditToy = ({ toyId, userId, setPage }) => {
     await deleteDates();
     await axios.post('/toys/dates', { toyId: toyId, dates: datesFormatted });
     setEditSubmit(!editSubmit);
+    setToyId(toyId);
     // eslint-disable-next-line no-undef
-    alert('Toy Updated!');
+    swal({
+      title: 'You Made Toy Edits!',
+      text: 'You succesfully edited your toy!',
+      icon: 'success',
+      button: 'OK'
+    })
+      .then(() => {
+        setPage(1);
+      });
   };
   const getCategories = () => {
     axios.get('/toys/category')
