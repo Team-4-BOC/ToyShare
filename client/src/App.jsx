@@ -7,7 +7,7 @@ import Home from './components/TempHome/Home.jsx';
 import EditToy from './components/AddEditToy/EditToy.jsx';
 import AddToy from './components/AddEditToy/AddToy.jsx';
 import ReserveDates from './components/Checkout/reserveMvp.jsx';
-import BookingConfirmation from './components/Checkout/bookingConfirmation.js';
+import BookingConfirmation from './components/Checkout/bookingConfirmation.jsx';
 import TopBar from './components/TempHome/TopBar.jsx';
 // import { use } from 'matter';
 // import { getCurrentUserInfo } from './Firebase.js';
@@ -29,19 +29,11 @@ const App = () => {
     getUserId();
   }, []);
 
-  // 0 === homepage
-  // 1 === individual toy page
-  // 2 === user profile
-  // 3 === rentee profile
-  // 4 === add a toy
-  // 5 == edit a toy
-  // 6 === checkout: choose dates
-  // 7 === checkout: details/payment
-  // 8 === checkout: confirmation
-  const [page, setPage] = useState(0); // check this
+  const [page, setPage] = useState(0);
   const [toyId, setToyId] = useState(1);
   const [toyUserId, setToyUserId] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedDates, setSelectedDates] = useState([]);
 
   if (page === 0) {
     return (
@@ -63,15 +55,15 @@ const App = () => {
   if (page === 1) {
     return (
       <>
-        <TopBar setPage={setPage}/>
-        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId}/>
+        <TopBar setPage={setPage} />
+        <IndividualToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} />
       </>
     );
   }
   if (page === 2) {
     return (
       <>
-        <TopBar setPage={setPage}/>
+        <TopBar setPage={setPage} />
         <br></br>
         <UserProfile setPage={setPage} />
       </>
@@ -80,68 +72,45 @@ const App = () => {
   if (page === 3) {
     return (
       <>
-        <TopBar setPage={setPage}/>
-        <RenteeProfile userId={userId} setPage={setPage} toyUserId={toyUserId}/>
+        <TopBar setPage={setPage} />
+        <RenteeProfile userId={userId} setPage={setPage} toyUserId={toyUserId} />
       </>
     );
   }
   if (page === 4) {
     return (
-     <>
-       <TopBar setPage={setPage}/>
-       <AddToy setPage={setPage}/>
-     </>
+      <>
+        <TopBar setPage={setPage} />
+        <AddToy setPage={setPage} />
+      </>
     );
   }
   if (page === 5) {
-    // revert line 88!
     return (
       <>
-        <TopBar setPage={setPage}/>
-        <EditToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId}/> /
+        <TopBar setPage={setPage} />
+        <EditToy setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} /> /
       </>
     );
   }
   if (page === 6) {
     return (
       <>
-        <TopBar setPage={setPage}/>
-        <ReserveDates setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} />
+        <TopBar setPage={setPage} />
+        <ReserveDates setPage={setPage} toyId={toyId} toyUserId={toyUserId} userId={userId} setSelectedDates={setSelectedDates} selectedDates={selectedDates} />
       </>
     );
   }
   if (page === 7) {
     return (
       <>
-        <TopBar setPage={setPage}/>
-        Dates reserved! Now pay them: <br />
-        <br />
-        <img src="https://www.belvoirterrace.com/wp-content/uploads/2020/10/Venmo-QR-Code-@Edna-260x300.jpg" alt="venmo payment link"></img>
-        <a className="justify-between" onClick={() => setPage(8)}>
-                Click <b>here</b> once you have paid $13 to the Venmo account above
-              </a>
+        <TopBar setPage={setPage} />
+        {selectedDates.length > 0 &&
+          <BookingConfirmation setPage={setPage} selectedDates={selectedDates} toyId={toyId} toyUserId={toyUserId} userId={userId} />
+        }
       </>
     );
   }
-  if (page === 8) {
-    return (
-      <>
-        <TopBar setPage={setPage}/>
-        <BookingConfirmation/>
-        <a className="justify-between" onClick={() => setPage(0)}>
-                Booking success! Click <b>here</b> to return to home page
-              </a>
-      </>
-    );
-  }
-  // if (page === 9) {
-  //   return (
-  //     <>
-  //       <div className='text-red-950'>Hello World Deployed!!!</div>
-  //       <button className='btn btn-outline btn-primary'>Daisy Button</button>
-  //     </>
-  //   );
-  // }
-};
+}
 
 export default App;
