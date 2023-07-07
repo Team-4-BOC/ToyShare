@@ -18,7 +18,7 @@ const ToyInfo = ({ toy, setPage, setMap, map, userCoords }) => {
         <div className='text-white font-bold text-center'>{toy.user}</div>
       </div>
       {distance !== undefined ? <div data-testid='it-distance' className='inline-block'>{distance > 0 ? distance + ' miles away' : 'Close by'}</div> : <div>Add location to see distance</div>}
-      {map ? <Map latLng={toy.latlng} iconImage={toy.photos[0]}/> : <img data-testid='it-map' className='w-8 inline-block hover:opacity-30' src='./icons/mapIcon.png' onClick={() => setMap(true)}/>}
+      {map ? <Map latLng={toy.latlng} iconImage={toy.photos[0]}/> : <img data-testid='it-map' className='inline-block hover:opacity-30 w-9 h-9 translate-y-2 shadow-sm shadow-black rounded-full' src='./icons/mapIcon.png' onClick={() => setMap(true)}/>}
       <div className='h-0.5 bg-black w-40 mt-5 mb-5'></div>  {/* A simple line */}
       <div data-testid='it-description'>{toy.description}</div>
     </div>
