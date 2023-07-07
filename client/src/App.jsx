@@ -24,7 +24,7 @@ const App = () => {
     axios
       .get('/userNew', { params: { email: input } })
       .then((data) => {
-        // getUserCoords(data.data[0].id);
+        getUserCoords(data.data[0].id);
         setUserId(data.data[0].id);
       })
       .catch((err) => console.log(err));
@@ -57,6 +57,8 @@ const App = () => {
   const [sort, setSort] = useState('');
   const [filter, setFilter] = useState('');
   const [toysIDCoordsPhoto, setToysIDCoordsPhoto] = useState([]);
+
+  console.log(toysIDCoordsPhoto);
   if (page === 0) {
     return (
       <>
@@ -83,7 +85,7 @@ const App = () => {
         />
         <br></br>
         <br></br>
-        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter}/>
+        <BottomBar setPage={setPage} toysIDCoordsPhoto={toysIDCoordsPhoto} setToysIDCoordsPhoto={setToysIDCoordsPhoto} userCoords={userCoords} sort={sort} setSort={setSort} filter={filter} setFilter={setFilter} setToyId={setToyId}/>
       </>
     );
   }

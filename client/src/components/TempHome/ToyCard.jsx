@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import StarCreator from '../SharedComponents/StarCreator';
 import getDistance from '../SharedComponents/getDistance';
 
-function ToyCard ({ toy, handleToyClick, userCoords, toysIDCoordsPhoto }) {
+function ToyCard ({ toy, handleToyClick, userCoords, toysIDCoordsPhoto, idx }) {
   const [distance, setDistance] = useState();
 
-  useEffect(() => { if (toysIDCoordsPhoto !== undefined && userCoords !== undefined) { setDistance(getDistance(userCoords, toysIDCoordsPhoto[toy.id - 1].latlng)); } }, [toysIDCoordsPhoto, userCoords]);
+  useEffect(() => { if (toysIDCoordsPhoto !== undefined && userCoords !== undefined && toysIDCoordsPhoto[idx].latlng) { setDistance(getDistance(userCoords, toysIDCoordsPhoto[idx].latlng)); } }, [toysIDCoordsPhoto, userCoords]);
   return (
     <li class="card bg-base-100 shadow-xl" key={toy.id} onClick={() => handleToyClick(toy.id, toy.user_id)}>
       <figure>
