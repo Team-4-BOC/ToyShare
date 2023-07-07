@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-// import PhotoCarousel from '../IndividualToy/components/PhotoCarousel.jsx';
 import axios from 'axios';
 import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 import DatePicker from 'react-multi-date-picker';
 import CarouselEdit from './CarouselEdit.jsx';
+import swal from 'sweetalert';
 
-const EditToy = ({ toyId, userId }) => {
+const EditToy = ({ toyId, userId, setPage, setToyId }) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [photoURLs, setPhotoURLs] = useState('');
@@ -84,8 +84,17 @@ const EditToy = ({ toyId, userId }) => {
     await deleteDates();
     await axios.post('/toys/dates', { toyId: toyId, dates: datesFormatted });
     setEditSubmit(!editSubmit);
+    setToyId(toyId);
     // eslint-disable-next-line no-undef
-    alert('Toy Updated!');
+    swal({
+      title: 'You Made Toy Edits!',
+      text: 'You succesfully edited your toy!',
+      icon: 'success',
+      button: 'OK'
+    })
+      .then(() => {
+        setPage(1);
+      });
   };
   const getCategories = () => {
     axios.get('/toys/category')
@@ -130,7 +139,7 @@ const EditToy = ({ toyId, userId }) => {
   };
 
   const getOnePhotos = () => {
-    axios.get('/toys/photos', { data: { toyId: toyId } })
+    axios.get('/toys/photos', { params: { toyId: toyId } })
       .then((results) => {
         const data = results.data;
         console.log('Image get');
@@ -188,13 +197,31 @@ const EditToy = ({ toyId, userId }) => {
     }
   };
   const deleteToy = () => {
-    axios.delete('toys', { data: { toyId: toyId } })
-      .then(() => {
-        console.log('Image get');
-        getOnePhotos();
-      })
-      .catch((err) => {
-        console.log(err);
+    swal({
+      title: 'Are you sure you want to delete this toy?',
+      text: 'There is no undo button!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          axios.delete('toys', { data: { toyId: toyId } })
+            .then(() => {
+              // getOnePhotos();
+              swal('Poof! it has now been deleted', {
+                icon: 'success'
+              })
+                .then(() => {
+                  setPage(2);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          swal('Good thing you didn\'t click delete! The toy is still there.');
+        }
       });
   };
 
