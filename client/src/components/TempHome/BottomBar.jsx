@@ -34,7 +34,7 @@ const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto, userCoord
   return (
     <>
       {map ? <div className='w-screen h-screen bg-slate-400/40 top-0 left-0 fixed z-30' onClick={() => { setMap(false); }}></div> : null}
-      <div className='fixed bottom-0 bg-white z-10 w-full shadow-md shadow-black rounded-tr-2xl rounded-tl-2xl flex justify-center space-x-1'>
+      <div className='fixed bottom-0 bg-primary z-10 w-full shadow-md shadow-black rounded-tr-2xl rounded-tl-2xl flex justify-center space-x-1'>
         <button className="active:bg-gray-100 text-black py-3 px-4 rounded-full border border-solid" onClick={onAddToyClick}>
           AddToy
         </button>

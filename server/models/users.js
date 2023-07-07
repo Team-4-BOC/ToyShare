@@ -87,7 +87,17 @@ module.exports = {
       photoData.url = 'https://villagesonmacarthur.com/wp-content/uploads/2020/12/Blank-Avatar.png';
     }
     const values = [photoData.user_id, photoData.url];
+    console.log('ADDDDD USERRR PHOTOSSSS', values);
     return db.query('INSERT INTO toyshare.user_photos (user_id, url) VALUES($1, $2)', values);
+  },
+  updateUserPhoto: async (photoData) => {
+    const values = [photoData.photoURL[0], photoData.id];
+    const userPhoto = await db.query('SELECT * from toyshare.user_photos where user_id = $1', [values[1]]);
+    if (userPhoto.rows.length === 0) {
+      await db.query('INSERT INTO toyshare.user_photos (url, user_id) VALUES($1, $2)', values);
+    } else {
+      return db.query('UPDATE toyshare.user_photos SET url = $1 where user_id = $2', values);
+    }
   },
   checkForNewUser: (email) => {
     console.log('inside checkForNewUser model', email);

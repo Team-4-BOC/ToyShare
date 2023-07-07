@@ -12,7 +12,7 @@ function UserInfo ({ userData, setEnableEdit }) {
     justifyContent: 'center'
   };
   return (
-  <div className="card card-compact w-80 bg-base-80 shadow-xl">
+  <div className="card bg-primary card-compact w-80 bg-base-80 shadow-xl">
     <figure><img src={userData.photo} /></figure>
     <div className="card-body">
       <h2 className="user-name" style={{ fontSize: 25, fontWeight: 'bold', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{userData.user.first_name} {userData.user.last_name}</h2>

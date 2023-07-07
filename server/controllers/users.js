@@ -72,6 +72,15 @@ module.exports = {
         res.status(500).send(err);
       });
   },
+  updateUserPhoto: (req, res) => {
+    models.users.updateUserPhoto(req.body)
+      .then(() => {
+        res.status(201).send('user photo updated');
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
+  },
   checkForNewUser: (req, res) => {
     console.log('inside checkForNewUser controller', req.query.email);
     models.users.checkForNewUser(req.query.email)

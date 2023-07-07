@@ -49,6 +49,16 @@ module.exports = {
         console.log('ERROR ADDING TOY', err);
       });
   },
+  put: (req, res) => {
+    models.toys.put(req.body)
+      .then((results) => {
+        res.status(200).send(results);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR updating toy');
+        console.log('ERROR updating TOY', err);
+      });
+  },
   getOnePhotos: (req, res) => {
     models.toys.getOnePhotos(req.query)
       .then((results) => {
@@ -69,8 +79,18 @@ module.exports = {
         console.log('ERROR ADDING TOY photo', err);
       });
   },
+  deletePhotos: (req, res) => {
+    models.toys.deletePhotos(req.body)
+      .then((results) => {
+        res.status(204).send('Successfully deleted toy photo!');
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR deleting toy photo');
+        console.log('ERROR deleting TOY photo', err);
+      });
+  },
   getCategory: (req, res) => {
-    models.toys.getCategory()
+    models.toys.getCategory(req.query)
       .then((results) => {
         res.status(200).send(results.rows);
       })
@@ -122,5 +142,15 @@ module.exports = {
         res.status(500).send('ERROR favoriting toy');
         console.log('ERROR ADDING TOY', err);
       });
+  },
+  getSaved: (req, res) => {
+    models.toys.getSaved(req.query)
+      .then((results) => {
+        res.status(201).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR GET user saved toys');
+        console.log('ERROR GET user saved toys', err);
+      })
   }
 };
