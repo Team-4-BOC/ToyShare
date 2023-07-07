@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import MapBox, { Marker } from 'react-map-gl';
 
-import mapBoxKey from './tempMapBoxKey.js'; // Fix me -------------------------------==-=-=-
-import { Translate } from 'aws-sdk';
+import mapBoxKey from './mapBoxKey.js';
 
 const Map = ({ latLng, iconImage, toysIDCoordsPhoto, userCoords, setPage, setToyId }) => {
   const [coordinates, setCoordinates] = useState();
