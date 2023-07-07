@@ -54,7 +54,7 @@ const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto, userCoord
           <option value="recommend">Recommend</option>
           <option value="">All</option>
         </select>
-        {!map && toysIDCoordsPhoto !== undefined ? <div className='shadow-sm shadow-black rounded-full'><img data-testid='it-map' className='inline-block hover:opacity-30 w-9 h-9 translate-y-2' src='./icons/mapIcon.png' onClick={() => setMap(true)}/></div> : null}
+        {!map && toysIDCoordsPhoto ? <img data-testid='it-map' className='inline-block hover:opacity-30 w-9 h-9 translate-y-2 shadow-sm shadow-black rounded-full' src='./icons/mapIcon.png' onClick={() => setMap(true)}/> : null}
       </div>
       {map ? <Map userCoords={userCoords} toysIDCoordsPhoto={toysIDCoordsPhoto}/> : null}
     </>
