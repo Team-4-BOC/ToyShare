@@ -16,12 +16,12 @@ const RenteeProfile = ({ userId, setPage, toyUserId }) => {
       });
   }, []);
 
-  if (!renteeData.user) {
-    // return (
-    //   <div>
-    console.log('Loading......');
-    //   </div>
-    // );
+  if (!renteeData || !renteeData.user) {
+    return (
+      <div data-testid="rentee_profile">
+        Loading......
+      </div>
+    );
   } else {
     return (
       <div className="h-screen flex items-center justify-center flex-col">

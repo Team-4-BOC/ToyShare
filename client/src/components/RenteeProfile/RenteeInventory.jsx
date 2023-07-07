@@ -6,7 +6,7 @@ const RenteeInventory = ({ inventoryData }) => {
     fontWeight: 'bold'
   };
   return (
-    <div className="user-toys">
+    <div data-testid="rentee_toys" className="user-toys">
       <ul className="menu bg-secondary bg-base-200 w-100 rounded-box">
         <li>
           <h2 className="rental-inventory" style={titleStyle}>Rental Inventory</h2>
