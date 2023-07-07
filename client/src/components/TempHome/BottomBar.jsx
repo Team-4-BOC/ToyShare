@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import swal from 'sweetalert';
 
@@ -43,13 +44,13 @@ const BottomBar = ({ setPage, toysIDCoordsPhoto, setToysIDCoordsPhoto, userCoord
         <button className="active:bg-gray-100 text-black py-3 px-4 rounded-full border border-solid" onClick={onAddToyClick}>
           AddToy
         </button>
-        <select className="select sort" value={sort} onChange={() => { setSort(event.target.value) }}>
+        <select className="select sort" value={sort} onChange={() => { setSort(event.target.value); }}>
           <option value="">Sort by</option>
           <option value="newest">Newest</option>
           <option value="rating">Rating</option>
           <option value="distance">Distance</option>
         </select>
-        <select className="select filter" value={filter} onChange={() => { setFilter(event.target.value) }}>
+        <select className="select filter" value={filter} onChange={() => { setFilter(event.target.value); }}>
           <option value="">Filter</option>
           <option value="recommend">Recommend</option>
           <option value="">All</option>
