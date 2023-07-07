@@ -28,5 +28,8 @@ module.exports = {
   getRental: (data) => {
     const values = [data.userId, data.toyId];
     return db.query('SELECT * FROM toyshare.toy_rental_history WHERE user_id = $1 AND toy_id = $2;', values);
+  },
+  getEarliestInstanceOfEachToy: () => {
+    return db.query('SELECT DISTINCT ON (toy_id) * FROM toyshare.dates_available ORDER BY toy_id, id;');
   }
 };

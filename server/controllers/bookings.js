@@ -74,4 +74,14 @@ module.exports = {
         console.log('ERROR posting rental', err);
       });
   },
+  getEarliestInstanceOfEachToy: (req, res) => {
+    models.getEarliestInstanceOfEachToy()
+      .then((results) => {
+        res.status(201).send(results.rows);
+      })
+      .catch((err) => {
+        res.status(500).send('ERROR getting earliest instance of each toy');
+        console.log('ERROR getting earliest instance of each toy', err);
+      });
+  }
 };
