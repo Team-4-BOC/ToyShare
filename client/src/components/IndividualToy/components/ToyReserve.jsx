@@ -1,11 +1,16 @@
 import React from 'react';
+import swal from 'sweetalert';
 import { verifySignedIn } from '../../../Firebase.js';
 
 const ToyReserve = ({ toy, setPage }) => {
   const handlereserveClick = () => {
     if (!verifySignedIn()) {
-      // eslint-disable-next-line no-undef
-      alert('Plese signin to reserve a toy');
+      swal({
+        title: 'Warning!',
+        text: 'Please sign in to reserve a toy',
+        icon: 'warning',
+        button: 'OK'
+      });
     } else {
       setPage(6);
     }
