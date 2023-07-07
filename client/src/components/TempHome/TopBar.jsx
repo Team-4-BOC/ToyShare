@@ -6,18 +6,6 @@ import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo }
 import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
 
 const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
-  // const getOne = () => {
-  //   axios.get('/renteepf', { params: { id: userId } })
-  //     .then((data) => {
-  //       console.log('data from user from inside homebar', data);
-  //     });
-  // };
-  // const deleteUser = () => {
-  //   axios.delete('/deleteUser', { params: { id: 48 } })
-  //     .then((data) => {
-  //       console.log('data from user from inside homebar', data);
-  //     });
-  // };
   const handleAcessProfileRequest = () => {
     if (!verifySignedIn()) {
       swal({
@@ -105,11 +93,6 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
             <li>
               <a onClick={() => { signOut(); }}>Signout</a>
             </li>
-            {/* <li><a onClick={() => setPage(3)}>RenteeProfile</a></li> */}
-            {/* <li><a onClick={() => { console.log(verifySignedIn()); }}>IsLoggedIn?</a></li>
-            <li><a onClick={() => { console.log(getCurrentUserInfo()); }}>getCurrentUserInfo</a></li>
-            <li><a onClick={() => { console.log(getOne()); }}>getOne</a></li>
-            <li><a onClick={() => { console.log(deleteUser()); }}>deleteUser</a></li> */}
           </ul>
         </div>
       </div>

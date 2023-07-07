@@ -18,7 +18,6 @@ const App = () => {
   const [userId, setUserId] = useState(3);
   const [userCoords, setUserCoords] = useState();
   const [userEmail, setUserEmail] = useState('');
-  console.log('You can do this!!!');
   const email = getCurrentUserInfo();
 
   const getUserId = (input) => {
@@ -31,7 +30,6 @@ const App = () => {
       .catch((err) => console.log(err));
   };
   getUserId(email);
-  console.log('USERID----->', userId);
 
   const getUserCoords = (id) => {
     axios.get('/userCoordinates', { params: { id } }) // returns 'lat, lng'

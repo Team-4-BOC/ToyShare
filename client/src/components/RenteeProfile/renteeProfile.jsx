@@ -9,7 +9,6 @@ const RenteeProfile = ({ userId, setPage, toyUserId }) => {
   useEffect(() => {
     axios.get('/renteepf', { params: { id: toyUserId } })
       .then((data) => {
-        console.log('data------>', data.data);
         setRenteeData(data.data);
       })
       .catch((err) => {
@@ -24,7 +23,6 @@ const RenteeProfile = ({ userId, setPage, toyUserId }) => {
       </div>
     );
   } else {
-    console.log('RENTEEDATA---->1', renteeData);
     return (
       <div className="h-screen flex items-center justify-center flex-col">
         <div className="profile">

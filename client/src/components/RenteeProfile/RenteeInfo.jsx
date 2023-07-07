@@ -2,7 +2,6 @@ import React from 'react';
 import StarCreator from '../SharedComponents/StarCreator.js';
 
 const RenteeInfo = ({ renteeData }) => {
-  console.log('RENTEEDATA-----INFO---->', renteeData);
   renteeData.user.introduction = 'Proud parent of amazing kids. Check out my inventory of toys for rental!';
   return (
     <div className="card bg-primary card-compact w-80 bg-base-80 shadow-xl">
