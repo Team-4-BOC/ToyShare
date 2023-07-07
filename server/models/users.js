@@ -102,5 +102,11 @@ module.exports = {
     console.log('inside deleteOne model', id);
     const value = [id];
     return db.query('DELETE FROM toyshare.users WHERE id = $1', value);
+  },
+  sendNotification: (data) => {
+    console.log(data);
+  },
+  getNotifications: (data) => {
+
   }
 };

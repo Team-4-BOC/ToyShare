@@ -102,5 +102,23 @@ module.exports = {
       .catch((err) => {
         res.status(500).send(err);
       });
+  },
+  sendNotification: (req, res) => {
+    models.users.sendNotification()
+      .then(() => {
+
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      })
+  },
+  getNotifications: (req, res) => {
+    models.users.getNotifications()
+      .then(() => {
+
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      })
   }
 };
