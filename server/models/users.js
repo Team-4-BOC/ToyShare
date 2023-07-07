@@ -20,7 +20,7 @@ const getCoordinates = (location, cb) => { // cb = (err, data) =>
 //   console.log(data);
 //   db.query(`UPDATE toyshare.users SET lat_lng = '${data}' where id = 49;`)
 //   .then(() => {
-//     console.log('worled')
+//     console.log('worked')
 //   })
 //   .catch((err) => {
 //     console.log(err);

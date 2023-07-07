@@ -50,14 +50,12 @@ const Map = ({ latLng, iconImage, toysIDCoordsPhoto, userCoords }) => {
         groups.push({ location, toys: [toys[i].photo] }); // Create a new group with the toy photo
       }
     }
-    console.log(groups);
     return groups;
   };
 
   const setMap = () => {
     if (toysIDCoordsPhoto) {
       if (userCoords) {
-        console.log('User location working!');
         setCoordinates(userCoords.split(','));
       } else {
         setCoordinates([38.500000, -98.0000]);
@@ -90,7 +88,7 @@ const Map = ({ latLng, iconImage, toysIDCoordsPhoto, userCoords }) => {
                 return (
                   <Marker latitude={markerCoordinates[0]} longitude={markerCoordinates[1]} anchor="bottom" key={idx * 10}>
                     <div className="icon-container">
-                      <div className="icon marker-element" style={{ width: '10px', height: '10px' }}>
+                      <div className="icon marker-element" style={{ width: '40px', height: '40px' }}>
                         <div className="marker-icon" />
                         {toyGroup.toys.length === 1 ? <img src={toyGroup.toys[0]} alt="Image" /> : <img src='https://thumbs.dreamstime.com/b/hand-cursor-click-icon-isolated-blue-round-button-illustration-hand-cursor-click-icon-blue-round-button-illustration-167324051.jpg' alt="Click"/>}
                       </div>
