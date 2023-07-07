@@ -73,5 +73,5 @@ module.exports = {
         res.status(500).send('ERROR posting rental');
         console.log('ERROR posting rental', err);
       });
-  }
+  },
 };
