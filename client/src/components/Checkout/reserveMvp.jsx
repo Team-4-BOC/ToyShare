@@ -106,7 +106,8 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, sel
 
   const currentDate = new Date();
   const monthsToRender = [];
-  for (let i = 0; i < 4; i++) {
+  const revenueNow = 3;
+  for (let i = 0; i < revenueNow; i++) {
     const monthStart = startOfMonth(addMonths(currentDate, i));
     const monthEnd = endOfMonth(addMonths(currentDate, i));
     const datesInMonth = eachDayOfInterval({
