@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-// import PhotoCarousel from '../IndividualToy/components/PhotoCarousel.jsx';
 import axios from 'axios';
 import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 import DatePicker from 'react-multi-date-picker';
 import CarouselEdit from './CarouselEdit.jsx';
+import swal from 'sweetalert';
 
 const EditToy = ({ toyId, userId }) => {
   const [toyName, setToyName] = useState('');
