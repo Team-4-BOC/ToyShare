@@ -3,6 +3,9 @@ const degreesToRadians = (degrees) => {
 };
 
 export default (start, end) => { // Expects 'lat,lng'
+  if (!start || !end) {
+    return null;
+  }
   const startCoords = start.split(',');
   const endCoords = end.split(',');
   const startLatRad = degreesToRadians(startCoords[0]);

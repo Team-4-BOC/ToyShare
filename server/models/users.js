@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const getCoordinates = (location, cb) => { // cb = (err, data) =>
   location = location.replace(' ', '%20');
-  return axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${process.env.MAPBOX_KEY}&&limit=1`)
+  return axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${process.env.MAPBOX_KEY}&types=place&limit=1`)
     .then((apiData) => {
       const lngLat = apiData.data.features[0].geometry.coordinates;
       cb(null, lngLat[1] + ',' + lngLat[0]);
@@ -15,6 +15,17 @@ const getCoordinates = (location, cb) => { // cb = (err, data) =>
       cb(err, null);
     });
 };
+
+// getCoordinates('Tahoe city, C.A ', (err, data) => { Example
+//   console.log(data);
+//   db.query(`UPDATE toyshare.users SET lat_lng = '${data}' where id = 49;`)
+//   .then(() => {
+//     console.log('worked')
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
+// });
 
 module.exports = {
   getOne: (data) => {

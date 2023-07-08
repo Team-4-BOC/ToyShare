@@ -1,5 +1,20 @@
 const db = require('../../database/pg.js');
 
+// db.query('select * from toyshare.category where id =1')
+// .then((results) => {
+//   console.log(results);
+// })
+
+// db.query('select * from toyshare.toys where id = 80')
+// .then((results) => {
+//   console.log(results);
+// })
+
+// db.query(`INSERT INTO toyshare.dates_available (toy_id, dates, toy_status) VALUES ('77', '2023-08-10', '1')`)
+// .then(() => {
+//   console.log('success');
+// })
+
 module.exports = {
   // getAll: (Kevin) => {
   //   return db.query("SELECT * FROM sdc.cart;");
@@ -18,7 +33,7 @@ module.exports = {
       t.user_id,
       u.first_name AS user,
       u.city_state AS location,
-      d.dates AS next_date,
+      COALESCE(d.dates, NULL) AS next_date,
       u.lat_lng AS latLng,
       (
         SELECT json_agg(tp.url)
@@ -34,7 +49,7 @@ module.exports = {
     ) AS user_photo
     FROM toyshare.toys t
     JOIN toyshare.users u ON t.user_id = u.id
-    JOIN toyshare.dates_available d ON d.toy_id = t.id AND toy_status = 1 AND dates > CURRENT_DATE
+    LEFT JOIN toyshare.dates_available d ON d.toy_id = t.id AND toy_status = 1 AND (dates > CURRENT_DATE OR dates IS NULL)
     LEFT JOIN toyshare.saved_toys st ON t.id = st.toy_id AND st.user_id = $2
     WHERE t.id = $1
     ORDER BY d.dates ASC
