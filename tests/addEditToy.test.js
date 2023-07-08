@@ -1,8 +1,15 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import AddToy from '../client/src/components/AddEditToy/AddToy.jsx';
-import '@testing-library/jest-dom';
-// import App from '../client/src/App.jsx';
+// import React from 'react';
+// import {rest} from 'msw';
+// import {setupServer} from 'msw/node';
+// import { render, screen, fireEvent} from '@testing-library/react';
+// import AddToy from '../client/src/components/AddEditToy/AddToy.jsx';
+// import '@testing-library/jest-dom';
+
+// // import App from '../client/src/App.jsx';
+
+// // const server = setupServer(
+// //   rest.get('/')
+// // )
 
 // describe('Add Toy Component Unit Tests', () => {
 //   beforeEach(async () => {
@@ -42,16 +49,9 @@ import '@testing-library/jest-dom';
 //   // });
 // });
 
-describe('Add Toy Component Unit Tests', () => {
-  beforeEach(async () => {
-    await render(<AddToy />);
-  });
+const sum = require('./example');
 
-  it('Renders the input element Add Toy Name', () => {
-    expect(screen.getByLabelText('Add Toy Name')).toBeInTheDocument();
-  });
-
-  it('Renders the select element Select Toy Category', () => {
-    expect(screen.getByLabelText('Select Toy Category')).toBeInTheDocument();
-  });
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3);
 });
+

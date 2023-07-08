@@ -26,7 +26,7 @@ const AddToy = ({ userId, setPage, setToyId }) => {
       .then((res) => {
         setCurrentCategories(res.data);
       })
-      // .catch((err) => { console.log(err); });
+      .catch((err) => { console.log(err); });
   };
 
   const setRandomRating = () => {
