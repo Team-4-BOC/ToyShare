@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import swal from 'sweetalert';
 // import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo } from '../../Firebase.js';
 import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
-import axios from 'axios';
 
 const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
   const handleAcessProfileRequest = () => {
@@ -38,18 +37,10 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
       .catch((err) => err);
   };
 
-  const getNotifications = () => {
-    axios.get('/notifications', { params: { user_id: userId } })
-      .then((response) => {
-        setNotifications(response.data);
-      })
-  };
-
-  useEffect(() => {
-    getNotifications();
-  }, [userId]);
-
   // eslint-disable-next-line no-unused-vars
+  const [notifications, setNotifications] = useState(['Josh Man has rented your toy!']);
+  const [showNotifs, setShowNotifs] = useState(false);
+  const [newNotifs, setNewNotifs] = useState(true);
   return (
     <div className="fixed navbar bg-primary z-20 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
       <div className="flex-1">
@@ -61,7 +52,12 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
         </a>
       </div>
       <div style={{ marginRight: '10px' }}>
-      <NotificationDropdown notifications={notifications} setNotifications={setNotifications}/>
+      <NotificationDropdown
+        newNotifs={newNotifs}
+        setNewNotifs={setNewNotifs}
+        showNotifs={showNotifs}
+        setShowNotifs={setShowNotifs}
+        notifications={notifications} />
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">

@@ -111,42 +111,5 @@ module.exports = {
       .catch((err) => {
         res.status(500).send(err);
       });
-  },
-  sendNotification: (req, res) => {
-    models.users.sendNotification(req.body)
-      .then(() => {
-        console.log('notification sent');
-        res.status(200).send();
-      })
-      .catch((err) => {
-        res.status(500).send(err);
-      })
-  },
-  getNotifications: (req, res) => {
-    models.users.getNotifications(req.query)
-      .then((response) => {
-        res.status(200).send(response.rows);
-      })
-      .catch((err) => {
-        res.status(500).send(err);
-      })
-  },
-  readNotifications: (req, res) => {
-    models.users.readNotifications(req.body)
-      .then((response) => {
-        res.status(200).send(response.rows);
-      })
-      .catch((err) => {
-        res.status(500).send(err);
-      })
-  },
-  deleteNotifications: (req, res) => {
-    models.users.deleteNotifications(req.query)
-      .then((response) => {
-        res.status(200).send(response.rows);
-      })
-      .catch((err) => {
-        res.status(500).send(err);
-      })
   }
 };
