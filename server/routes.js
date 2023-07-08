@@ -33,6 +33,10 @@ router.post('/user', controllers.users.addUser);
 router.post('/user/photos', controllers.users.addUserPhoto);
 router.put('/user/photos', controllers.users.updateUserPhoto);
 router.get('/userNew', controllers.users.checkForNewUser);
+router.post('/notifications', controllers.users.sendNotification);
+router.get('/notifications', controllers.users.getNotifications);
+router.put('/notifications', controllers.users.readNotifications);
+router.delete('/notifications', controllers.users.deleteNotifications);
 router.delete('/deleteUser', controllers.users.deleteUser);
 
 router.get('/toy', controllers.toys.getOne);
