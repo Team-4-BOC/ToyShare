@@ -133,7 +133,7 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, sel
     <div>
       {monthsToRender.map(({ monthStart, datesToRender }) => (
         <div key={monthStart.getTime()}>
-          <h2>{format(monthStart, 'MMMM yyyy')}</h2>
+          <h2 className="text-2xl font-bold mb-4">{format(monthStart, 'MMMM yyyy')}</h2>
           <div style={{ display: 'flex' }}>
             {daysOfWeek.map((day) => (
               <div
@@ -203,9 +203,9 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, sel
                     style={{
                       textDecoration: isBooked ? 'line-through' : 'none',
                       backgroundColor: isSelected
-                        ? 'blue'
+                        ? 'mediumturquoise'
                         : isDisabled
-                          ? 'lightgray'
+                          ? 'gray'
                           : 'white',
                       color: isDisabled ? 'gray' : 'black',
                       border: '1px solid black',
@@ -242,7 +242,7 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, sel
         </div>
       ))}
       {errorMessage && <p>{errorMessage}</p>}
-      <button onClick={handleReserve}>Book Selected Dates</button>
+      <button onClick={handleReserve} className="btn-primary bg-primary-500 text-black font-bold py-2 px-4 rounded">Book Selected Dates</button>
     </div>
   );
 };
