@@ -15,7 +15,7 @@ const PhotoCarousel = ({ toy, handleSave, setPage }) => {
           return (
           <div id={'slide' + idx} className="carousel-item relative w-full" key={idx / 10}>
             <div className='absolute bg-white/75 rounded p-1 bottom-1 right-1'>{idx + 1}/{toy.photos.length}</div>
-            <img data-testid='it-photo' src={curUrl} className="w-full" />
+            <img data-testid='it-photo' src={curUrl} className="w-full object-cover" />
             {/* <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"> //For Desktop
               <a href={prevPhoto} className="btn btn-circle">❮</a>
               <a href={nextPhoto} className="btn btn-circle">❯</a>

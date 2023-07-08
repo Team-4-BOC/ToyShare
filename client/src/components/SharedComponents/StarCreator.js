@@ -10,7 +10,7 @@ const StarCreator = (rating) => { // Example implement in react {StarCreator(5)}
     }
   }
 
-  return <div data-testid='stars'>{starElements}</div>;
+  return <div data-testid='stars' className='flex place-items-center'>{starElements}</div>;
 };
 
 export default StarCreator;
