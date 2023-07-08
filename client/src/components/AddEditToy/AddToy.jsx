@@ -140,36 +140,80 @@ const AddToy = ({ userId, setPage, setToyId }) => {
   return (
     <div className="h-screen flex items-center justify-center flex-col space-y-3 overflow-y-scroll">
       <div>Add a Toy!</div>
-      <input onChange={handleChange} type="text" placeholder="Add Toy Name" className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
-      <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="selectedCategory">
-        <option disabled selected>Select Toy Category</option>
-       {currentCategories.map(category => <option key={category.id} data-key={category.id}> {category.name} </option>)}
-      </select>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+            <span className="label-text">Add Toy Name</span>
+          </label>
+        <input aria-label='Add Toy Name' onChange={handleChange} type="text" placeholder="Add Toy Name" className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+            <span className="label-text">Select Toy Category</span>
+          </label>
+        <select aria-label='Select Toy Category' onChange={handleChange} className="select select-primary w-full max-w-xs" defaultValue='Select Toy Category' name="selectedCategory">
+          <option disabled>Select Toy Category</option>
+          {currentCategories.map(category => <option key={category.id} data-key={category.id}> {category.name} </option>)}
+        </select>
+      </div>
+
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Upload Toy Image</span>
         </label>
-        <input onChange={handlePhotoUpload} type="file" accept="image/*" multiple="multiple" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
-        <label className="label">
-        </label>
+        <input aria-label='Upload Toy Image' onChange={handlePhotoUpload} type="file" accept="image/*" multiple="multiple" className="file-input file-input-bordered file-input-secondary w-full max-w-xs" name="photos"/>
       </div>
-      <input onChange={handleChange} type="text" placeholder="Add Original Price" className="input input-bordered input-primary w-full max-w-xs" name="originalPrice"/>
-      <input onChange={handleChange} type="text" placeholder="Add Rental Price" className="input input-bordered input-primary w-full max-w-xs" name="rentalPrice"/>
-      <input onChange={handleChange} type="text" placeholder="Add Description" className="input input-bordered input-primary w-full max-w-xs" name="description"/>
-      <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="deliveryMethod">
-        <option disabled selected>Select Delivery Methods</option>
-        <option>Pick Up</option>
-        <option>Delivery</option>
-        <option>Pick Up & Delivery</option>
-      </select>
-      <select onChange={handleChange} className="select select-primary w-full max-w-xs" name="paymentMethod">
-        <option disabled selected>Select Payment Methods</option>
-        <option>Cash</option>
-        <option>Venmo</option>
-        <option>Cash & Venmo</option>
-      </select>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+            <span className="label-text">Add Original Price</span>
+          </label>
+        <input aria-label='Add Original Price' onChange={handleChange} type="text" placeholder="Add Original Price" className="input input-bordered input-primary w-full max-w-xs" name="originalPrice"/>
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+            <span className="label-text">Add Rental Price</span>
+          </label>
+        <input aria-label='Add Rental Price' onChange={handleChange} type="text" placeholder="Add Rental Price" className="input input-bordered input-primary w-full max-w-xs" name="rentalPrice"/>
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+            <span className="label-text">Add Description</span>
+          </label>
+        <input aria-label='Add Description' onChange={handleChange} type="text" placeholder="Add Description" className="input input-bordered input-primary w-full max-w-xs" name="description"/>
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+            <span className="label-text">Select Delivery Methods</span>
+          </label>
+        <select aria-label='Select Delivery Methods' onChange={handleChange} defaultValue='Select Delivery Methods' className="select select-primary w-full max-w-xs" name="deliveryMethod">
+          <option disabled>Select Delivery Methods</option>
+          <option>Pick Up</option>
+          <option>Delivery</option>
+          <option>Pick Up & Delivery</option>
+        </select>
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+            <span className="label-text">Select Payment Methods</span>
+          </label>
+        <select aria-label='Select Payment Methods' onChange={handleChange} defaultValue='Select Payment Methods' className="select select-primary w-full max-w-xs" name="paymentMethod">
+          <option disabled>Select Payment Methods</option>
+          <option>Cash</option>
+          <option>Venmo</option>
+          <option>Cash & Venmo</option>
+        </select>
+      </div>
+
       <div className="stat-title text-info-content">Input Dates Available</div>
-      <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)} plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
+      <div aria-label='Input Dates Available'>
+        <DatePicker multiple minDate={new Date().setDate(new Date().getDate() + 1)} plugins={[<DatePanel key='1' />]} value={dateValues} onChange={handleDateChange} />
+      </div>
       <button onClick={addToy} className="btn btn-primary">Submit!</button>
     </div>
   );

@@ -248,7 +248,7 @@ const EditToy = ({ toyId, userId, setPage, setToyId }) => {
         <label className="label">
           <span className="label-text">Edit Toy Name</span>
         </label>
-      <input onChange={handleChange} type="text" placeholder="Edit Toy Name" defaultValue={toyName} className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
+        <input onChange={handleChange} type="text" placeholder="Edit Toy Name" defaultValue={toyName} className="input input-bordered input-primary w-full max-w-xs" name="toyName" />
       </div>
 
       <div className="form-control w-full max-w-xs">
