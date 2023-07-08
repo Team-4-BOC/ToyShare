@@ -23,9 +23,9 @@ module.exports = {
 
         "accent": "#f3cc30",
 
-        "neutral": "#111827",
+        "neutral": "#f3f4f6",
 
-        "base-100": "#ffffff",
+        "base-100": "#f5f5f4",
 
         "info": "#53c0f3",
 
@@ -33,7 +33,7 @@ module.exports = {
 
         "warning": "#f3cc30",
 
-        "error": "#e24056",
+        "error": "#e24056"
                  }
     }]
   }
