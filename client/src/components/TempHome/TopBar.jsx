@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import swal from 'sweetalert';
 // import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo } from '../../Firebase.js';
 import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
+import axios from 'axios';
 
 const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
   // const getOne = () => {
@@ -18,6 +19,9 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
   //       console.log('data from user from inside homebar', data);
   //     });
   // };
+
+  const [notifications, setNotifications] = useState([]);
+
   const handleAcessProfileRequest = () => {
     if (!verifySignedIn()) {
       swal({
@@ -49,10 +53,18 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
       .catch((err) => err);
   };
 
+  const getNotifications = () => {
+    axios.get('/notifications', { params: { user_id: userId } })
+      .then((response) => {
+        setNotifications(response.data);
+      })
+  };
+
+  useEffect(() => {
+    getNotifications();
+  }, [userId]);
+
   // eslint-disable-next-line no-unused-vars
-  const [notifications, setNotifications] = useState(['Josh Man has rented your toy!']);
-  const [showNotifs, setShowNotifs] = useState(false);
-  const [newNotifs, setNewNotifs] = useState(true);
   return (
     <div className="fixed navbar bg-primary z-10 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
       <div className="flex-1">
@@ -64,12 +76,7 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
         </a>
       </div>
       <div style={{ marginRight: '10px' }}>
-      <NotificationDropdown
-        newNotifs={newNotifs}
-        setNewNotifs={setNewNotifs}
-        showNotifs={showNotifs}
-        setShowNotifs={setShowNotifs}
-        notifications={notifications} />
+      <NotificationDropdown notifications={notifications} setNotifications={setNotifications}/>
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">

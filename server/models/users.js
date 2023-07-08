@@ -113,10 +113,22 @@ module.exports = {
     const value = [id];
     return db.query('DELETE FROM toyshare.users WHERE id = $1', value);
   },
-  sendNotification: (data) => {
-    console.log(data);
+  sendNotification: async (data) => {
+    const user = await db.query('SELECT * from toyshare.users where id = $1', [data.user_id]);
+    const name = user.rows[0].first_name + ' ' + user.rows[0].last_name;
+    const values = [data.toyUserId, `${name} just booked your toy!`, false];
+    return db.query('INSERT INTO toyshare.notifications (user_id, message, read) VALUES($1, $2, $3)', values);
   },
   getNotifications: (data) => {
-
+    const values = [data.user_id];
+    return db.query('SELECT * from toyshare.notifications where user_id = $1', values);
+  },
+  readNotifications: (data) => {
+    const values = [true, data.user_id];
+    return db.query('UPDATE toyshare.notifications SET read = $1 where user_id = $2', values);
+  },
+  deleteNotifications: (data) => {
+    const values = [data.user_id];
+    return db.query('DELETE FROM toyshare.notifications where user_id = $1', values);
   }
 };
