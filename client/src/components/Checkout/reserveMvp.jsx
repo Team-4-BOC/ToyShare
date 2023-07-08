@@ -14,7 +14,7 @@ import {
   addMonths,
 } from 'date-fns';
 
-const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, selectedDates,}) => {
+const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, selectedDates, }) => {
   const [availableDates, setAvailableDates] = useState([]);
   const [bookedDates, setBookedDates] = useState([]);
   const [startDate, setStartDate] = useState(null);
@@ -43,16 +43,23 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, sel
   };
 
   const handleReserve = async () => {
-    try {
-      const dates = selectedDates.map((date) => format(date, 'yyyy-MM-dd'));
-      await axios.put('/bookings/updateStatus', { toyId, dates });
-      await axios.post('/bookings/postInventory', { toyUserId, toyId });
-      await axios.post('/bookings/postRental', { userId, toyId });
-      setPage(7);
-    } catch (err) {
-      console.error(err);
+    if (selectedDates.length > 0) {
+      const confirmMessage = 'Are you sure you want to book these dates?';
+
+      if (window.confirm(confirmMessage)) {
+        try {
+          const dates = selectedDates.map((date) => format(date, 'yyyy-MM-dd'));
+          await axios.put('/bookings/updateStatus', { toyId, dates });
+          await axios.post('/bookings/postInventory', { toyUserId, toyId });
+          await axios.post('/bookings/postRental', { userId, toyId });
+          setPage(7);
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   };
+
 
   const handleSelect = (date) => {
     if (!startDate || (startDate && endDate)) {
