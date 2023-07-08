@@ -16,6 +16,20 @@ let justSaved = false;
 const IndividualToy = ({ testing, setPage, toyId, userId, userCoords }) => {
   const [map, setMap] = useState(false);
   const [toy, setToy] = useState(testing ? tempData : {});
+  const [desktopMode, setDesktopMode] = useState(false);
+  useEffect(() => {
+    const updateDesktopMode = () => {
+      setDesktopMode(window.innerWidth > window.innerHeight);
+    };
+
+    window.addEventListener('resize', updateDesktopMode);
+    updateDesktopMode();
+
+    return () => {
+      window.removeEventListener('resize', updateDesktopMode);
+    };
+  }, []);
+
   const fetchToy = () => {
     justSaved = false;
     axios.get('toy', { params: { toyId, userId } })
@@ -53,22 +67,22 @@ const IndividualToy = ({ testing, setPage, toyId, userId, userCoords }) => {
   };
 
   return (
-    <div className='absolute overflow-y-scroll min-h-screen'>
-      {map ? <div className='w-screen h-screen bg-slate-400/40 absolute top-0 left-0 z-10' onClick={() => setMap(false)}></div> : null}
+    <div className='relative overflow-y-scroll min-h-screen'>
+      {map ? <div className='w-screen h-screen bg-slate-400/40 absolute top-0 left-0 z-20' onClick={() => setMap(false)}></div> : null}
       {toy.name
         ? <>
-        <div className='card w-screen bg-base-100 shadow-xl mt-5'>
+        <div className={`card bg-base-100 shadow-xl mt-5 w-screen shadow-black ${desktopMode ? 'max-w-[200px] mx-auto' : ''}`}>
           <div className='flex space-x-5 justify-center bg-gray-900 rounded-tl-lg rounded-tr-lg'>
             <div className='card-title text-lg text-white' data-testid='it-toy-name'>{toy.name}</div>
               {StarCreator(toy.rating)}
             </div>
-            <PhotoCarousel toy={toy} handleSave={handleSave} setPage={setPage}/>
+            <PhotoCarousel toy={toy} handleSave={handleSave} setPage={setPage} desktopMode={desktopMode}/>
             <div className='card-body'>
-              <ToyInfo toy={toy} setPage={setPage} map={map} setMap={setMap} userCoords={userCoords}/>
+              <ToyInfo toy={toy} setPage={setPage} map={map} setMap={setMap} userCoords={userCoords} desktopMode={desktopMode}/>
             </div>
         </div>
         <div className='card-actions justify-end'></div>
-        <ToyReserve toy={toy} setPage={setPage}/>
+        <ToyReserve toy={toy} setPage={setPage} desktopMode={desktopMode}/>
       </>
         : null}
     </div>

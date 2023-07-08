@@ -16,23 +16,23 @@ module.exports = {
     styled: true,
     themes: ['light', 'dark', 'cupcake', 'emerald', 'cmyk', 'winter', 'retro', 'lemonade', 'autumn', 'aqua', 'bumblebee', 'valentine', {
       mytheme: {
-          
+
         "primary": "#67e8f9",
-                 
+
         "secondary": "#fef08a",
-                 
+
         "accent": "#f3cc30",
-                 
+
         "neutral": "#111827",
-                 
-        "base-100": "#e5e7eb",
-                 
+
+        "base-100": "#ffffff",
+
         "info": "#53c0f3",
-                 
+
         "success": "#60a5fa",
-                 
+
         "warning": "#f3cc30",
-                 
+
         "error": "#e24056",
                  }
     }]
