@@ -7,6 +7,9 @@ import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
 import axios from 'axios';
 
 const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
+
+  const [notifications, setNotifications] = useState([]);
+
   const handleAcessProfileRequest = () => {
     if (!verifySignedIn()) {
       swal({
