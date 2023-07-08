@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-multi-date-picker';
 import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 import axios from 'axios';
+import swal from 'sweetalert';
 
-const AddToy = ({ userId }) => {
+const AddToy = ({ userId, setPage, setToyId }) => {
   const [toyName, setToyName] = useState('');
   const [photos, setPhotos] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
@@ -69,8 +70,17 @@ const AddToy = ({ userId }) => {
     const imageURLS = await uploadAllImages();
     await axios.post('/toys/photos', { toyId: toyId, photoURLs: imageURLS });
     await axios.post('/toys/dates', { toyId: toyId, dates: datesFormatted });
+    setToyId(toyId);
     // eslint-disable-next-line no-undef
-    alert('Toy Added!');
+    swal({
+      title: 'Added Toy',
+      text: 'You succesfully added toy!',
+      icon: 'success',
+      button: 'OK'
+    })
+      .then(() => {
+        setPage(1);
+      });
   };
 
   // - CHANGE FUNCTIONS

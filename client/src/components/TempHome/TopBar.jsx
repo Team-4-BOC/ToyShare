@@ -7,21 +7,6 @@ import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
 import axios from 'axios';
 
 const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
-  // const getOne = () => {
-  //   axios.get('/renteepf', { params: { id: userId } })
-  //     .then((data) => {
-  //       console.log('data from user from inside homebar', data);
-  //     });
-  // };
-  // const deleteUser = () => {
-  //   axios.delete('/deleteUser', { params: { id: 48 } })
-  //     .then((data) => {
-  //       console.log('data from user from inside homebar', data);
-  //     });
-  // };
-
-  const [notifications, setNotifications] = useState([]);
-
   const handleAcessProfileRequest = () => {
     if (!verifySignedIn()) {
       swal({
@@ -66,7 +51,7 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
 
   // eslint-disable-next-line no-unused-vars
   return (
-    <div className="fixed navbar bg-primary z-10 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
+    <div className="fixed navbar bg-primary z-20 w-full shadow-md shadow-black rounded-br-2xl rounded-bl-2xl">
       <div className="flex-1">
         <a
           className="btn btn-ghost normal-case text-xl"
@@ -112,11 +97,6 @@ const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
             <li>
               <a onClick={() => { signOut(); }}>Signout</a>
             </li>
-            {/* <li><a onClick={() => setPage(3)}>RenteeProfile</a></li> */}
-            {/* <li><a onClick={() => { console.log(verifySignedIn()); }}>IsLoggedIn?</a></li>
-            <li><a onClick={() => { console.log(getCurrentUserInfo()); }}>getCurrentUserInfo</a></li>
-            <li><a onClick={() => { console.log(getOne()); }}>getOne</a></li>
-            <li><a onClick={() => { console.log(deleteUser()); }}>deleteUser</a></li> */}
           </ul>
         </div>
       </div>

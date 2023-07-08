@@ -180,8 +180,8 @@ function Home ({ setToyId, setToyUserId, setPage, searchTerm, sort, filter, user
 
   return (
     <ul className="grid grid-cols-2">
-      {renderedToys.map((toy) => (
-        <ToyCard toy={toy} handleToyClick={handleToyClick} userCoords={userCoords} toysIDCoordsPhoto={toysIDCoordsPhoto} />
+      {renderedToys.map((toy, idx) => (
+        <ToyCard toy={toy} handleToyClick={handleToyClick} userCoords={userCoords} toysIDCoordsPhoto={toysIDCoordsPhoto} idx={idx} />
       ))}
     </ul>
   );

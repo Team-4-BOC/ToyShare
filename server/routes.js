@@ -52,23 +52,10 @@ router.get('/bookings/getAllBooked', controllers.bookings.getAllBooked);
 router.get('/bookings/getAllAvailable', controllers.bookings.getAllAvailable);
 router.get('/bookings/getInventory', controllers.bookings.getInventory);
 router.get('/bookings/getRental', controllers.bookings.getRental);
-
+router.get('/bookings/getEarliestInstanceOfEachToy', controllers.bookings.getEarliestInstanceOfEachToy);
 router.post('/bookings/postInventory', controllers.bookings.postInventory);
 router.post('/bookings/postRental', controllers.bookings.postRental);
-router.get('/bookings/getEarliestInstanceOfEachToy', controllers.bookings.getEarliestInstanceOfEachToy);
 
 router.put('/bookings/updateStatus', controllers.bookings.updateStatus);
-
-// Examples:
-
-// router.get('/products/:product_id', controllers.product.getOne);
-
-// router.get('/products/:product_id/styles', controllers.styles.get);
-
-// router.get('/products/:product_id/related', controllers.related.get);
-
-// router.get('/cart', controllers.cart.get);
-
-// router.post('/cart', controllers.cart.post);
 
 module.exports = router;
