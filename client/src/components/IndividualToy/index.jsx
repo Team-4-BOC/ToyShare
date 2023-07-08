@@ -4,4 +4,4 @@ import IndividualToy from './IndividualToy.jsx';
 
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
-root.render(<IndividualToy setPage={1} toyId={1} userId={5} userCoords/>);
+root.render(<IndividualToy setPage={1} toyId={1} userId={18} userCoords/>);
