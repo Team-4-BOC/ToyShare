@@ -6,6 +6,9 @@ import { signInWithGoogle, signOutOfGoogle, verifySignedIn, getCurrentUserInfo }
 import NotificationDropdown from '../Notifications/NotificationDropdown.jsx';
 
 const TopBar = ({ setPage, searchTerm, setSearchTerm, userId, setUserId }) => {
+
+  const [notifications, setNotifications] = useState([]);
+
   const handleAcessProfileRequest = () => {
     if (!verifySignedIn()) {
       swal({
