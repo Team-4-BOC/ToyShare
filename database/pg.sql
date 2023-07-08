@@ -88,6 +88,15 @@ CREATE SCHEMA toyshare
     FOREIGN KEY(user_id)
       REFERENCES users(id)
       ON DELETE CASCADE
+  )
+  CREATE TABLE notifications (
+    id SERIAL PRIMARY KEY,
+    user_id integer NOT NULL,
+    message varchar,
+    read boolean,
+    FOREIGN KEY(user_id)
+      REFERENCES users(id)
+      ON DELETE CASCADE
   );
 
   -- AFTER IMPORTING THE DATA- This sets the auto icrement to the last id
