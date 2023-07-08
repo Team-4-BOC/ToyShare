@@ -68,7 +68,7 @@ const IndividualToy = ({ testing, setPage, toyId, userId, userCoords }) => {
 
   return (
     <div className='relative overflow-y-scroll min-h-screen'>
-      {map ? <div className='w-screen h-screen bg-slate-400/40 absolute top-0 left-0 z-10' onClick={() => setMap(false)}></div> : null}
+      {map ? <div className='w-screen h-screen bg-slate-400/40 absolute top-0 left-0 z-20' onClick={() => setMap(false)}></div> : null}
       {toy.name
         ? <>
         <div className={`card bg-base-100 shadow-xl mt-5 w-screen shadow-black ${desktopMode ? 'max-w-[200px] mx-auto' : ''}`}>
