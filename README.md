@@ -28,6 +28,18 @@ The renteeprofile consists of the three main features, the topbar as described a
 
 3. Add/Edit toy
 
+- Add Toy:
+    This component allows users to add toys to their inventory. They input the name, description, images, original price, rental price, and select from a date 
+    picker which dates it will be available to rent.
+
+- Edit Toy:
+    This component allows users to edit their existing toys. They can delete photos, upload new photos, edit all the details including dates available. It also 
+    allows users to delete the toy entirely. It will popup a warning message asking for them to confirm that they would like to delete it.
+
+  
+ 
+
+
 
 
 4. Checkout
