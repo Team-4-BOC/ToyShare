@@ -14,7 +14,7 @@ import {
   addMonths,
 } from 'date-fns';
 
-const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, selectedDates,}) => {
+const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, selectedDates, }) => {
   const [availableDates, setAvailableDates] = useState([]);
   const [bookedDates, setBookedDates] = useState([]);
   const [startDate, setStartDate] = useState(null);
@@ -43,16 +43,23 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, sel
   };
 
   const handleReserve = async () => {
-    try {
-      const dates = selectedDates.map((date) => format(date, 'yyyy-MM-dd'));
-      await axios.put('/bookings/updateStatus', { toyId, dates });
-      await axios.post('/bookings/postInventory', { toyUserId, toyId });
-      await axios.post('/bookings/postRental', { userId, toyId });
-      setPage(7);
-    } catch (err) {
-      console.error(err);
+    if (selectedDates.length > 0) {
+      const confirmMessage = 'Are you sure you want to book these dates?';
+
+      if (window.confirm(confirmMessage)) {
+        try {
+          const dates = selectedDates.map((date) => format(date, 'yyyy-MM-dd'));
+          await axios.put('/bookings/updateStatus', { toyId, dates });
+          await axios.post('/bookings/postInventory', { toyUserId, toyId });
+          await axios.post('/bookings/postRental', { userId, toyId });
+          setPage(7);
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   };
+
 
   const handleSelect = (date) => {
     if (!startDate || (startDate && endDate)) {
@@ -126,7 +133,7 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, sel
     <div>
       {monthsToRender.map(({ monthStart, datesToRender }) => (
         <div key={monthStart.getTime()}>
-          <h2>{format(monthStart, 'MMMM yyyy')}</h2>
+          <h2 className="text-2xl font-bold mb-4">{format(monthStart, 'MMMM yyyy')}</h2>
           <div style={{ display: 'flex' }}>
             {daysOfWeek.map((day) => (
               <div
@@ -196,9 +203,9 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, sel
                     style={{
                       textDecoration: isBooked ? 'line-through' : 'none',
                       backgroundColor: isSelected
-                        ? 'blue'
+                        ? 'mediumturquoise'
                         : isDisabled
-                          ? 'lightgray'
+                          ? 'gray'
                           : 'white',
                       color: isDisabled ? 'gray' : 'black',
                       border: '1px solid black',
@@ -235,7 +242,7 @@ const ReserveDates = ({ setPage, toyId, toyUserId, userId, setSelectedDates, sel
         </div>
       ))}
       {errorMessage && <p>{errorMessage}</p>}
-      <button onClick={handleReserve}>Book Selected Dates</button>
+      <button onClick={handleReserve} className="btn-primary bg-primary-500 text-black font-bold py-2 px-4 rounded">Book Selected Dates</button>
     </div>
   );
 };
