@@ -3,7 +3,7 @@
 ## Overview
 ToyShare is a full-stack application designed by the BSEI team for a client to allow users to be able to rent their own toys out to others or to rent toys from others. The app allows users to browse through the current inventory of toys and view the rentee profiles of the users renting each toy without having to login. If a the user wished to rent a toy they will be prompted to login through Google. Once logged in each user will be able to view and edit their own profile as well as rent toys from others.
 
-![Uploading ezgif-4-5a199c6290.gif…]()
+![toyshare](https://github.com/Team-4-BOC/ToyShare/assets/98065426/e64b515f-088e-4cb1-b73b-2d6c2900fc7f)
 
 ### Description
 1. Home
