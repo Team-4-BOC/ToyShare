@@ -64,6 +64,16 @@ The component consists of:
 
 6. User profile
 
+This component will display the user profile for the currently logged on user. This page consists of a topbar, rentee cards, and rentee rental inventory.
+
+- Topbar
+- User profile card
+- Rental inventory
+- Rental history
+- Saved toys
+
+The user profile is similar to the rentee profile with a few additional sections that allow the user to perform crucial functions such as adding editing the user profile, editing the user profile picture, adding a new toy for rental, editing toy rental details, viewing the users rental history, and viewing toys that have been saved/favorited. 
+
 
 ### Installation
 
